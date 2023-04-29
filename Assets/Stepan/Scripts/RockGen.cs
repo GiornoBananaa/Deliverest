@@ -6,6 +6,7 @@ public class RockGen : MonoBehaviour
 {
     [SerializeField] private int tile_width, tile_height, tiles_in_row, rows_number, min_ledges, max_ledges;
     [SerializeField] private GameObject[] tilesWithLedges, tilesWithOutLedges;
+    [SerializeField] private Transform player, playerBody;
     private List<GameObject[]> rows = new List<GameObject[]>();
     private bool _isMoving;
     void Start()
@@ -20,7 +21,7 @@ public class RockGen : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (playerBody.position.y > transform.position.y)
         {
             StartCoroutine( SmoothScroll());
             
@@ -46,10 +47,11 @@ public class RockGen : MonoBehaviour
             for (float i = 0f; i <= 1.0f; i += 0.02f)
             {
                 transform.position = Vector3.Lerp(startPosition, startPosition + Vector3.down * tile_height, i);
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSeconds(0.01f);
             }
             DelLastRaw();
             transform.position = startPosition;
+            player.position += Vector3.down * tile_height;
             FastScroll();
             GenRow();
             _isMoving = false;
