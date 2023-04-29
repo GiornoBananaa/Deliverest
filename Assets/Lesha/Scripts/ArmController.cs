@@ -7,21 +7,26 @@ using TMPro;
 public class ArmController : MonoBehaviour
 {
     public bool IsMoving { get; private set; }
+    public bool IsHooked { get; private set; }
 
     [Range(0,1)][SerializeField] private int _button;
     [SerializeField] private GameObject _target;
     [SerializeField] private LayerMask _hitchLayerMask;
     [SerializeField] private Transform _deafultPosition;
     [SerializeField] private GameObject _limbSolver;
-    [SerializeField] private GameObject _otherLimbSolver;
+    //[SerializeField] private GameObject _otherLimbSolver;
     [SerializeField] private ArmController _otherArmController;
     [SerializeField] private TMP_Text _timer;
     [SerializeField] private float _grappingRadius;
 
+    private static bool _isOnOneHand;
     private DistanceJoint2D _joint;
+    private float _timeOnOneHand;
 
     void Start()
     {
+        IsHooked = true;
+        _isOnOneHand = false;
         IsMoving = false;
         _joint = _target.GetComponent<DistanceJoint2D>();
     }
@@ -35,6 +40,28 @@ public class ArmController : MonoBehaviour
             TryCling();
 
         if (IsMoving) Move();
+
+        if (_isOnOneHand)
+        {
+            _timeOnOneHand += Time.deltaTime;
+            _timer.gameObject.SetActive(true);
+            if(_timeOnOneHand > 5)
+            {
+                _joint.enabled = false;
+                _limbSolver.SetActive(false);
+                _timer.gameObject.SetActive(false);
+            }
+        }
+        else 
+        { 
+            _timeOnOneHand = 0;
+            _timer.gameObject.SetActive(false);
+        }
+
+        if (IsHooked && !_otherArmController.IsHooked) _isOnOneHand = true;
+        if (IsHooked && _otherArmController.IsHooked) _isOnOneHand = false;
+
+        _timer.text = _timeOnOneHand.ToString("0.00");
     }
 
     private void Move()
@@ -49,6 +76,7 @@ public class ArmController : MonoBehaviour
         if (colliders.Length > 0)
         {
             _target.transform.position = _deafultPosition.position;
+            IsHooked = true;
         }
         else
         {
@@ -61,8 +89,9 @@ public class ArmController : MonoBehaviour
 
     private void StartMove()
     {
-        if (_otherLimbSolver.activeSelf && !_otherArmController.IsMoving)
+        if (_otherArmController.IsHooked)
         {
+            IsHooked = false;
             IsMoving = true;
             if (_joint.enabled == false) _joint.enabled = true;
             if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
