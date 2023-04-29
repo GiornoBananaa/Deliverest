@@ -573,6 +573,7 @@ MonoBehaviour:
   _deafultPosition: {fileID: 1051689267}
   _limbSolver: {fileID: 319051900}
   _otherLimbSolver: {fileID: 1243169787}
+  _otherArmController: {fileID: 1794020012}
   _grappingRadius: 0.2
 --- !u!4 &1011302585
 Transform:
@@ -840,6 +841,7 @@ MonoBehaviour:
   _deafultPosition: {fileID: 1810354274}
   _limbSolver: {fileID: 1243169787}
   _otherLimbSolver: {fileID: 319051900}
+  _otherArmController: {fileID: 1011302584}
   _grappingRadius: 0.2
 --- !u!4 &1794020013
 Transform:
