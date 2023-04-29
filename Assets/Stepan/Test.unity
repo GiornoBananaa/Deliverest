@@ -239,9 +239,9 @@ MonoBehaviour:
   tile_width: 2
   tile_height: 4
   tiles_in_row: 6
-  rows_number: 10
-  min_ledges: 4
-  max_ledges: 6
+  rows_number: 4
+  min_ledges: 3
+  max_ledges: 5
   tilesWithLedges:
   - {fileID: 3307335735891350794, guid: 57f22f20b22522b43915db25b47e6454, type: 3}
   - {fileID: 3307335735891350794, guid: 3c2fc3ba197309740a5c429adefb8ae1, type: 3}
