@@ -6,11 +6,11 @@ public class ArmController : MonoBehaviour
 {
     [Range(0,1)][SerializeField] private int _button;
     [SerializeField] private GameObject _target;
-    [SerializeField] private int _hitchLayer;
+    [SerializeField] private LayerMask _hitchLayerMask;
     [SerializeField] private Transform _deafultPosition;
     [SerializeField] private GameObject _limbSolver;
+    [SerializeField] private float _grappingRadius;
 
-    private Vector2 _startPosition;
     private bool _isMoving;
     private DistanceJoint2D _joint;
 
@@ -39,8 +39,8 @@ public class ArmController : MonoBehaviour
 
     private void TryCling()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(_deafultPosition.position, 1, _hitchLayer);
-        Debug.Log(colliders.Length);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_deafultPosition.position, _grappingRadius, _hitchLayerMask);
+
         if (colliders.Length > 0)
         {
             _target.transform.position = _deafultPosition.position;
@@ -60,10 +60,5 @@ public class ArmController : MonoBehaviour
         _isMoving = true;
         if (_joint.enabled == false) _joint.enabled = true;
         if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log(collision.gameObject.layer);
     }
 }

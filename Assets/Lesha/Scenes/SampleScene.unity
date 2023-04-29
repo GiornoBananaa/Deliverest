@@ -466,9 +466,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: 0
   _target: {fileID: 142474651}
-  _hitchLayer: 7
+  _hitchLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _deafultPosition: {fileID: 1051689267}
   _limbSolver: {fileID: 319051900}
+  _grappingRadius: 0.2
 --- !u!4 &1011302585
 Transform:
   m_ObjectHideFlags: 0
@@ -590,7 +593,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1637305786}
   - component: {fileID: 1637305785}
-  - component: {fileID: 1637305784}
+  - component: {fileID: 1637305788}
   - component: {fileID: 1637305787}
   m_Layer: 7
   m_Name: Rock
@@ -599,22 +602,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &1637305784
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637305783}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.30666667
 --- !u!212 &1637305785
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -690,7 +677,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637305783}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -703,6 +690,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &1637305788
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637305783}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.30666667
 --- !u!1 &1794020010
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,9 +754,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: 1
   _target: {fileID: 39003710}
-  _hitchLayer: 7
+  _hitchLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _deafultPosition: {fileID: 1810354274}
   _limbSolver: {fileID: 1243169787}
+  _grappingRadius: 0.2
 --- !u!4 &1794020013
 Transform:
   m_ObjectHideFlags: 0
