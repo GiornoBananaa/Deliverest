@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ArmController : MonoBehaviour
 {
+    public bool IsMoving { get; private set; }
+
     [Range(0,1)][SerializeField] private int _button;
     [SerializeField] private GameObject _target;
-    [SerializeField] private int _hitchLayer;
+    [SerializeField] private LayerMask _hitchLayerMask;
     [SerializeField] private Transform _deafultPosition;
     [SerializeField] private GameObject _limbSolver;
+    [SerializeField] private GameObject _otherLimbSolver;
+    [SerializeField] private ArmController _otherArmController;
+    [SerializeField] private TMP_Text _timer;
+    [SerializeField] private float _grappingRadius;
 
-    private Vector2 _startPosition;
-    private bool _isMoving;
     private DistanceJoint2D _joint;
 
     void Start()
     {
-        
-        _isMoving = false;
+        IsMoving = false;
         _joint = _target.GetComponent<DistanceJoint2D>();
     }
 
@@ -26,10 +31,10 @@ public class ArmController : MonoBehaviour
         transform.position = _target.transform.position;
         if (Input.GetMouseButtonDown(_button))
             StartMove();
-        if (Input.GetMouseButtonUp(_button) && _isMoving)
+        if (Input.GetMouseButtonUp(_button) && IsMoving)
             TryCling();
 
-        if (_isMoving) Move();
+        if (IsMoving) Move();
     }
 
     private void Move()
@@ -39,8 +44,8 @@ public class ArmController : MonoBehaviour
 
     private void TryCling()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(_deafultPosition.position, 1, _hitchLayer);
-        Debug.Log(colliders.Length);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_deafultPosition.position, _grappingRadius, _hitchLayerMask);
+
         if (colliders.Length > 0)
         {
             _target.transform.position = _deafultPosition.position;
@@ -51,19 +56,16 @@ public class ArmController : MonoBehaviour
             _limbSolver.SetActive(false);
         }
 
-        _isMoving = false;
+        IsMoving = false;
     }
 
     private void StartMove()
     {
-        Debug.Log("StartMove");
-        _isMoving = true;
-        if (_joint.enabled == false) _joint.enabled = true;
-        if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log(collision.gameObject.layer);
+        if (_otherLimbSolver.activeSelf && !_otherArmController.IsMoving)
+        {
+            IsMoving = true;
+            if (_joint.enabled == false) _joint.enabled = true;
+            if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
+        }
     }
 }
