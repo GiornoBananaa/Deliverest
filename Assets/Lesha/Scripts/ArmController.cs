@@ -9,6 +9,7 @@ public class ArmController : MonoBehaviour
     [SerializeField] private LayerMask _hitchLayerMask;
     [SerializeField] private Transform _deafultPosition;
     [SerializeField] private GameObject _limbSolver;
+    [SerializeField] private GameObject _otherLimbSolver;
     [SerializeField] private float _grappingRadius;
 
     private bool _isMoving;
@@ -56,9 +57,12 @@ public class ArmController : MonoBehaviour
 
     private void StartMove()
     {
-        Debug.Log("StartMove");
-        _isMoving = true;
-        if (_joint.enabled == false) _joint.enabled = true;
-        if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
+        if (_otherLimbSolver.activeSelf)
+        {
+            Debug.Log("StartMove");
+            _isMoving = true;
+            if (_joint.enabled == false) _joint.enabled = true;
+            if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
+        }
     }
 }
