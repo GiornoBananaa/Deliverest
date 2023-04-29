@@ -240,8 +240,14 @@ MonoBehaviour:
   tile_height: 4
   tiles_in_row: 6
   rows_number: 10
-  min_ledges: 2
+  min_ledges: 4
+  max_ledges: 6
   tilesWithLedges:
+  - {fileID: 3307335735891350794, guid: 57f22f20b22522b43915db25b47e6454, type: 3}
+  - {fileID: 3307335735891350794, guid: 3c2fc3ba197309740a5c429adefb8ae1, type: 3}
+  - {fileID: 3307335735891350794, guid: 5af79a29249ccf74a884ee31204a4945, type: 3}
+  - {fileID: 3307335735891350794, guid: a4c366e62ba80b543b7dc1a17f3ff693, type: 3}
+  - {fileID: 3307335735891350794, guid: 2b483b0040816f8448c96a74f32d4e0f, type: 3}
   - {fileID: 3307335735891350794, guid: 57f22f20b22522b43915db25b47e6454, type: 3}
   tilesWithOutLedges:
   - {fileID: 8675744602116485443, guid: 43819210eade2a647a2eba98b95d7ce7, type: 3}

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class RockGen : MonoBehaviour
 {
-    [SerializeField] private int tile_width, tile_height, tiles_in_row, rows_number, min_ledges;
+    [SerializeField] private int tile_width, tile_height, tiles_in_row, rows_number, min_ledges, max_ledges;
     [SerializeField] private GameObject[] tilesWithLedges, tilesWithOutLedges;
     private List<GameObject[]> rows = new List<GameObject[]>();
+    private bool _isMoving;
     void Start()
     {
         for (int i = 0; i < rows_number; i++)
         {
-            Scroll();
+            FastScroll();
             GenRow();
         }
     }
@@ -21,12 +22,11 @@ public class RockGen : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DelLastRaw();
-            Scroll();
-            GenRow();
+            StartCoroutine( SmoothScroll());
+            
         }
     }
-    private void Scroll()
+    private void FastScroll()
     {
         foreach (GameObject[] row in rows)
         {
@@ -36,6 +36,25 @@ public class RockGen : MonoBehaviour
             }
         }
        
+    }
+    private IEnumerator SmoothScroll()
+    {
+        if (!_isMoving)
+        {
+            _isMoving = true;
+            Vector3 startPosition = transform.position;
+            for (float i = 0f; i <= 1.0f; i += 0.02f)
+            {
+                transform.position = Vector3.Lerp(startPosition, startPosition + Vector3.down * tile_height, i);
+                yield return new WaitForSeconds(0.02f);
+            }
+            DelLastRaw();
+            transform.position = startPosition;
+            FastScroll();
+            GenRow();
+            _isMoving = false;
+        }
+        
     }
     private void DelLastRaw()
     {
@@ -48,7 +67,7 @@ public class RockGen : MonoBehaviour
     }
     private void GenRow()
     {
-        int ledges_ammount = Random.Range(min_ledges, tiles_in_row - 1);
+        int ledges_ammount = Random.Range(min_ledges, max_ledges+1);
         GameObject[] rowOfPrefabs = new GameObject[tiles_in_row];
         for (int i = 0; i < tiles_in_row; i++)
         {
@@ -65,9 +84,9 @@ public class RockGen : MonoBehaviour
         GameObject[] rowOfTiles = new GameObject[tiles_in_row];
         for (int i = 0; i < tiles_in_row; i++)
         {
-            Vector3 position = new Vector3(tile_width * i + tile_width / 2 - tile_width * tiles_in_row / 2,
-                rows_number * tile_height );
-            rowOfTiles[i] = Instantiate(rowOfPrefabs[i], position, Quaternion.identity);
+            rowOfTiles[i] = Instantiate(rowOfPrefabs[i], transform);
+            rowOfTiles[i].transform.position = new Vector3(tile_width * i + tile_width / 2 - tile_width * tiles_in_row / 2,
+                (rows_number - 2) * tile_height);
         }
         rows.Add(rowOfTiles);
     }
