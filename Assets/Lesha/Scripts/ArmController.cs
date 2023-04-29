@@ -14,9 +14,11 @@ public class ArmController : MonoBehaviour
     [SerializeField] private LayerMask _hitchLayerMask;
     [SerializeField] private Transform _deafultPosition;
     [SerializeField] private GameObject _limbSolver;
-    //[SerializeField] private GameObject _otherLimbSolver;
+    [SerializeField] private GameObject _otherLimbSolver;
     [SerializeField] private ArmController _otherArmController;
-    [SerializeField] private TMP_Text _timer;
+    [SerializeField] private DistanceJoint2D _otherJoint;
+    [SerializeField] private StaminaTimer _staminaTimer;
+    [SerializeField] private float _maxTime;
     [SerializeField] private float _grappingRadius;
 
     private static bool _isOnOneHand;
@@ -25,6 +27,7 @@ public class ArmController : MonoBehaviour
 
     void Start()
     {
+        _timeOnOneHand = _maxTime;
         IsHooked = true;
         _isOnOneHand = false;
         IsMoving = false;
@@ -41,27 +44,30 @@ public class ArmController : MonoBehaviour
 
         if (IsMoving) Move();
 
-        if (_isOnOneHand)
+        if (_isOnOneHand && !IsHooked)
         {
-            _timeOnOneHand += Time.deltaTime;
-            _timer.gameObject.SetActive(true);
-            if(_timeOnOneHand > 5)
+            _timeOnOneHand -= Time.deltaTime;
+            _staminaTimer.gameObject.SetActive(true);
+            if(_timeOnOneHand < 0)
             {
+                _otherJoint.enabled = false;
+                _otherLimbSolver.SetActive(false);
+                _staminaTimer.gameObject.SetActive(false);
+                IsMoving = false;
                 _joint.enabled = false;
                 _limbSolver.SetActive(false);
-                _timer.gameObject.SetActive(false);
             }
         }
         else 
         { 
-            _timeOnOneHand = 0;
-            _timer.gameObject.SetActive(false);
+            _timeOnOneHand = _maxTime;
+            _staminaTimer.gameObject.SetActive(false);
         }
 
         if (IsHooked && !_otherArmController.IsHooked) _isOnOneHand = true;
         if (IsHooked && _otherArmController.IsHooked) _isOnOneHand = false;
 
-        _timer.text = _timeOnOneHand.ToString("0.00");
+        _staminaTimer.fillAmount = _timeOnOneHand / _maxTime;
     }
 
     private void Move()
