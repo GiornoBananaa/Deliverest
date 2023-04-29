@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ArmController : MonoBehaviour
 {
@@ -11,15 +13,15 @@ public class ArmController : MonoBehaviour
     [SerializeField] private LayerMask _hitchLayerMask;
     [SerializeField] private Transform _deafultPosition;
     [SerializeField] private GameObject _limbSolver;
-    [SerializeField] private GameObject _otherLimbSolver;
-    [SerializeField] private ArmController _otherArmController;
+    [SerializeField] private TMP_Text _timer;
     [SerializeField] private float _grappingRadius;
 
     private DistanceJoint2D _joint;
+    private bool _onOneHand;
 
     void Start()
     {
-
+        _onOneHand = false;
         IsMoving = false;
         _joint = _target.GetComponent<DistanceJoint2D>();
     }
@@ -33,6 +35,8 @@ public class ArmController : MonoBehaviour
             TryCling();
 
         if (IsMoving) Move();
+
+        Debug.Log(_button + " "+_onOneHand);
     }
 
     private void Move()
@@ -47,6 +51,7 @@ public class ArmController : MonoBehaviour
         if (colliders.Length > 0)
         {
             _target.transform.position = _deafultPosition.position;
+            _onOneHand = false;
         }
         else
         {
@@ -59,10 +64,10 @@ public class ArmController : MonoBehaviour
 
     private void StartMove()
     {
-        if (_otherLimbSolver.activeSelf && !_otherArmController.IsMoving)
+        if (!_onOneHand)
         {
-            Debug.Log("StartMove");
             IsMoving = true;
+            _onOneHand = true;
             if (_joint.enabled == false) _joint.enabled = true;
             if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
         }
