@@ -40,6 +40,7 @@ public class ArmController : MonoBehaviour
     private void TryCling()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(_deafultPosition.position, 1, _hitchLayer);
+        Debug.Log(colliders.Length);
         if (colliders.Length > 0)
         {
             _target.transform.position = _deafultPosition.position;
@@ -59,5 +60,10 @@ public class ArmController : MonoBehaviour
         _isMoving = true;
         if (_joint.enabled == false) _joint.enabled = true;
         if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.layer);
     }
 }
