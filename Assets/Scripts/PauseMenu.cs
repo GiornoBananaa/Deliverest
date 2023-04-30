@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject Canvas;
+    [SerializeField] private GameObject panel, pauseButton;
+
     private void Start()
     {
-        Canvas.SetActive(false);
+        panel.SetActive(false);
     }
     void Update()
     {
@@ -20,7 +21,12 @@ public class PauseMenu : MonoBehaviour
     public void SwitchPause()
     {
         GameManager.instance.isPaused = !GameManager.instance.isPaused;
-        Canvas.SetActive(GameManager.instance.isPaused);
+        panel.SetActive(GameManager.instance.isPaused);
+        pauseButton.SetActive(!GameManager.instance.isPaused);
+        if (GameManager.instance.isPaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1.0f;
     }
 
     public void RestartLevel()
