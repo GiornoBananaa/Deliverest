@@ -29,7 +29,7 @@ public class GameTimer : MonoBehaviour
         else
         {
             timeLeft = 0;
-            //Смерть
+            GameManager.instance.LoseGame();
         }
         text.text = $"{(int)timeLeft / 60:00}:{timeLeft % 60:00.00}";
         UpdatePorgressBar();
