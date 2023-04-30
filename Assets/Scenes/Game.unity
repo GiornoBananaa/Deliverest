@@ -374,7 +374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &366940140
 GameObject:
@@ -1095,7 +1095,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1109618489
 GameObject:
@@ -1402,7 +1402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _maxStaminaTimeWhileStorm
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7157772571317453246, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1446,7 +1446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _maxStaminaTimeWhileStorm
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8119411049644004552, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_Icon
@@ -1609,7 +1609,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1615277313
 GameObject:

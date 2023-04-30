@@ -31,6 +31,7 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartLevel()
     {
+        Time.timeScale = 1.0f;
         GameManager.instance.RestartLevel();
     }
     public void GoToMainMenu()
