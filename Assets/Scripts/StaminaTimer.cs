@@ -24,5 +24,6 @@ public class StaminaTimer : MonoBehaviour
             fill.color = Color.Lerp(halfColor, fullColor, (fillAmount - 0.5f) * 2);
         else
             fill.color = Color.Lerp(quarterColor, halfColor, fillAmount * 2);
+        fill.fillAmount = fillAmount;
     }
 }
