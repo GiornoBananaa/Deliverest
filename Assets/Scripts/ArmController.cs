@@ -45,6 +45,7 @@ public class ArmController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(_rigidbody.velocity);
         if (GameManager.instance.isPaused)
             return;
         transform.position = _target.transform.position;
@@ -99,9 +100,12 @@ public class ArmController : MonoBehaviour
             _maxTime = _maxStaminaTimeWhileStorm;
             if (_button == 1 && (_isOnOneHand || (!IsHooked && !_otherArmController.IsHooked)))
             {
-                _rigidbody.AddForce(_stormManager.Velocity * _stormForce, ForceMode2D.Impulse);
-                Debug.Log(_stormManager.Velocity);
+                _rigidbody.AddForce(_stormManager.Velocity * _stormForce, ForceMode2D.Impulse); 
             }
+        }
+        else
+        {
+            _maxTime = _maxStaminaTime;
         }
     }
 
