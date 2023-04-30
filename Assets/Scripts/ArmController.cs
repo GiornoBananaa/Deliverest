@@ -10,26 +10,31 @@ public class ArmController : MonoBehaviour
     public bool IsHooked { get; private set; }
     public Vector2 JointAcnhor { get; private set; }
 
-
     [Range(0, 1)] [SerializeField] private int _button;
     [SerializeField] private GameObject _target;
     [SerializeField] private LayerMask _hitchLayerMask;
     [SerializeField] private LayerMask _avalanceLayerMask;
     [SerializeField] private Transform _deafultPosition;
+    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GameObject _limbSolver;
     [SerializeField] private GameObject _otherLimbSolver;
     [SerializeField] private ArmController _otherArmController;
     [SerializeField] private DistanceJoint2D _otherJoint;
+    [SerializeField] private SnowStormManager _stormManager;
     [SerializeField] private StaminaTimer _staminaTimer;
-    [SerializeField] private float _maxTime;
+    [Range(0,1)][SerializeField] private float _stormForce;
+    [SerializeField] private float _maxStaminaTime;
+    [SerializeField] private float _maxStaminaTimeWhileStorm;
     [SerializeField] private float _grappingRadius;
 
     private static bool _isOnOneHand;
     private DistanceJoint2D _joint;
     private float _timeOnOneHand;
+    private float _maxTime;
 
     void Start()
     {
+        _maxTime = _maxStaminaTime;
         _timeOnOneHand = _maxTime;
         IsHooked = true;
         _isOnOneHand = false;
@@ -43,13 +48,26 @@ public class ArmController : MonoBehaviour
         if (GameManager.instance.isPaused)
             return;
         transform.position = _target.transform.position;
-        if (Input.GetMouseButtonDown(_button))
-            StartMove();
-        if (Input.GetMouseButtonUp(_button) && IsMoving)
-            TryCling();
+
+        Controls();
 
         if (IsMoving) Move();
 
+        OneHandTiming();
+
+        if (IsHooked && !_otherArmController.IsHooked) _isOnOneHand = true;
+        if (IsHooked && _otherArmController.IsHooked) _isOnOneHand = false;
+
+        if (Physics2D.OverlapCircleAll(_deafultPosition.position, _grappingRadius, _avalanceLayerMask).Length > 0)
+            Unhook();
+
+        SnowStormBehavior();
+
+        _staminaTimer.fillAmount = _timeOnOneHand / _maxTime;
+    }
+
+    private void OneHandTiming()
+    {
         if (_isOnOneHand && !IsHooked)
         {
             _timeOnOneHand -= Time.deltaTime;
@@ -64,14 +82,27 @@ public class ArmController : MonoBehaviour
             _timeOnOneHand = _maxTime;
             _staminaTimer.gameObject.SetActive(false);
         }
+    }
 
-        if (IsHooked && !_otherArmController.IsHooked) _isOnOneHand = true;
-        if (IsHooked && _otherArmController.IsHooked) _isOnOneHand = false;
+    private void Controls()
+    {
+        if (Input.GetMouseButtonDown(_button))
+            StartMove();
+        if (Input.GetMouseButtonUp(_button) && IsMoving)
+            TryCling();
+    }
 
-        if (Physics2D.OverlapCircleAll(_deafultPosition.position, _grappingRadius, _avalanceLayerMask).Length > 0)
-            Unhook();
-
-        _staminaTimer.fillAmount = _timeOnOneHand / _maxTime;
+    private void SnowStormBehavior()
+    {
+        if (_stormManager.IsStorm)
+        {
+            _maxTime = _maxStaminaTimeWhileStorm;
+            if (_button == 1 && (_isOnOneHand || (!IsHooked && !_otherArmController.IsHooked)))
+            {
+                _rigidbody.AddForce(_stormManager.Velocity * _stormForce, ForceMode2D.Impulse);
+                Debug.Log(_stormManager.Velocity);
+            }
+        }
     }
 
     private void Move()

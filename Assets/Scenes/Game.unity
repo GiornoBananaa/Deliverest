@@ -587,6 +587,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &598741064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 598741066}
+  - component: {fileID: 598741065}
+  m_Layer: 0
+  m_Name: SnowStormManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &598741065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598741064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa606a454c15cd84a808b6e2c522635e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stormMinDelay: 13
+  _stormMaxDelay: 16
+  _stormMinDuration: 3
+  _stormMaxDuration: 6
+  _appearSpeed: 0.01
+  _stormSpeed: 4
+  _stormPrefab: {fileID: 745284143987020214, guid: b981ea3876d731d42a9d3fd01a542765, type: 3}
+  _spawnPosition: {fileID: 519420032}
+  _spawnOffset: {x: 20, y: 0}
+--- !u!4 &598741066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598741064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.7190738, y: 3.0049765, z: -0.4989931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &767982270
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,6 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target_height: 100
+  best_height: 0
   isPaused: 0
   isInSafePlace: 0
 --- !u!4 &942763194
@@ -1106,8 +1160,32 @@ PrefabInstance:
       value: -0.5500987
       objectReference: {fileID: 0}
     - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _rigidbody
+      value: 
+      objectReference: {fileID: 1732677310}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _stormForce
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _stormManager
+      value: 
+      objectReference: {fileID: 598741065}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxStaminaTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _avalanceLayerMask.m_Bits
       value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxStaminaTimeWhileStorm
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7157772571317453246, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1126,8 +1204,32 @@ PrefabInstance:
       value: -0.67010564
       objectReference: {fileID: 0}
     - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _rigidbody
+      value: 
+      objectReference: {fileID: 1732677310}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _stormForce
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _stormManager
+      value: 
+      objectReference: {fileID: 598741065}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxStaminaTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _avalanceLayerMask.m_Bits
       value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxStaminaTimeWhileStorm
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8119411049644004552, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_Icon
@@ -1559,6 +1661,11 @@ CanvasRenderer:
 --- !u!4 &1732677309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4235425781311488268, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+  m_PrefabInstance: {fileID: 1309182804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1732677310 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1763467669557993887, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
   m_PrefabInstance: {fileID: 1309182804}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1910758087
