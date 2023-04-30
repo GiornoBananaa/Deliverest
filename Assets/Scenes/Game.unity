@@ -724,6 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target_height: 100
+  best_height: 0
   isPaused: 0
   isInSafePlace: 0
 --- !u!4 &942763194
@@ -1713,7 +1714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2055102961
 RectTransform:
   m_ObjectHideFlags: 0
