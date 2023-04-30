@@ -26,7 +26,6 @@ public class RockGen : MonoBehaviour
 
     void Update()
     {
-
         timeForNextStone -= Time.deltaTime;
         timeForNextAvalanche -= Time.deltaTime;
         if (timeForNextStone <= 0)
@@ -43,8 +42,8 @@ public class RockGen : MonoBehaviour
     {
         timeForNextStone = Random.Range(stone_min_delay, stone_max_delay);
         Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 10);
-        Destroy(Instantiate(stone_prefab, pos, Quaternion.identity), 10f);
-        pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), tile_height);
+        Destroy(Instantiate(stone_prefab, pos, Quaternion.identity), 6f);
+        pos.y = tile_height;
         Destroy(Instantiate(stone_sighn_prefab, pos, Quaternion.identity), 1f);
     }
     
@@ -52,8 +51,8 @@ public class RockGen : MonoBehaviour
     {
         timeForNextAvalanche = Random.Range(avalanche_min_delay, avalanche_max_delay);
         Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 10);
-        Destroy(Instantiate(avalanche_prefab, pos, Quaternion.identity), 10f);
-        pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), tile_height);
+        Destroy(Instantiate(avalanche_prefab, pos, Quaternion.identity), 20f);
+        pos.y = tile_height;
         Destroy(Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity), 1f);
     }
     private void FastScroll()
