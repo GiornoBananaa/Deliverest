@@ -45,7 +45,7 @@ public class RockGen : MonoBehaviour
         Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 10);
         Destroy(Instantiate(stone_prefab, pos, Quaternion.identity), 10f);
         pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), tile_height);
-        Destroy(Instantiate(stone_sighn_prefab, pos, Quaternion.identity), 3f);
+        Destroy(Instantiate(stone_sighn_prefab, pos, Quaternion.identity), 1f);
     }
     
     private void DropAvalanche()
@@ -54,7 +54,7 @@ public class RockGen : MonoBehaviour
         Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 10);
         Destroy(Instantiate(avalanche_prefab, pos, Quaternion.identity), 10f);
         pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), tile_height);
-        Destroy(Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity), 3f);
+        Destroy(Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity), 1f);
     }
     private void FastScroll()
     {
