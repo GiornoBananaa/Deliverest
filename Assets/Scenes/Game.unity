@@ -737,6 +737,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.5500987
       objectReference: {fileID: 0}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _avalanceLayerMask.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
     - target: {fileID: 7157772571317453246, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.79261017
@@ -752,6 +756,10 @@ PrefabInstance:
     - target: {fileID: 7259784598951416166, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.67010564
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _avalanceLayerMask.m_Bits
+      value: 768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
