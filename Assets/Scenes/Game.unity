@@ -655,6 +655,12 @@ MonoBehaviour:
   - {fileID: 3307335735891350794, guid: d117fe3f29a0ccd44a72021efa50810a, type: 3}
   - {fileID: 3307335735891350794, guid: 449dd850e1e7f684fa6e1489f82f35cd, type: 3}
   - {fileID: 3307335735891350794, guid: 198f3d76ebb1d194e8f5f2a7bbca63f2, type: 3}
+  - {fileID: 3307335735891350794, guid: e1f9d2d8ecc98fb4cbd7c21f02374f55, type: 3}
+  - {fileID: 3307335735891350794, guid: 69392ddd3dcc3cb40b35dcefdb21b0ff, type: 3}
+  - {fileID: 3307335735891350794, guid: 8e56071f1b9cc7c4ca1d1eaceebab901, type: 3}
+  - {fileID: 3307335735891350794, guid: b8de69adcdec20849a59ca9a609d8f17, type: 3}
+  - {fileID: 3307335735891350794, guid: 291477490210adc468604b3d7db3efb7, type: 3}
+  - {fileID: 3307335735891350794, guid: ce90d4de70a952a42b30937302cd7238, type: 3}
   tilesWithOutLedges:
   - {fileID: 8675744602116485443, guid: 43819210eade2a647a2eba98b95d7ce7, type: 3}
   stone_min_delay: 5
@@ -861,7 +867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2100517124
