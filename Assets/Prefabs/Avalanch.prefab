@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2451195841442279092}
   - component: {fileID: 6084495797245571510}
   - component: {fileID: 4617342412229160809}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Avalanch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4998386160089316582}
   - component: {fileID: 493305267327126218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u043B\u0430\u0432\u0438\u043D\u0430"
   m_TagString: Untagged
   m_Icon: {fileID: 0}

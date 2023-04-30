@@ -436,10 +436,10 @@ MonoBehaviour:
   - {fileID: 3307335735891350794, guid: 198f3d76ebb1d194e8f5f2a7bbca63f2, type: 3}
   tilesWithOutLedges:
   - {fileID: 8675744602116485443, guid: 43819210eade2a647a2eba98b95d7ce7, type: 3}
-  stone_min_delay: 2
-  stone_max_delay: 6
-  avalanche_min_delay: 5
-  avalanche_max_delay: 10
+  stone_min_delay: 100
+  stone_max_delay: 100
+  avalanche_min_delay: 100
+  avalanche_max_delay: 100
   avalanche_prefab: {fileID: 1884278513588441802, guid: 928646a91bb7511428c762401a57ffbd, type: 3}
   avalanche_sighn_prefab: {fileID: 6591707329160501096, guid: 1812bb6f22adbc144b3dde90b5e8915a, type: 3}
   stone_prefab: {fileID: 2566756003551857671, guid: fd70789213c11ee40bc48a867e17988b, type: 3}
