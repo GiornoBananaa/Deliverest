@@ -22,7 +22,7 @@ public class ArmController : MonoBehaviour
     [SerializeField] private DistanceJoint2D _otherJoint;
     [SerializeField] private SnowStormManager _stormManager;
     [SerializeField] private StaminaTimer _staminaTimer;
-    [Range(0,1)][SerializeField] private float _stormForce;
+    [SerializeField] private float _stormForce;
     [SerializeField] private float _maxStaminaTime;
     [SerializeField] private float _maxStaminaTimeWhileStorm;
     [SerializeField] private float _grappingRadius;
@@ -100,7 +100,7 @@ public class ArmController : MonoBehaviour
             _maxTime = _maxStaminaTimeWhileStorm;
             if (_button == 1 && (_isOnOneHand || (!IsHooked && !_otherArmController.IsHooked)))
             {
-                _rigidbody.AddForce(_stormManager.Velocity * _stormForce, ForceMode2D.Impulse); 
+                _rigidbody.AddForce(new Vector2(_stormManager.Velocity.x > 0 ? 1 : -1,0) * _stormForce, ForceMode2D.Force);
             }
         }
         else

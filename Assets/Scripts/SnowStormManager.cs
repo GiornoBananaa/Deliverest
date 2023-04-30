@@ -11,9 +11,12 @@ public class SnowStormManager : MonoBehaviour
     [SerializeField] private float _stormMinDuration, _stormMaxDuration;
     [SerializeField] private float _appearSpeed;
     [SerializeField] private float _stormSpeed;
+    [SerializeField] private float _signTime;
     [SerializeField] private GameObject _stormPrefab;
+    [SerializeField] private GameObject _signPrefab;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private Vector2 _spawnOffset;
+    [SerializeField] private Vector2 _signOffset;
 
     private float _timeForNextStorm;
     private float _durationOfNextStorm;
@@ -33,9 +36,14 @@ public class SnowStormManager : MonoBehaviour
         _timeForNextStorm -= Time.deltaTime;
         if (!IsStorm && _timeForNextStorm <= 0)
         {
+            _durationOfNextStorm = Random.Range(_stormMinDuration, _stormMaxDuration);
+            _timeForNextStorm = Random.Range(_stormMinDelay, _stormMaxDelay);
             StartCoroutine(Storm());
         }
+    }
 
+    private void FixedUpdate()
+    {
         if (IsStorm && !_stormIsShowed)
         {
             float alpha = Mathf.Lerp(_stormRender.color.a, 1, _appearSpeed);
@@ -61,17 +69,19 @@ public class SnowStormManager : MonoBehaviour
     private IEnumerator Storm()
     {
         Velocity = new Vector2(Random.value < 0.5f ? -_stormSpeed : _stormSpeed, 0);
-        _stormRender = Instantiate(_stormPrefab, (Vector2)_spawnPosition.position + (Velocity.x > 0 ? -_spawnOffset : _spawnOffset), _spawnPosition.rotation).GetComponent<SpriteRenderer>();
+        _stormRender = Instantiate(_stormPrefab, (Vector2)_spawnPosition.position + (Velocity.x > 0 ? -_spawnOffset : _spawnOffset), Quaternion.identity).GetComponent<SpriteRenderer>();
         _stormRender.color = new Color(1, 1, 1, 0);
         _stormRender.GetComponent<SnowStorm>().Velocity = Velocity;
+
+        GameObject sign = Instantiate(_signPrefab, (Vector2)_spawnPosition.position + (Velocity.x > 0 ? -_signOffset : _signOffset), _signPrefab.transform.rotation);
+        sign.GetComponent<SpriteRenderer>().flipY = (Velocity.x > 0 ? true : false);
+        yield return new WaitForSeconds(_signTime);
+        Destroy(sign);
 
         IsStorm = true;
 
         yield return new WaitForSeconds(_durationOfNextStorm);
 
         IsStorm = false;
-
-        _durationOfNextStorm = Random.Range(_stormMinDuration, _stormMaxDuration);
-        _timeForNextStorm = Random.Range(_stormMinDelay, _stormMaxDelay);
     }
 }
