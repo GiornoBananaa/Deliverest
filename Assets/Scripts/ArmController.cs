@@ -40,6 +40,8 @@ public class ArmController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.isPaused)
+            return;
         transform.position = _target.transform.position;
         if (Input.GetMouseButtonDown(_button))
             StartMove();

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public float height, target_height;
+    public bool isPaused;
+    public bool isInSafePlace;
     private void Awake()
     {
         if (instance == null)
@@ -19,9 +21,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void StartNewGame()
     {
-        ResetProgress();
+        isPaused = false;
+        ResetAllProgress();
         SceneManager.LoadScene(1);
     }
     public void LoseGame()
@@ -32,8 +36,22 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
-    public void ResetProgress()
+    public void OpenMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void RestartLevel()
+    {
+        ResetLevelProgress();
+        isPaused = false;
+        SceneManager.LoadScene(1);
+    }
+    public void ResetLevelProgress()
     {
         height = 0;
+    }
+    public void ResetAllProgress()
+    {
+        ResetLevelProgress();
     }
 }

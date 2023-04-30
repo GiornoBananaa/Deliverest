@@ -22,6 +22,8 @@ public class GameTimer : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.instance.isPaused)
+            return;
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;

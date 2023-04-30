@@ -26,6 +26,8 @@ public class RockGen : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.isPaused)
+            return;
         timeForNextStone -= Time.deltaTime;
         timeForNextAvalanche -= Time.deltaTime;
         if (timeForNextStone <= 0)
@@ -38,6 +40,8 @@ public class RockGen : MonoBehaviour
            
             StartCoroutine( SmoothScroll()); 
         }
+        if (playerBody.position.y < -3 * tile_height)
+            GameManager.instance.LoseGame();
     }
     private void DropStone()
     {
