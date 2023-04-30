@@ -130,6 +130,8 @@ public class ArmController : MonoBehaviour
             }
             _target.transform.position = _deafultPosition.position;
             IsHooked = true;
+            AudioSource audioSource = colliders[0].GetComponent<AudioSource>();
+            if (audioSource.clip is not null) audioSource.Play();
         }
         else
         {

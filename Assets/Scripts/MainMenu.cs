@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private AudioSource _clickSource;
+
     public void StartNewGame()
     {
-        GameManager.instance.StartNewGame();
+        _clickSource.Play();
+        StartCoroutine(StartDelay());
     }
+
     public void OpenInstruction()
     {
-        
+        _clickSource.Play();
+    }
+
+    public void Exit()
+    {
+        _clickSource.Play();
+        Application.Quit();
+    }
+
+    private IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        GameManager.instance.StartNewGame();
     }
 }
