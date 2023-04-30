@@ -508,6 +508,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1479795853}
     m_Modifications:
+    - target: {fileID: 463989590299301276, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 1041484227149672575, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -608,6 +612,10 @@ PrefabInstance:
       propertyPath: _avalanceLayerMask.m_Bits
       value: 768
       objectReference: {fileID: 0}
+    - target: {fileID: 8119411049644004552, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
 --- !u!1 &1479795851
