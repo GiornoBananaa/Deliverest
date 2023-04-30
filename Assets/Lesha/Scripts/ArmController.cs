@@ -56,6 +56,10 @@ public class ArmController : MonoBehaviour
                 IsMoving = false;
                 _joint.enabled = false;
                 _limbSolver.SetActive(false);
+                IsHooked = false;
+                _otherArmController.IsHooked = false;
+                _isOnOneHand = false;
+                
             }
         }
         else 
@@ -95,7 +99,7 @@ public class ArmController : MonoBehaviour
 
     private void StartMove()
     {
-        if (_otherArmController.IsHooked)
+        if (_otherArmController.IsHooked || (!IsHooked && !_otherArmController.IsHooked))
         {
             IsHooked = false;
             IsMoving = true;
