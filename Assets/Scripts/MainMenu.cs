@@ -17,10 +17,10 @@ public class MainMenu : MonoBehaviour
         _clickSource.Play();
     }
 
-    public void Exit()
+    public void Autors()
     {
         _clickSource.Play();
-        Application.Quit();
+        
     }
 
     private IEnumerator StartDelay()
