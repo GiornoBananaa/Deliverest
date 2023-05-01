@@ -1047,7 +1047,7 @@ GameObject:
   - component: {fileID: 1009989002}
   - component: {fileID: 1009989001}
   m_Layer: 0
-  m_Name: BackGoundRight
+  m_Name: BackGoundRight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1094,12 +1094,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 5d726fa8a86ef2b4caca608984335ab3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31590e69ce35dff438447017b6c8edff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.1, y: 10.8}
+  m_Size: {x: 5.08, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1914,7 +1914,7 @@ GameObject:
   - component: {fileID: 1512061780}
   - component: {fileID: 1512061779}
   m_Layer: 0
-  m_Name: BackGroundLeft
+  m_Name: BackGroundRIght1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1961,12 +1961,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 6e20e1ceb14ac8b45b455f203f405b0b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31590e69ce35dff438447017b6c8edff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.1, y: 10.8}
+  m_Size: {x: 5.08, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

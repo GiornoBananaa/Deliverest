@@ -655,6 +655,8 @@ MonoBehaviour:
     appearSpeed: 0.023
     stormSpeed: 8
     signTime: 3
+    levelWinSceneID: 3
+    backGround: {fileID: 21300000, guid: bfc1540043183a3428a8a39137d23a17, type: 3}
   best_height: 0
   isPaused: 0
   isInSafePlace: 0
