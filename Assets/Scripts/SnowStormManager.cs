@@ -63,7 +63,7 @@ public class SnowStormManager : MonoBehaviour
             if (_stormRender.color.a < 0.01f)
             {
                 _stormIsShowed = false;
-                Destroy(_stormRender);
+                Destroy(_stormRender.gameObject);
             }
         }
     }
@@ -85,6 +85,7 @@ public class SnowStormManager : MonoBehaviour
         yield return new WaitForSeconds(_durationOfNextStorm);
 
         IsStorm = false;
+        _stormRender.GetComponent<AudioSource>().Stop();
         _isStormCoroutine = false;
         _dangersSign.SetActive(false);
     }
