@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 [Serializable]
 public class Level
 {
@@ -13,4 +14,6 @@ public class Level
     public float appearSpeed;
     public float stormSpeed;
     public float signTime;
+    public float levelWinSceneID;
+    public Sprite backGround;
 }
