@@ -44,11 +44,15 @@ public class GameManager : MonoBehaviour
         LoadValues();
         SceneManager.LoadScene(1);
     }
-    public void LoseGame()
+    public void LoseGame(bool loseTime)
     {
         if (height > best_height)
             best_height = height;
-        SceneManager.LoadScene(2);
+        if (loseTime)
+            SceneManager.LoadScene(4);
+        else
+            SceneManager.LoadScene(2);
+
     }
     public void WinGame()
     {
@@ -79,8 +83,8 @@ public class GameManager : MonoBehaviour
     private void SaveValues()
     {
 
-       PlayerPrefs.SetFloat("bestHeight", best_height);
-       PlayerPrefs.SetFloat("height", height);
+        PlayerPrefs.SetFloat("bestHeight", best_height);
+        PlayerPrefs.SetFloat("height", height);
 
     }
     private void LoadValues()
