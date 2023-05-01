@@ -701,6 +701,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa606a454c15cd84a808b6e2c522635e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stormMinDelay: 20
+  _stormMaxDelay: 35
+  _stormMinDuration: 3
+  _stormMaxDuration: 4
+  _appearSpeed: 0.023
+  _stormSpeed: 8
+  _signTime: 2
   _stormPrefab: {fileID: 745284143987020214, guid: b981ea3876d731d42a9d3fd01a542765, type: 3}
   _dangersSign: {fileID: 1447214903}
   _spawnPosition: {fileID: 519420032}
@@ -857,20 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f22d597aadf8344e97b2939e0ab21ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels:
-  - stone_min_delay: 5
-    stone_max_delay: 10
-    avalanche_min_delay: 10
-    avalanche_max_delay: 20
-    target_height: 50
-    time_for_level: 120
-    stormMinDelay: 20
-    stormMaxDelay: 35
-    stormMinDuration: 3
-    stormMaxDuration: 4
-    appearSpeed: 0.023
-    stormSpeed: 8
-    signTime: 2
+  target_height: 100
   best_height: 0
   isPaused: 0
   isInSafePlace: 0
@@ -1766,7 +1760,10 @@ MonoBehaviour:
   - {fileID: 3307335735891350794, guid: 198f3d76ebb1d194e8f5f2a7bbca63f2, type: 3}
   tilesWithOutLedges:
   - {fileID: 8675744602116485443, guid: 43819210eade2a647a2eba98b95d7ce7, type: 3}
-  edgeTile: {fileID: 8675744602116485443, guid: b63f8694516fab547a6ee6a087294217, type: 3}
+  stone_min_delay: 5
+  stone_max_delay: 10
+  avalanche_min_delay: 10
+  avalanche_max_delay: 20
   avalanche_prefab: {fileID: 1884278513588441802, guid: 928646a91bb7511428c762401a57ffbd, type: 3}
   avalanche_sighn_prefab: {fileID: 6591707329160501096, guid: 1812bb6f22adbc144b3dde90b5e8915a, type: 3}
   stone_prefab: {fileID: 2566756003551857671, guid: fd70789213c11ee40bc48a867e17988b, type: 3}
@@ -1987,7 +1984,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lossHeight: -1.5
-  _jumpForce: 0
+  _jumpForce: 15
+  _leftArmController: {fileID: 2074251924}
+  _rightArmController: {fileID: 2108531033}
   _body: {fileID: 1309182805}
 --- !u!1 &1615277313
 GameObject:
@@ -2596,6 +2595,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 397655173}
   pauseButton: {fileID: 964433931}
+--- !u!114 &2074251924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+  m_PrefabInstance: {fileID: 1309182804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11d64a2583c82b4db691a52a8acdaab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2100517122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,6 +2659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb262b3cb7282e4e9e5fc53de6ec953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startTime: 90
   fullColor: {r: 0.08276451, g: 1, b: 0, a: 1}
   halfColor: {r: 1, g: 0.69540036, b: 0, a: 1}
   quarterColor: {r: 1, g: 0, b: 0, a: 1}
@@ -2692,3 +2703,14 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100517122}
   m_CullTransparentMesh: 1
+--- !u!114 &2108531033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+  m_PrefabInstance: {fileID: 1309182804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11d64a2583c82b4db691a52a8acdaab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
