@@ -44,7 +44,8 @@ public class RockGen : MonoBehaviour
     {
         timeForNextStone = Random.Range(stone_min_delay, stone_max_delay);
         Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 10);
-        Destroy(Instantiate(stone_prefab, pos, Quaternion.identity), 6f);
+        GameObject stone = Instantiate(stone_prefab, pos, Quaternion.identity);
+        StartCoroutine(SoundLerp(stone));
         pos.y = tile_height;
         Destroy(Instantiate(stone_sighn_prefab, pos, Quaternion.identity), 1f);
     }
@@ -53,7 +54,8 @@ public class RockGen : MonoBehaviour
     {
         timeForNextAvalanche = Random.Range(avalanche_min_delay, avalanche_max_delay);
         Vector3 pos = new Vector3(transform.position.x + tile_width * 2f * Random.Range(-1, 2), 20);
-        Destroy(Instantiate(avalanche_prefab, pos, Quaternion.identity), 10f);
+        GameObject avalanche = Instantiate(avalanche_prefab, pos, Quaternion.identity);
+        StartCoroutine(SoundLerp(avalanche));
         pos.y = tile_height;
         Destroy(Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity), 1f);
     }
@@ -122,5 +124,17 @@ public class RockGen : MonoBehaviour
                 (rows_number - 2) * tile_height);
         }
         rows.Add(rowOfTiles);
+    }
+
+    private IEnumerator SoundLerp(GameObject obj)
+    {
+        AudioSource audio = obj.GetComponent<AudioSource>();
+        float deafultVolume = audio.volume;
+        audio.volume = 0;
+        while (audio.volume < deafultVolume-0.05f)
+        {
+            audio.volume = Mathf.Lerp(audio.volume, deafultVolume, 0.025f);
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

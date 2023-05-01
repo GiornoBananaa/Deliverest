@@ -10,7 +10,19 @@ public class GameObjectsDestroyer : MonoBehaviour
     {
         if (_layers == (_layers | (1 << collision.gameObject.layer)))
         {
-            Destroy(collision.gameObject);
+            StartCoroutine(DestroyObject(collision.gameObject));
         }
+    }
+    
+    private IEnumerator DestroyObject(GameObject destroyableObject)
+    {
+        AudioSource audio = destroyableObject.GetComponent<AudioSource>();
+
+        while (audio.volume > 0.01f)
+        {
+            yield return new WaitForFixedUpdate();
+            audio.volume = Mathf.Lerp(audio.volume, 0, 0.03f);
+        }
+        Destroy(destroyableObject);
     }
 }

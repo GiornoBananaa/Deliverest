@@ -24,9 +24,15 @@ public class PauseMenu : MonoBehaviour
         panel.SetActive(GameManager.instance.isPaused);
         pauseButton.SetActive(!GameManager.instance.isPaused);
         if (GameManager.instance.isPaused)
+        {
+            AudioListener.pause = true;
             Time.timeScale = 0f;
+        }
         else
-            Time.timeScale = 1.0f;
+        {
+            AudioListener.pause = false;
+            Time.timeScale = 1f;
+        }
     }
 
     public void RestartLevel()
