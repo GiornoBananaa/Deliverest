@@ -701,8 +701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa606a454c15cd84a808b6e2c522635e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stormMinDelay: 10
-  _stormMaxDelay: 10
+  _stormMinDelay: 100
+  _stormMaxDelay: 120
   _stormMinDuration: 3
   _stormMaxDuration: 4
   _appearSpeed: 0.023
