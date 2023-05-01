@@ -701,18 +701,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa606a454c15cd84a808b6e2c522635e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stormMinDelay: 13
-  _stormMaxDelay: 16
+  _stormMinDelay: 1000
+  _stormMaxDelay: 1000
   _stormMinDuration: 3
   _stormMaxDuration: 6
   _appearSpeed: 0.01
   _stormSpeed: 8
   _signTime: 3
   _stormPrefab: {fileID: 745284143987020214, guid: b981ea3876d731d42a9d3fd01a542765, type: 3}
-  _signPrefab: {fileID: 1591561612263863704, guid: 14885d2fc9a468f49a206d5891ad4af1, type: 3}
   _spawnPosition: {fileID: 519420032}
   _spawnOffset: {x: 45, y: 0}
-  _signOffset: {x: 8, y: 0}
 --- !u!4 &598741066
 Transform:
   m_ObjectHideFlags: 0
@@ -1565,7 +1563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile_width: 2
   tile_height: 4
-  tiles_in_row: 6
+  tiles_in_row: 4
   rows_number: 4
   min_ledges: 4
   max_ledges: 5
