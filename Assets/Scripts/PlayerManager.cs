@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float _lossHeight;
+    [SerializeField] private float _jumpForce;
     [SerializeField] private GameObject _body;
 
     private Rigidbody2D _rigidbody2D;
@@ -22,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            //_rigidbody2D.AddForce(_jumpForce, ForceMode2D.Impulse);
         }
 
         if (_body.transform.localPosition.y < _lossHeight && !_isFallingForLoss)

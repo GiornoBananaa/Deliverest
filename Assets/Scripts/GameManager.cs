@@ -6,19 +6,26 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public float target_height, best_height;
+    public Level[] levels; 
+    public Level currentLevel
+    {
+        get => levels[currentLevelID];
+    }
+
+    private int currentLevelID;
+    [HideInInspector] public float best_height;
     public float height
     {
         get => _height;
         set
         {
             _height = value;
-            if (_height >= target_height)
+            if (_height >= currentLevel.target_height)
                 WinGame();
         }
     }
-    public bool isPaused;
-    public bool isInSafePlace;
+    [HideInInspector] public bool isPaused;
+    [HideInInspector] public bool isInSafePlace;
     private float _height;
     private void Awake()
     {

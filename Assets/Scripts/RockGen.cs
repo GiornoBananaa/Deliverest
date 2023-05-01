@@ -6,16 +6,17 @@ public class RockGen : MonoBehaviour
 {
     [SerializeField] private int tile_width, tile_height, tiles_in_row, rows_number, min_ledges, max_ledges;
     [SerializeField] private GameObject[] tilesWithLedges, tilesWithOutLedges;
-    [SerializeField] private float stone_min_delay, stone_max_delay, avalanche_min_delay, avalanche_max_delay;
-    [SerializeField] private GameObject avalanche_prefab, avalanche_sighn_prefab, stone_prefab, stone_sighn_prefab;
+    [SerializeField] private GameObject edgeTile, avalanche_prefab, avalanche_sighn_prefab, stone_prefab, stone_sighn_prefab;
     [SerializeField] private Transform player, playerBody;
     private List<GameObject[]> rows = new List<GameObject[]>();
     private bool _isMoving;
     private float timeForNextStone, timeForNextAvalanche;
+    private Level level;
     void Start()
     {
-        timeForNextStone = stone_max_delay;
-        timeForNextAvalanche = avalanche_max_delay;
+        level = GameManager.instance.currentLevel;
+        timeForNextStone = level.stone_max_delay;
+        timeForNextAvalanche = level.avalanche_max_delay;
         for (int i = 0; i < rows_number; i++)
         {
             FastScroll();
@@ -42,16 +43,16 @@ public class RockGen : MonoBehaviour
     }
     private void DropStone()
     {
-        timeForNextStone = Random.Range(stone_min_delay, stone_max_delay);
+        timeForNextStone = Random.Range(level.stone_min_delay, level.stone_max_delay);
         Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 10);
         Destroy(Instantiate(stone_prefab, pos, Quaternion.identity), 6f);
         pos.y = tile_height;
         Destroy(Instantiate(stone_sighn_prefab, pos, Quaternion.identity), 1f);
     }
-    
+
     private void DropAvalanche()
     {
-        timeForNextAvalanche = Random.Range(avalanche_min_delay, avalanche_max_delay);
+        timeForNextAvalanche = Random.Range(level.avalanche_min_delay, level.avalanche_max_delay);
         Vector3 pos = new Vector3(transform.position.x + tile_width * 2f * Random.Range(-1, 2), 20);
         Destroy(Instantiate(avalanche_prefab, pos, Quaternion.identity), 10f);
         pos.y = tile_height;
@@ -61,7 +62,7 @@ public class RockGen : MonoBehaviour
     {
         foreach (GameObject[] row in rows)
         {
-            foreach(GameObject tile in row)
+            foreach (GameObject tile in row)
             {
                 tile.transform.position += Vector3.down * tile_height;
             }
@@ -87,7 +88,7 @@ public class RockGen : MonoBehaviour
             GenRow();
             _isMoving = false;
         }
-        
+
     }
     private void DelLastRaw()
     {
@@ -100,7 +101,7 @@ public class RockGen : MonoBehaviour
     }
     private void GenRow()
     {
-        int ledges_ammount = Random.Range(min_ledges, max_ledges+1);
+        int ledges_ammount = Random.Range(min_ledges, max_ledges + 1);
         GameObject[] rowOfPrefabs = new GameObject[tiles_in_row];
         for (int i = 0; i < tiles_in_row; i++)
         {
@@ -114,11 +115,14 @@ public class RockGen : MonoBehaviour
             int j = Random.Range(0, i + 1);
             (rowOfPrefabs[j], rowOfPrefabs[i]) = (rowOfPrefabs[i], rowOfPrefabs[j]);
         }
-        GameObject[] rowOfTiles = new GameObject[tiles_in_row];
+        GameObject[] rowOfTiles = new GameObject[tiles_in_row + 1];
+        rowOfTiles[0] = Instantiate(edgeTile, transform);
+        rowOfTiles[0].transform.position = new Vector3(tile_width / 2 - tile_width * (tiles_in_row + 1) / 2,
+            (rows_number - 2) * tile_height);
         for (int i = 0; i < tiles_in_row; i++)
         {
-            rowOfTiles[i] = Instantiate(rowOfPrefabs[i], transform);
-            rowOfTiles[i].transform.position = new Vector3(tile_width * i + tile_width / 2 - tile_width * tiles_in_row / 2,
+            rowOfTiles[i + 1] = Instantiate(rowOfPrefabs[i], transform);
+            rowOfTiles[i + 1].transform.position = new Vector3(tile_width * i + tile_width / 2 - tile_width * tiles_in_row / 2,
                 (rows_number - 2) * tile_height);
         }
         rows.Add(rowOfTiles);

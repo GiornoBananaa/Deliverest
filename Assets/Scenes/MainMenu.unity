@@ -643,6 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target_height: 40
   best_height: 0
+  time_for_level: 120
   isPaused: 0
   isInSafePlace: 0
 --- !u!4 &414920429
