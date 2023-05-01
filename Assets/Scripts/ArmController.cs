@@ -45,7 +45,6 @@ public class ArmController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_rigidbody.velocity);
         if (GameManager.instance.isPaused)
             return;
         transform.position = _target.transform.position;
