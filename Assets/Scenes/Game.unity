@@ -349,7 +349,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: ba529b4680071c04d893a0f1de9f34a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -701,13 +701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa606a454c15cd84a808b6e2c522635e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stormMinDelay: 20
-  _stormMaxDelay: 35
-  _stormMinDuration: 3
-  _stormMaxDuration: 4
-  _appearSpeed: 0.023
-  _stormSpeed: 8
-  _signTime: 2
   _stormPrefab: {fileID: 745284143987020214, guid: b981ea3876d731d42a9d3fd01a542765, type: 3}
   _dangersSign: {fileID: 1447214903}
   _spawnPosition: {fileID: 519420032}
@@ -864,7 +857,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f22d597aadf8344e97b2939e0ab21ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target_height: 100
+  levels:
+  - stone_min_delay: 100
+    stone_max_delay: 100
+    avalanche_min_delay: 100
+    avalanche_max_delay: 100
+    target_height: 100
+    time_for_level: 100
+    stormMinDelay: 100
+    stormMaxDelay: 100
+    stormMinDuration: 100
+    stormMaxDuration: 100
+    appearSpeed: 100
+    stormSpeed: 100
+    signTime: 3
   best_height: 0
   isPaused: 0
   isInSafePlace: 0
@@ -1073,7 +1079,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 5d726fa8a86ef2b4caca608984335ab3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -1760,10 +1766,7 @@ MonoBehaviour:
   - {fileID: 3307335735891350794, guid: 198f3d76ebb1d194e8f5f2a7bbca63f2, type: 3}
   tilesWithOutLedges:
   - {fileID: 8675744602116485443, guid: 43819210eade2a647a2eba98b95d7ce7, type: 3}
-  stone_min_delay: 5
-  stone_max_delay: 10
-  avalanche_min_delay: 10
-  avalanche_max_delay: 20
+  edgeTile: {fileID: 8675744602116485443, guid: b63f8694516fab547a6ee6a087294217, type: 3}
   avalanche_prefab: {fileID: 1884278513588441802, guid: 928646a91bb7511428c762401a57ffbd, type: 3}
   avalanche_sighn_prefab: {fileID: 6591707329160501096, guid: 1812bb6f22adbc144b3dde90b5e8915a, type: 3}
   stone_prefab: {fileID: 2566756003551857671, guid: fd70789213c11ee40bc48a867e17988b, type: 3}
@@ -1843,8 +1846,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5d726fa8a86ef2b4caca608984335ab3, type: 3}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: 6e20e1ceb14ac8b45b455f203f405b0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2659,7 +2662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb262b3cb7282e4e9e5fc53de6ec953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 90
   fullColor: {r: 0.08276451, g: 1, b: 0, a: 1}
   halfColor: {r: 1, g: 0.69540036, b: 0, a: 1}
   quarterColor: {r: 1, g: 0, b: 0, a: 1}
