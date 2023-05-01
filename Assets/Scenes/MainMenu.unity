@@ -648,8 +648,23 @@ MonoBehaviour:
     avalanche_max_delay: 27
     target_height: 50
     time_for_level: 120
-    stormMinDelay: 25
-    stormMaxDelay: 30
+    stormMinDelay: 50
+    stormMaxDelay: 50
+    stormMinDuration: 5
+    stormMaxDuration: 8
+    appearSpeed: 0.023
+    stormSpeed: 8
+    signTime: 3
+    levelWinSceneID: 6
+    backGround: {fileID: 21300000, guid: 6b26d36ec3afeb6479de0483b1dc5efe, type: 3}
+  - stone_min_delay: 9
+    stone_max_delay: 12
+    avalanche_min_delay: 21
+    avalanche_max_delay: 24
+    target_height: 100
+    time_for_level: 140
+    stormMinDelay: 18
+    stormMaxDelay: 21
     stormMinDuration: 5
     stormMaxDuration: 8
     appearSpeed: 0.023
