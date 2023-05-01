@@ -8,4 +8,8 @@ public class WinMenu : MonoBehaviour
     {
         GameManager.instance.OpenMainMenu();
     }
+    public void NextLevel()
+    {
+        GameManager.instance.NextLevel();
+    }
 }

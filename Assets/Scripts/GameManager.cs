@@ -6,19 +6,26 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public float target_height, best_height;
+    public Level[] levels; 
+    public Level currentLevel
+    {
+        get => levels[currentLevelID];
+    }
+
+    private int currentLevelID;
+    [HideInInspector] public float best_height;
     public float height
     {
         get => _height;
         set
         {
             _height = value;
-            if (_height >= target_height)
+            if (_height >= currentLevel.target_height)
                 WinGame();
         }
     }
-    public bool isPaused;
-    public bool isInSafePlace;
+    [HideInInspector] public bool isPaused;
+    [HideInInspector] public bool isInSafePlace;
     private float _height;
     private void Awake()
     {
@@ -31,19 +38,29 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        LoadValues();
     }
 
     public void StartNewGame()
     {
         isPaused = false;
-        ResetAllProgress();
+        ResetProgress();
         SceneManager.LoadScene(1);
     }
-    public void LoadGame()
+    public void NextLevel()
     {
-        LoadValues();
-        SceneManager.LoadScene(1);
+        
+        if(++currentLevelID >= levels.Length)
+        {
+            currentLevelID = 0;
+            OpenMainMenu();
+        }else
+        {
+            SceneManager.LoadScene(1);
+        }
+
     }
+
     public void LoseGame(bool loseTime)
     {
         if (height > best_height)
@@ -58,39 +75,27 @@ public class GameManager : MonoBehaviour
     {
         if (height > best_height)
             best_height = height;
-        SceneManager.LoadScene(3);
+
+        SceneManager.LoadScene(currentLevel.levelWinSceneID);
     }
     public void OpenMainMenu()
     {
         SceneManager.LoadScene(0);
     }
-    public void RestartLevel()
-    {
-        ResetLevelProgress();
-        isPaused = false;
-        SceneManager.LoadScene(1);
-    }
-    public void ResetLevelProgress()
+
+    public void ResetProgress()
     {
         height = 0;
-    }
-    public void ResetAllProgress()
-    {
-        ResetLevelProgress();
-        PlayerPrefs.DeleteAll();
+        currentLevelID = 0;
     }
 
     private void SaveValues()
     {
-
         PlayerPrefs.SetFloat("bestHeight", best_height);
-        PlayerPrefs.SetFloat("height", height);
-
     }
     private void LoadValues()
     {
-        height = PlayerPrefs.GetFloat("height");
-        best_height = PlayerPrefs.GetFloat("height");
+        best_height = PlayerPrefs.GetFloat("bestHeight");
     }
     private void OnApplicationQuit()
     {
