@@ -5,19 +5,18 @@ using UnityEngine.UI;
 using TMPro;
 public class GameTimer : MonoBehaviour
 {
-    [SerializeField] private float startTime;
     [SerializeField] private Color fullColor, halfColor, quarterColor;
     [SerializeField] private Image fill;
     [SerializeField] private TMP_Text text;
     private float timeLeft;
     private void Start()
     {
-        timeLeft = startTime;
+        timeLeft = GameManager.instance.currentLevel.time_for_level;
         UpdatePorgressBar();
     }
     public void Reset()
     {
-        timeLeft = startTime;
+        timeLeft = GameManager.instance.currentLevel.time_for_level;
         UpdatePorgressBar();
     }
     private void Update()
@@ -38,7 +37,7 @@ public class GameTimer : MonoBehaviour
     }
     private void UpdatePorgressBar()
     {
-        float ratio = timeLeft / startTime;
+        float ratio = timeLeft / GameManager.instance.currentLevel.time_for_level;
         if (ratio > 0.5f)
             fill.color = fullColor;
         else if (ratio > 0.25f)

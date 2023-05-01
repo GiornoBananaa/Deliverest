@@ -8,7 +8,7 @@ public class HeightBar : MonoBehaviour
     [SerializeField] private float barHeight;
     private void Update()
     {
-        arrow.anchoredPosition = new Vector2(0, barHeight * (GameManager.instance.height / GameManager.instance.target_height));
+        arrow.anchoredPosition = new Vector2(0, barHeight * (GameManager.instance.height / GameManager.instance.currentLevel.target_height));
     }
 
 }

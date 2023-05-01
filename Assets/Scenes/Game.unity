@@ -374,7 +374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &366940140
 GameObject:
@@ -725,7 +725,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &765155663
 PrefabInstance:
@@ -942,6 +942,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target_height: 100
+  time_for_level: 120
+  levels:
+  - stone_min_delay: 5
+    stone_max_delay: 20
+    avalanche_min_delay: 20
+    avalanche_max_delay: 30
   best_height: 0
   isPaused: 0
   isInSafePlace: 0
@@ -958,7 +964,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &964433931
 GameObject:
@@ -1175,7 +1181,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1109618489
 GameObject:
@@ -1754,10 +1760,6 @@ MonoBehaviour:
   - {fileID: 3307335735891350794, guid: 198f3d76ebb1d194e8f5f2a7bbca63f2, type: 3}
   tilesWithOutLedges:
   - {fileID: 8675744602116485443, guid: 43819210eade2a647a2eba98b95d7ce7, type: 3}
-  stone_min_delay: 5
-  stone_max_delay: 10
-  avalanche_min_delay: 10
-  avalanche_max_delay: 20
   avalanche_prefab: {fileID: 1884278513588441802, guid: 928646a91bb7511428c762401a57ffbd, type: 3}
   avalanche_sighn_prefab: {fileID: 6591707329160501096, guid: 1812bb6f22adbc144b3dde90b5e8915a, type: 3}
   stone_prefab: {fileID: 2566756003551857671, guid: fd70789213c11ee40bc48a867e17988b, type: 3}
@@ -1862,7 +1864,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1615277313
 GameObject:
@@ -2524,7 +2526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb262b3cb7282e4e9e5fc53de6ec953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 5
   fullColor: {r: 0.08276451, g: 1, b: 0, a: 1}
   halfColor: {r: 1, g: 0.69540036, b: 0, a: 1}
   quarterColor: {r: 1, g: 0, b: 0, a: 1}
