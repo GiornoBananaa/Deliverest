@@ -14,6 +14,6 @@ public class Level
     public float appearSpeed;
     public float stormSpeed;
     public float signTime;
-    public float levelWinSceneID;
+    public int levelWinSceneID;
     public Sprite backGround;
 }

@@ -47,6 +47,19 @@ public class GameManager : MonoBehaviour
         ResetProgress();
         SceneManager.LoadScene(1);
     }
+    public void NextLevel()
+    {
+        
+        if(++currentLevelID >= levels.Length)
+        {
+            currentLevelID = 0;
+            OpenMainMenu();
+        }else
+        {
+            SceneManager.LoadScene(1);
+        }
+
+    }
 
     public void LoseGame(bool loseTime)
     {
@@ -62,7 +75,8 @@ public class GameManager : MonoBehaviour
     {
         if (height > best_height)
             best_height = height;
-        SceneManager.LoadScene(3);
+
+        SceneManager.LoadScene(currentLevel.levelWinSceneID);
     }
     public void OpenMainMenu()
     {
