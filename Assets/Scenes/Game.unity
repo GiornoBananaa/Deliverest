@@ -2105,6 +2105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lossHeight: -1.5
   _jumpForce: 15
+  _jumpReloadTime: 3
   _leftArmController: {fileID: 2074251924}
   _rightArmController: {fileID: 2108531033}
   _body: {fileID: 1309182805}
