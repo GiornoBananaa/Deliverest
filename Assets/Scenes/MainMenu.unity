@@ -641,9 +641,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f22d597aadf8344e97b2939e0ab21ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target_height: 40
+  levels:
+  - stone_min_delay: 10
+    stone_max_delay: 13
+    avalanche_min_delay: 23
+    avalanche_max_delay: 27
+    target_height: 50
+    time_for_level: 120
+    stormMinDelay: 25
+    stormMaxDelay: 30
+    stormMinDuration: 5
+    stormMaxDuration: 8
+    appearSpeed: 0.023
+    stormSpeed: 8
+    signTime: 3
   best_height: 0
-  time_for_level: 120
   isPaused: 0
   isInSafePlace: 0
 --- !u!4 &414920429
