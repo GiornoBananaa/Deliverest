@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float _lossHeight;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _jumpReloadTime;
     [SerializeField] private ArmController _leftArmController;
     [SerializeField] private ArmController _rightArmController;
     [SerializeField] private GameObject _body;
@@ -13,9 +14,13 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private AudioSource _audioSource;
     private bool _isFallingForLoss;
+    private float _timeForNextJump;
+
+    public float NormilizedJumpReloadTime { get => _timeForNextJump / _jumpReloadTime; }
 
     void Start()
     {
+        _timeForNextJump = _jumpReloadTime;
         _isFallingForLoss = false;
         _rigidbody2D = _body.GetComponent<Rigidbody2D>();
         _audioSource = GetComponent<AudioSource>();
@@ -23,6 +28,8 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        _timeForNextJump += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
@@ -32,7 +39,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Jump()
     {
-        if(!_leftArmController.IsHooked || !_rightArmController.IsHooked)
+        if(!_leftArmController.IsHooked || !_rightArmController.IsHooked || _timeForNextJump < _jumpReloadTime)
             return;
 
         _leftArmController.Fall(true);
@@ -40,6 +47,8 @@ public class PlayerManager : MonoBehaviour
         Vector2 direction = (mousePosition - (Vector2)_body.transform.position).normalized;
 
         _rigidbody2D.AddForce(direction * _jumpForce, ForceMode2D.Impulse);
+
+        _timeForNextJump = 0;
     }
 
     private IEnumerator FallLoss()

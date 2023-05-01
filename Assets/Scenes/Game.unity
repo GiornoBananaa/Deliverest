@@ -1590,7 +1590,7 @@ PrefabInstance:
       objectReference: {fileID: 1732677310}
     - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _stormForce
-      value: 4.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _stormManager
@@ -1634,7 +1634,7 @@ PrefabInstance:
       objectReference: {fileID: 1732677310}
     - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _stormForce
-      value: 4.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _stormManager
