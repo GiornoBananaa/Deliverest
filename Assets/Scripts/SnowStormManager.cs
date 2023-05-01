@@ -13,10 +13,12 @@ public class SnowStormManager : MonoBehaviour
     [SerializeField] private float _stormSpeed;
     [SerializeField] private float _signTime;
     [SerializeField] private GameObject _stormPrefab;
+    [SerializeField] private GameObject _dangersSign;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private Vector2 _spawnOffset;
 
     private float _timeForNextStorm;
+    private float _timeForSign;
     private float _durationOfNextStorm;
     private bool _stormIsShowed;
     private bool _isStormCoroutine;
@@ -69,6 +71,10 @@ public class SnowStormManager : MonoBehaviour
     private IEnumerator Storm()
     {
         _isStormCoroutine = true;
+        _dangersSign.SetActive(true);
+
+        yield return new WaitForSeconds(_signTime);
+
         Velocity = new Vector2(Random.value < 0.5f ? -_stormSpeed : _stormSpeed, 0);
         _stormRender = Instantiate(_stormPrefab, (Vector2)_spawnPosition.position + (Velocity.x > 0 ? -_spawnOffset : _spawnOffset), Quaternion.identity).GetComponent<SpriteRenderer>();
         _stormRender.color = new Color(1, 1, 1, 0);
@@ -80,5 +86,6 @@ public class SnowStormManager : MonoBehaviour
 
         IsStorm = false;
         _isStormCoroutine = false;
+        _dangersSign.SetActive(false);
     }
 }
