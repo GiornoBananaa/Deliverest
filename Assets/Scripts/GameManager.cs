@@ -78,6 +78,22 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(currentLevel.levelWinSceneID);
     }
+    public void RestartLevel()
+    {
+        if (height > best_height)
+            best_height = height;
+
+        if(currentLevelID >= 1)
+        {
+            height = levels[currentLevelID - 1].target_height;
+        }
+        else
+        {
+            height = 0;
+        }
+
+        SceneManager.LoadScene(1);
+    }
     public void OpenMainMenu()
     {
         SceneManager.LoadScene(0);

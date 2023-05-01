@@ -21,7 +21,7 @@ public class LoseMenu : MonoBehaviour
     }
     public void RestartLevel()
     {
-        GameManager.instance.StartNewGame();
+        GameManager.instance.RestartLevel();
     }
 
 }
