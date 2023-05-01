@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 760546554733692086}
   - component: {fileID: 279258597}
   m_Layer: 0
-  m_Name: TestStorm
+  m_Name: SnowStorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
