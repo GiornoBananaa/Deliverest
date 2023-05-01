@@ -8,7 +8,11 @@ public class LoseMenu : MonoBehaviour
     [SerializeField] private TMP_Text bestHeight;
     void Start()
     {
-        bestHeight.text = $"Best height: {(int)GameManager.instance.best_height}";
+        if (bestHeight != null)
+        {
+
+            bestHeight.text = $"Best height: {(int)GameManager.instance.best_height}";
+        }
     }
     public void GoToMainMenu()
     {
@@ -19,5 +23,5 @@ public class LoseMenu : MonoBehaviour
     {
         GameManager.instance.RestartLevel();
     }
-    
+
 }

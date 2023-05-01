@@ -31,7 +31,7 @@ public class GameTimer : MonoBehaviour
         else
         {
             timeLeft = 0;
-            GameManager.instance.LoseGame();
+            GameManager.instance.LoseGame(true);
         }
         text.text = $"{(int)timeLeft / 60:00}:{timeLeft % 60:00.00}";
         UpdatePorgressBar();
