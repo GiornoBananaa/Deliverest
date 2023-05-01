@@ -38,7 +38,7 @@ public class RockGen : MonoBehaviour
 
         if (playerBody.position.y > transform.position.y)
         {
-            StartCoroutine( SmoothScroll()); 
+            StartCoroutine(SmoothScroll());
         }
     }
     private void DropStone()
@@ -117,10 +117,10 @@ public class RockGen : MonoBehaviour
         }
         GameObject[] rowOfTiles = new GameObject[tiles_in_row + 2];
         rowOfTiles[0] = Instantiate(edgeTile, transform);
-        rowOfTiles[0].transform.position = new Vector3(-tile_width * (tiles_in_row + 1) / 2,
+        rowOfTiles[0].transform.position = new Vector3(tile_width / 2 - tile_width * (tiles_in_row + 1) / 2,
             (rows_number - 2) * tile_height);
         rowOfTiles[rowOfTiles.Length - 1] = Instantiate(edgeTile, transform);
-        rowOfTiles[rowOfTiles.Length - 1].transform.position = new Vector3(tile_width * (tiles_in_row + 1) / 2,
+        rowOfTiles[rowOfTiles.Length - 1].transform.position = new Vector3(- tile_width / 2 + tile_width * (tiles_in_row + 1) / 2,
             (rows_number - 2) * tile_height);
         rowOfTiles[rowOfTiles.Length - 1].transform.localScale = new Vector3(-1, 1, 1);
         for (int i = 0; i < tiles_in_row; i++)
