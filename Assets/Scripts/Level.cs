@@ -15,5 +15,7 @@ public class Level
     public float stormSpeed;
     public float signTime;
     public int levelWinSceneID;
+    public bool snow_storm;
     public Sprite backGround;
+    public AudioClip music_on_level;
 }

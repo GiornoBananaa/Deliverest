@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f22d597aadf8344e97b2939e0ab21ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target_height: 100
+  levels: []
   best_height: 0
   isPaused: 0
   isInSafePlace: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f29d6e2a6f243749b6b29ea8a1cb366, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40867280ede20ec46b62b18f7c7c2a48, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

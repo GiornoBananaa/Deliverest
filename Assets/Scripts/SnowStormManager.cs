@@ -22,6 +22,8 @@ public class SnowStormManager : MonoBehaviour
     private Level level;
     void Start()
     {
+        if (!GameManager.instance.currentLevel.snow_storm) gameObject.SetActive(false);
+
         level = GameManager.instance.currentLevel;
         _isStormCoroutine = false;
         _stormIsShowed = false;

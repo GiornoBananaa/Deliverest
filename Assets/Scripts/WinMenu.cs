@@ -6,6 +6,10 @@ public class WinMenu : MonoBehaviour
 {
     public void GoToMainMenu()
     {
+        GameManager.instance.OpenMainMenu();
+    }
+    public void NextLevel()
+    {
         GameManager.instance.NextLevel();
     }
 }
