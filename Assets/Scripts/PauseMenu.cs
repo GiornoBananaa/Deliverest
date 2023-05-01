@@ -37,11 +37,13 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartLevel()
     {
+        AudioListener.pause = false;
         Time.timeScale = 1.0f;
-        GameManager.instance.StartNewGame();
+        GameManager.instance.RestartLevel();
     }
     public void GoToMainMenu()
     {
+        AudioListener.pause = false;
         Time.timeScale = 1.0f;
         GameManager.instance.OpenMainMenu();
     }
