@@ -55,7 +55,7 @@ public class RockGen : MonoBehaviour
     private void DropAvalanche()
     {
         timeForNextAvalanche = Random.Range(avalanche_min_delay, avalanche_max_delay);
-        Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 20);
+        Vector3 pos = new Vector3(transform.position.x + tile_width * 2f * Random.Range(-1, 2), 20);
         Destroy(Instantiate(avalanche_prefab, pos, Quaternion.identity), 10f);
         pos.y = tile_height;
         Destroy(Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity), 1f);
