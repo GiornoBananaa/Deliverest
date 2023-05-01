@@ -835,6 +835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a0d81f86e5c5145bc0f28fbd5d381a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!4 &838643414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1041484227149672575, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
@@ -883,8 +884,8 @@ MonoBehaviour:
     appearSpeed: 100
     stormSpeed: 100
     signTime: 3
-    levelWinSceneID: 0
-    backGround: {fileID: 0}
+    levelWinSceneID: 3
+    backGround: {fileID: 21300000, guid: bfc1540043183a3428a8a39137d23a17, type: 3}
   best_height: 0
   isPaused: 0
   isInSafePlace: 0
@@ -1300,6 +1301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a0d81f86e5c5145bc0f28fbd5d381a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 820855785}
 --- !u!212 &1228934545
 SpriteRenderer:
   m_ObjectHideFlags: 0

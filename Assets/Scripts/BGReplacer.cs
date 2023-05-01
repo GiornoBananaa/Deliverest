@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class BGReplacer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private SpriteRenderer spriteRenderer;
     void Start()
     {
-        
+        spriteRenderer.sprite = GameManager.instance.currentLevel.backGround;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
