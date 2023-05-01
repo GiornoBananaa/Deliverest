@@ -38,19 +38,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        LoadValues();
     }
 
     public void StartNewGame()
     {
         isPaused = false;
-        ResetAllProgress();
+        ResetProgress();
         SceneManager.LoadScene(1);
     }
-    public void LoadGame()
-    {
-        LoadValues();
-        SceneManager.LoadScene(1);
-    }
+
     public void LoseGame(bool loseTime)
     {
         if (height > best_height)
@@ -71,33 +68,20 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void RestartLevel()
-    {
-        ResetLevelProgress();
-        isPaused = false;
-        SceneManager.LoadScene(1);
-    }
-    public void ResetLevelProgress()
+
+    public void ResetProgress()
     {
         height = 0;
-    }
-    public void ResetAllProgress()
-    {
-        ResetLevelProgress();
-        PlayerPrefs.DeleteAll();
+        currentLevelID = 0;
     }
 
     private void SaveValues()
     {
-
         PlayerPrefs.SetFloat("bestHeight", best_height);
-        PlayerPrefs.SetFloat("height", height);
-
     }
     private void LoadValues()
     {
-        height = PlayerPrefs.GetFloat("height");
-        best_height = PlayerPrefs.GetFloat("height");
+        best_height = PlayerPrefs.GetFloat("bestHeight");
     }
     private void OnApplicationQuit()
     {
