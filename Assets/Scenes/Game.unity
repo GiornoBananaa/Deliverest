@@ -1984,6 +1984,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lossHeight: -1.5
+  _jumpForce: 15
+  _leftArmController: {fileID: 2074251924}
+  _rightArmController: {fileID: 2108531033}
   _body: {fileID: 1309182805}
 --- !u!1 &1615277313
 GameObject:
@@ -2592,6 +2595,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 397655173}
   pauseButton: {fileID: 964433931}
+--- !u!114 &2074251924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+  m_PrefabInstance: {fileID: 1309182804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11d64a2583c82b4db691a52a8acdaab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2100517122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,3 +2703,14 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100517122}
   m_CullTransparentMesh: 1
+--- !u!114 &2108531033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+  m_PrefabInstance: {fileID: 1309182804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11d64a2583c82b4db691a52a8acdaab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

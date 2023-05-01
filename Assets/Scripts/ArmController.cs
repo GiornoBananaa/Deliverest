@@ -113,7 +113,7 @@ public class ArmController : MonoBehaviour
         _target.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    private void Fall(bool isMovable)
+    public void Fall(bool isMovable)
     {
         _otherJoint.enabled = false;
         _otherLimbSolver.SetActive(false);
