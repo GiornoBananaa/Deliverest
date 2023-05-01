@@ -22,7 +22,9 @@ public class SnowStormManager : MonoBehaviour
     private float _durationOfNextStorm;
     private bool _stormIsShowed;
     private bool _isStormCoroutine;
+    private float _stormVolume;
     private SpriteRenderer _stormRender;
+    private AudioSource _stormSound;
 
     void Start()
     {
@@ -50,6 +52,9 @@ public class SnowStormManager : MonoBehaviour
         {
             float alpha = Mathf.Lerp(_stormRender.color.a, 1, _appearSpeed);
             _stormRender.color = new Color(1, 1, 1, alpha);
+
+            _stormSound.volume = Mathf.Lerp(_stormSound.volume, _stormVolume, _appearSpeed);
+
             if (_stormRender.color.a > 0.7f)
             {
                 _stormIsShowed = true;
@@ -60,10 +65,12 @@ public class SnowStormManager : MonoBehaviour
             float alpha = Mathf.Lerp(_stormRender.color.a, 0, _appearSpeed);
             _stormRender.color = new Color(1, 1, 1, alpha);
 
+            _stormSound.volume = Mathf.Lerp(_stormSound.volume, 0, _appearSpeed);
+
             if (_stormRender.color.a < 0.01f)
             {
                 _stormIsShowed = false;
-                Destroy(_stormRender);
+                Destroy(_stormRender.gameObject);
             }
         }
     }
@@ -79,6 +86,9 @@ public class SnowStormManager : MonoBehaviour
         _stormRender = Instantiate(_stormPrefab, (Vector2)_spawnPosition.position + (Velocity.x > 0 ? -_spawnOffset : _spawnOffset), Quaternion.identity).GetComponent<SpriteRenderer>();
         _stormRender.color = new Color(1, 1, 1, 0);
         _stormRender.GetComponent<SnowStorm>().Velocity = Velocity;
+        _stormSound = _stormRender.GetComponent<AudioSource>();
+        _stormVolume = _stormSound.volume;
+        _stormSound.volume = 0;
 
         IsStorm = true;
 

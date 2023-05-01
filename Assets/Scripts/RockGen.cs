@@ -38,11 +38,8 @@ public class RockGen : MonoBehaviour
 
         if (playerBody.position.y > transform.position.y)
         {
-
-            StartCoroutine(SmoothScroll());
+            StartCoroutine( SmoothScroll()); 
         }
-        if (playerBody.position.y < -3 * tile_height)
-            GameManager.instance.LoseGame(false);
     }
     private void DropStone()
     {
