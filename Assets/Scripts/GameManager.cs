@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         }
     }
     [HideInInspector] public bool isPaused;
+    [HideInInspector] public bool isSnowStorm;
     [HideInInspector] public bool isInSafePlace;
     private float _height;
     private void Awake()
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         isPaused = false;
+        isSnowStorm = false;
         ResetProgress();
         SceneManager.LoadScene(1);
     }
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         isPaused = false;
+        isSnowStorm = false;
         if (height > best_height)
             best_height = height;
 

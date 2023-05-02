@@ -8,10 +8,12 @@ public class RockGen : MonoBehaviour
     [SerializeField] private GameObject[] tilesWithLedges, tilesWithOutLedges;
     [SerializeField] private GameObject edgeTile, avalanche_prefab, avalanche_sighn_prefab, stone_prefab, stone_sighn_prefab;
     [SerializeField] private Transform player, playerBody;
+
     private List<GameObject[]> rows = new List<GameObject[]>();
     private bool _isMoving;
     private float timeForNextStone, timeForNextAvalanche;
     private Level level;
+
     void Start()
     {
         level = GameManager.instance.currentLevel;
@@ -31,10 +33,22 @@ public class RockGen : MonoBehaviour
             return;
         timeForNextStone -= Time.deltaTime;
         timeForNextAvalanche -= Time.deltaTime;
-        if (timeForNextStone <= 0)
-            DropStone();
+        if (timeForNextStone <= 0 && !GameManager.instance.isSnowStorm)
+        {
+            if (!GameManager.instance.isSnowStorm)
+                DropStone();
+            else 
+                timeForNextStone = Random.Range(level.stone_min_delay, level.stone_max_delay);
+
+        }
         if (timeForNextAvalanche <= 0)
-            DropAvalanche();
+        {
+            if(!GameManager.instance.isSnowStorm)
+                DropAvalanche();
+            else 
+                timeForNextAvalanche = Random.Range(level.avalanche_min_delay, level.avalanche_max_delay);
+        }
+
 
         if (playerBody.position.y > transform.position.y)
         {
