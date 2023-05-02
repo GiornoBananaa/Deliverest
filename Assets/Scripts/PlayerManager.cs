@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float _lossY;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _jumpReloadTime;
+    [SerializeField] private float _fallingForLossTime;
     [SerializeField] private ArmController _leftArmController;
     [SerializeField] private ArmController _rightArmController;
     [SerializeField] private GameObject _body;
@@ -56,10 +57,19 @@ public class PlayerManager : MonoBehaviour
     {
         _isFallingForLoss = true;
         _audioSource.Play();
+
+        float fallingTime = 0;
+        while (fallingTime< _fallingForLossTime)
+        {
+            fallingTime += Time.deltaTime;
+            _audioSource.volume = Mathf.Lerp(_audioSource.volume, 0, 0.005f);
+            yield return new WaitForEndOfFrame();
+        }
+        /*
         while (_audioSource.isPlaying)
         {
             yield return new WaitForFixedUpdate();
-        }
+        }*/
 
         GameManager.instance.LoseGame(false);
     }
