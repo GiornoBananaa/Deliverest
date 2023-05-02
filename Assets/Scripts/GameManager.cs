@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     }
     public void RestartLevel()
     {
+        isPaused = false;
         if (height > best_height)
             best_height = height;
 

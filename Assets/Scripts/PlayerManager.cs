@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float _lossHeight;
+    [SerializeField] private float _lossY;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _jumpReloadTime;
     [SerializeField] private ArmController _leftArmController;
@@ -33,7 +34,7 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-        if (_body.transform.localPosition.y < _lossHeight && !_isFallingForLoss)
+        if ((_body.transform.localPosition.y <= _lossHeight || _body.transform.localPosition.x <= -_lossY || _body.transform.localPosition.x >= _lossY) && !_isFallingForLoss)
             StartCoroutine(FallLoss());
     }
 
