@@ -19,6 +19,8 @@ public class PlayerManager : MonoBehaviour
     private float _timeForNextJump;
 
     public float NormilizedJumpReloadTime { get => _timeForNextJump / _jumpReloadTime; }
+    public bool IsOnOneHand { get => (_leftArmController.IsHooked && !_rightArmController.IsHooked) || (!_leftArmController.IsHooked && _rightArmController.IsHooked); }
+    public bool IsOnTwoHands { get => (_leftArmController.IsHooked && _rightArmController.IsHooked); }
 
     void Start()
     {

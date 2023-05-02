@@ -13,9 +13,11 @@ public class RockGen : MonoBehaviour
     private bool _isMoving;
     private float timeForNextStone, timeForNextAvalanche;
     private Level level;
+    private PlayerManager playerManager;
 
     void Start()
     {
+        playerManager = player.GetComponent<PlayerManager>();
         level = GameManager.instance.currentLevel;
         timeForNextStone = level.stone_max_delay;
         timeForNextAvalanche = level.avalanche_max_delay;
@@ -50,7 +52,7 @@ public class RockGen : MonoBehaviour
         }
 
 
-        if (playerBody.position.y > transform.position.y)
+        if (playerBody.position.y > transform.position.y && playerManager.IsOnTwoHands)
         {
             StartCoroutine(SmoothScroll());
         }

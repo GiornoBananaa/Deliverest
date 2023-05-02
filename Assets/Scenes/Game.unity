@@ -1005,8 +1005,8 @@ MonoBehaviour:
     avalanche_max_delay: 100
     target_height: 10
     time_for_level: 100
-    stormMinDelay: 10
-    stormMaxDelay: 10
+    stormMinDelay: 20
+    stormMaxDelay: 20
     stormMinDuration: 4
     stormMaxDuration: 6
     appearSpeed: 0.023
