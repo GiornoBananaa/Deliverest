@@ -38,7 +38,7 @@ public class RockGen : MonoBehaviour
         if (timeForNextStone <= 0 && !GameManager.instance.isSnowStorm)
         {
             if (!GameManager.instance.isSnowStorm)
-                DropStone();
+                StartCoroutine(StoneEvent());
             else 
                 timeForNextStone = Random.Range(level.stone_min_delay, level.stone_max_delay);
 
@@ -46,7 +46,7 @@ public class RockGen : MonoBehaviour
         if (timeForNextAvalanche <= 0)
         {
             if(!GameManager.instance.isSnowStorm)
-                DropAvalanche();
+                StartCoroutine(AvalancheEvent());
             else 
                 timeForNextAvalanche = Random.Range(level.avalanche_min_delay, level.avalanche_max_delay);
         }
@@ -57,24 +57,42 @@ public class RockGen : MonoBehaviour
             StartCoroutine(SmoothScroll());
         }
     }
-    private void DropStone()
+
+    private IEnumerator StoneEvent()
     {
-        timeForNextStone = Random.Range(level.stone_min_delay, level.stone_max_delay);
-        Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), 10);
-        GameObject stone = Instantiate(stone_prefab, pos, Quaternion.identity);
-        StartCoroutine(SoundLerp(stone));
-        pos.y = tile_height;
-        Destroy(Instantiate(stone_sighn_prefab, pos, Quaternion.identity), 1f);
+        timeForNextStone = Random.Range(level.stone_min_delay, level.avalanche_max_delay) + level.stone_sign_time;
+        Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), tile_height);
+        GameObject sign = Instantiate(stone_sighn_prefab, pos, Quaternion.identity);
+        yield return new WaitForSeconds(level.stone_sign_time);
+        pos.y = 10;
+        DropStone(pos);
+        yield return new WaitForSeconds(1);
+        Destroy(sign);
     }
 
-    private void DropAvalanche()
+    private void DropStone(Vector3 pos)
     {
-        timeForNextAvalanche = Random.Range(level.avalanche_min_delay, level.avalanche_max_delay);
-        Vector3 pos = new Vector3(transform.position.x + tile_width * 2f * Random.Range(-1, 2), 20);
+        timeForNextStone = Random.Range(level.stone_min_delay, level.avalanche_max_delay);
+        GameObject stone = Instantiate(stone_prefab, pos, Quaternion.identity);
+        StartCoroutine(SoundLerp(stone));
+    }
+
+    private IEnumerator AvalancheEvent()
+    {
+        timeForNextAvalanche = Random.Range(level.avalanche_min_delay, level.avalanche_max_delay) + level.avalanche_sign_time;
+        Vector3 pos = new Vector3(transform.position.x + tile_width * 2f * Random.Range(-1, 2), tile_height);
+        GameObject sign = Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity);
+        yield return new WaitForSeconds(level.avalanche_sign_time);
+        pos.y = 20;
+        DropAvalanche(pos);
+        yield return new WaitForSeconds(1);
+        Destroy(sign);
+    }
+
+    private void DropAvalanche(Vector3 pos)
+    {
         GameObject avalanche = Instantiate(avalanche_prefab, pos, Quaternion.identity);
         StartCoroutine(SoundLerp(avalanche));
-        pos.y = tile_height;
-        Destroy(Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity), 1f);
     }
     private void FastScroll()
     {

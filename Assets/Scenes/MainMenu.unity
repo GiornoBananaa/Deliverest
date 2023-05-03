@@ -948,8 +948,10 @@ MonoBehaviour:
   levels:
   - stone_min_delay: 10
     stone_max_delay: 13
+    stone_sign_time: 3
     avalanche_min_delay: 23
     avalanche_max_delay: 27
+    avalanche_sign_time: 5
     target_height: 50
     time_for_level: 120
     stormMinDelay: 50
@@ -966,8 +968,10 @@ MonoBehaviour:
     music_on_level: {fileID: 8300000, guid: 33e03855d2a5fa544b401855a9a0acdb, type: 3}
   - stone_min_delay: 9
     stone_max_delay: 12
+    stone_sign_time: 1
     avalanche_min_delay: 21
     avalanche_max_delay: 24
+    avalanche_sign_time: 5
     target_height: 100
     time_for_level: 140
     stormMinDelay: 18

@@ -6,8 +6,8 @@ using UnityEngine;
 public class Level
 {
 
-    public float stone_min_delay, stone_max_delay;
-    public float avalanche_min_delay, avalanche_max_delay;
+    public float stone_min_delay, stone_max_delay, stone_sign_time;
+    public float avalanche_min_delay, avalanche_max_delay, avalanche_sign_time;
     public float target_height, time_for_level;
     public float stormMinDelay, stormMaxDelay;
     public float stormMinDuration, stormMaxDuration;
