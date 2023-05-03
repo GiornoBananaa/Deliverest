@@ -27,7 +27,7 @@ public class ArmController : MonoBehaviour
     [SerializeField] private float _maxStaminaTimeWhileStorm;
     [SerializeField] private float _grappingRadius;
 
-    private static bool _isOnOneHand;
+    public static bool _isOnOneHand;
     private DistanceJoint2D _joint;
     private float _timeOnOneHand;
     private float _maxTime;

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 23021be5bb877b84a8969701daa70dd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad6431192181f6a4cae4c402543aface, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1038404065a21b84096303f1de8d74cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1721e91a5b6cbce49941cc3ee63c896e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -439,7 +439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -88.3, y: -476.8}
+  m_AnchoredPosition: {x: -88.3, y: -487}
   m_SizeDelta: {x: 71.4439, y: 71.751}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &128160509
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 242283a1856b8c7478fe60f16d39bb01, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 980d67ffa308414439f9d89272f776ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8265cea5a0c537c4e8c788ea6ced6d18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aef473df78b96a74197bbf3031298a9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -822,7 +822,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dc2903444b764f549b4526ce510ccb71, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b8541a5f789d1f46a6254ec1672be9b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -961,6 +961,7 @@ MonoBehaviour:
     signTime: 3
     levelWinSceneID: 6
     snow_storm: 0
+    wind_sound: 0
     backGround: {fileID: 21300000, guid: 6b26d36ec3afeb6479de0483b1dc5efe, type: 3}
     music_on_level: {fileID: 8300000, guid: 33e03855d2a5fa544b401855a9a0acdb, type: 3}
   - stone_min_delay: 9
@@ -978,10 +979,12 @@ MonoBehaviour:
     signTime: 3
     levelWinSceneID: 3
     snow_storm: 1
+    wind_sound: 1
     backGround: {fileID: 21300000, guid: bfc1540043183a3428a8a39137d23a17, type: 3}
     music_on_level: {fileID: 8300000, guid: 06147c5792a582841b2261c474105579, type: 3}
   best_height: 0
   isPaused: 0
+  isSnowStorm: 0
   isInSafePlace: 0
 --- !u!4 &414920429
 Transform:
@@ -1510,7 +1513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e88bd8c72a87fed46a975df1e5ce1a41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d3c503b799727064ba537dedac891ffe, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1797,7 +1800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 88.2, y: -477.1}
+  m_AnchoredPosition: {x: 88.2, y: -487.30002}
   m_SizeDelta: {x: 71.4439, y: 71.751}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1573299882
@@ -1978,7 +1981,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612851541}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -2085,7 +2088,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89a71aab502652b45b8c865d264a909b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d23e7c5b5ec92c49885e38e52b200ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2370,7 +2373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 47ba987e89391a84dbb045f47e21dc9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7687b5ff2d20ee54bb5a41f2fe1bd9aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

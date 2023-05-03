@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float _lossHeight;
+    [SerializeField] private float _lossY;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _jumpReloadTime;
+    [SerializeField] private float _fallingForLossTime;
     [SerializeField] private ArmController _leftArmController;
     [SerializeField] private ArmController _rightArmController;
     [SerializeField] private GameObject _body;
@@ -17,6 +19,8 @@ public class PlayerManager : MonoBehaviour
     private float _timeForNextJump;
 
     public float NormilizedJumpReloadTime { get => _timeForNextJump / _jumpReloadTime; }
+    public bool IsOnOneHand { get => (_leftArmController.IsHooked && !_rightArmController.IsHooked) || (!_leftArmController.IsHooked && _rightArmController.IsHooked); }
+    public bool IsOnTwoHands { get => (_leftArmController.IsHooked && _rightArmController.IsHooked); }
 
     void Start()
     {
@@ -33,7 +37,7 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-        if (_body.transform.localPosition.y < _lossHeight && !_isFallingForLoss)
+        if ((_body.transform.localPosition.y <= _lossHeight || _body.transform.localPosition.x <= -_lossY || _body.transform.localPosition.x >= _lossY) && !_isFallingForLoss)
             StartCoroutine(FallLoss());
     }
 
@@ -55,10 +59,19 @@ public class PlayerManager : MonoBehaviour
     {
         _isFallingForLoss = true;
         _audioSource.Play();
+
+        float fallingTime = 0;
+        while (fallingTime< _fallingForLossTime)
+        {
+            fallingTime += Time.deltaTime;
+            _audioSource.volume = Mathf.Lerp(_audioSource.volume, 0, 0.005f);
+            yield return new WaitForEndOfFrame();
+        }
+        /*
         while (_audioSource.isPlaying)
         {
             yield return new WaitForFixedUpdate();
-        }
+        }*/
 
         GameManager.instance.LoseGame(false);
     }

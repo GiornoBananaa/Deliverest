@@ -20,6 +20,7 @@ public class SnowStormManager : MonoBehaviour
     private SpriteRenderer _stormRender;
     private AudioSource _stormSound;
     private Level level;
+
     void Start()
     {
         if (!GameManager.instance.currentLevel.snow_storm) gameObject.SetActive(false);
@@ -74,6 +75,7 @@ public class SnowStormManager : MonoBehaviour
 
     private IEnumerator Storm()
     {
+        GameManager.instance.isSnowStorm = true;
         _isStormCoroutine = true;
         _dangersSign.SetActive(true);
 
@@ -94,5 +96,6 @@ public class SnowStormManager : MonoBehaviour
         IsStorm = false;
         _isStormCoroutine = false;
         _dangersSign.SetActive(false);
+        GameManager.instance.isSnowStorm = false;
     }
 }
