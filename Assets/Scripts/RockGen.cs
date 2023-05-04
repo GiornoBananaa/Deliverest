@@ -11,12 +11,16 @@ public class RockGen : MonoBehaviour
 
     private List<GameObject[]> rows = new List<GameObject[]>();
     private bool _isMoving;
+    private bool isStorm;
+    private bool stoneIsWaitingStormEnd;
+    private bool avalancheIsWaitingStormEnd;
     private float timeForNextStone, timeForNextAvalanche;
     private Level level;
     private PlayerManager playerManager;
 
     void Start()
     {
+        isStorm = false;
         playerManager = player.GetComponent<PlayerManager>();
         level = GameManager.instance.currentLevel;
         timeForNextStone = level.stone_max_delay;
@@ -35,22 +39,49 @@ public class RockGen : MonoBehaviour
             return;
         timeForNextStone -= Time.deltaTime;
         timeForNextAvalanche -= Time.deltaTime;
-        if (timeForNextStone <= 0 && !GameManager.instance.isSnowStorm)
+
+        if (GameManager.instance.isSnowStorm != isStorm)
+        {
+            if (isStorm)
+            {
+                if (timeForNextStone < 4)
+                    timeForNextStone = 4;
+                if (timeForNextAvalanche < 5)
+                    timeForNextStone = 5;
+            }
+            isStorm = GameManager.instance.isSnowStorm;
+        }
+
+        if (timeForNextStone <= 0)
         {
             if (!GameManager.instance.isSnowStorm)
-                StartCoroutine(StoneEvent());
-            else 
-                timeForNextStone = Random.Range(level.stone_min_delay, level.stone_max_delay);
-
+            {
+                if (stoneIsWaitingStormEnd)
+                {
+                    stoneIsWaitingStormEnd = false;
+                    timeForNextStone = 5;
+                }
+                else
+                    StartCoroutine(StoneEvent());
+            }
+            else
+                stoneIsWaitingStormEnd = true;
         }
         if (timeForNextAvalanche <= 0)
         {
-            if(!GameManager.instance.isSnowStorm)
-                StartCoroutine(AvalancheEvent());
-            else 
-                timeForNextAvalanche = Random.Range(level.avalanche_min_delay, level.avalanche_max_delay);
+            if (!GameManager.instance.isSnowStorm)
+            {
+                if (avalancheIsWaitingStormEnd)
+                {
+                    avalancheIsWaitingStormEnd = false;
+                    timeForNextAvalanche = 7;
+                }
+                else
+                    StartCoroutine(AvalancheEvent());
+            }
+            else
+                avalancheIsWaitingStormEnd = true;
         }
-
 
         if (playerBody.position.y > transform.position.y && playerManager.IsOnTwoHands)
         {
