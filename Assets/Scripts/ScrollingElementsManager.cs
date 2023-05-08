@@ -5,18 +5,47 @@ using UnityEngine;
 public class ScrollingElementsManager : MonoBehaviour
 {
     [SerializeField] private Transform _panel;
+    [SerializeField] private float _leftBorderX;
+    [SerializeField] private float _rightBorderX;
 
-    public void MoveAuthor(bool isRight, RectTransform element)
+    private RectTransform _rectTransform;
+    private float _border;
+
+    private void Start()
     {
-        if (isRight)
+        if(Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            element.position = _panel.GetChild(0).position + new Vector3(-550,0,0);
-            element.SetAsFirstSibling();
+            _border = 300;
+            _rightBorderX = 1116;
         }
         else
         {
-            element.position = _panel.GetChild(_panel.childCount-1).position + new Vector3(550, 0, 0);
-            element.SetAsLastSibling();
+            _border = 550;
+            _rightBorderX = 3100;
+        }
+
+        _rectTransform = GetComponent<RectTransform>();
+    }
+
+    private void FixedUpdate()
+    {
+        if(_rectTransform.position.x > _rightBorderX)
+            MoveAuthor(true);
+        else if(_rectTransform.position.x < _leftBorderX)
+            MoveAuthor(false);
+    }
+    
+    public void MoveAuthor(bool isRight)
+    {
+        if (isRight)
+        {
+            _rectTransform.position = _panel.GetChild(0).position + new Vector3(-_border, 0,0);
+            _rectTransform.SetAsFirstSibling();
+        }
+        else
+        {
+            _rectTransform.position = _panel.GetChild(_panel.childCount-1).position + new Vector3(_border, 0, 0);
+            _rectTransform.SetAsLastSibling();
         }
     }
 }

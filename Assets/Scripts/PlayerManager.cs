@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private ArmController _leftArmController;
     [SerializeField] private ArmController _rightArmController;
     [SerializeField] private GameObject _body;
+    [SerializeField] private GameObject _restartButton;
 
     private Rigidbody2D _rigidbody2D;
     private AudioSource _audioSource;
@@ -37,7 +38,7 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-        if ((_body.transform.localPosition.y <= _lossHeight || _body.transform.localPosition.x <= -_lossY || _body.transform.localPosition.x >= _lossY) && !_isFallingForLoss)
+        if ((_body.transform.position.y <= _lossHeight || _body.transform.localPosition.x <= -_lossY || _body.transform.localPosition.x >= _lossY) && !_isFallingForLoss)
             StartCoroutine(FallLoss());
     }
 
@@ -57,6 +58,7 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator FallLoss()
     {
+        _restartButton.SetActive(true);
         _isFallingForLoss = true;
         _audioSource.Play();
 
@@ -72,7 +74,7 @@ public class PlayerManager : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
         }*/
-
+        _restartButton.SetActive(false);
         GameManager.instance.LoseGame(false);
     }
 }
