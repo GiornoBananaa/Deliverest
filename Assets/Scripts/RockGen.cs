@@ -142,10 +142,11 @@ public class RockGen : MonoBehaviour
         {
             _isMoving = true;
             Vector3 startPosition = transform.position;
-            for (float i = 0f; i <= 1.0f; i += 0.02f)
+            for (float i = 0f; i <= 1.0f; i += 0.015f)
             {
                 transform.position = Vector3.Lerp(startPosition, startPosition + Vector3.down * tile_height, i);
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForFixedUpdate();
+
             }
             DelLastRaw();
             transform.position = startPosition;
