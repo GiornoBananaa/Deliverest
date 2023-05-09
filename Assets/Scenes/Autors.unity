@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1269730928}
-  _leftBorderX: -900
-  _rightBorderX: 1116
+  _leftBorderX: -1100
+  _rightBorderX: 3000
 --- !u!1 &210124323
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,8 +571,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1269730928}
-  _leftBorderX: -900
-  _rightBorderX: 1116
+  _leftBorderX: -1100
+  _rightBorderX: 3000
 --- !u!1 &548622009
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,8 +922,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1269730928}
-  _leftBorderX: -900
-  _rightBorderX: 1116
+  _leftBorderX: -1100
+  _rightBorderX: 3000
 --- !u!1 &782282399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,8 +1003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1269730928}
-  _leftBorderX: -900
-  _rightBorderX: 1116
+  _leftBorderX: -1100
+  _rightBorderX: 3000
 --- !u!1 &792266231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,8 +1305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1269730928}
-  _leftBorderX: -900
-  _rightBorderX: 1116
+  _leftBorderX: -1100
+  _rightBorderX: 3000
 --- !u!1 &1201747836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,8 +1540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1269730928}
-  _leftBorderX: -900
-  _rightBorderX: 1116
+  _leftBorderX: -1100
+  _rightBorderX: 3000
 --- !u!1 &1269730927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,8 +2489,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1269730928}
-  _leftBorderX: -900
-  _rightBorderX: 1116
+  _leftBorderX: -1100
+  _rightBorderX: 3000
 --- !u!1 &1571912562
 GameObject:
   m_ObjectHideFlags: 0
