@@ -600,9 +600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprites:
-  - {fileID: 21300000, guid: 6ca9ac6a349bdb84f87184b1bb8650b1, type: 3}
-  - {fileID: 21300000, guid: 2f8d87c8edfe59e478899fc0312d00eb, type: 3}
-  - {fileID: 21300000, guid: b9c404daa1399c044ab6dbd64db70754, type: 3}
+  - {fileID: 21300000, guid: 73fc96b700207154f9054075233cb1de, type: 3}
+  - {fileID: 21300000, guid: 4cd31e39f73642e47a9729228d0c8d6d, type: 3}
   _image: {fileID: 64940586}
   _nextScene: 1
   _nextLevel: 0

@@ -384,7 +384,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprites:
-  - {fileID: 21300000, guid: 014260cc184da0f43aed72289fb35677, type: 3}
+  - {fileID: 21300000, guid: 63eb2351ae5a94b4589f887d94a64610, type: 3}
+  - {fileID: 21300000, guid: 0043ef02a1776cf4bae83eec86ce0acd, type: 3}
+  - {fileID: 21300000, guid: 82a9b25e05889974bb769706e14bcb36, type: 3}
+  - {fileID: 21300000, guid: 7779b26ea9a914e48a25a5ac263281c9, type: 3}
   _image: {fileID: 29380583}
   _nextScene: 1
   _nextLevel: 1
