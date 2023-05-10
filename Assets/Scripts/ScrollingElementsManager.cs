@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScrollingElementsManager : MonoBehaviour
 {
@@ -9,28 +10,31 @@ public class ScrollingElementsManager : MonoBehaviour
     [SerializeField] private float _rightBorderX;
 
     private RectTransform _rectTransform;
-    private float _border;
+    private float _offset;
+    private float _leftborderRatio;
+    private float _rightborderRatio;
+    private float _lastScreenWidth;
 
     private void Start()
     {
-        if(Application.platform == RuntimePlatform.WebGLPlayer)
-        {
-            _border = 300;
-            _rightBorderX = 1116;
-        }
-        else
-        {
-            _border = 550;
-            _rightBorderX = 3100;
-        }
+        _offset = 550;
+        _leftborderRatio = 1920f / _leftBorderX;
+        _rightborderRatio = 1920f / _rightBorderX;
+        _leftBorderX = Screen.width / _leftborderRatio;
+        _rightBorderX = Screen.width / _rightborderRatio;
+        _lastScreenWidth = Screen.width;
 
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if(_rectTransform.position.x > _rightBorderX)
+        if (_lastScreenWidth != Screen.width)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        if (_rectTransform.position.x > _rightBorderX)
             MoveAuthor(true);
+
         else if(_rectTransform.position.x < _leftBorderX)
             MoveAuthor(false);
     }
@@ -39,12 +43,12 @@ public class ScrollingElementsManager : MonoBehaviour
     {
         if (isRight)
         {
-            _rectTransform.position = _panel.GetChild(0).position + new Vector3(-_border, 0,0);
+            _rectTransform.localPosition = _panel.GetChild(0).localPosition + new Vector3(-_offset, 0,0);
             _rectTransform.SetAsFirstSibling();
         }
         else
         {
-            _rectTransform.position = _panel.GetChild(_panel.childCount-1).position + new Vector3(_border, 0, 0);
+            _rectTransform.localPosition = _panel.GetChild(_panel.childCount-1).localPosition + new Vector3(_offset, 0, 0);
             _rectTransform.SetAsLastSibling();
         }
     }

@@ -961,7 +961,7 @@ MonoBehaviour:
     appearSpeed: 0.023
     stormSpeed: 8
     signTime: 3
-    levelWinSceneID: 6
+    levelWinSceneID: 7
     snow_storm: 0
     wind_sound: 0
     backGround: {fileID: 21300000, guid: 6b26d36ec3afeb6479de0483b1dc5efe, type: 3}
@@ -981,7 +981,7 @@ MonoBehaviour:
     appearSpeed: 0.023
     stormSpeed: 8
     signTime: 3
-    levelWinSceneID: 3
+    levelWinSceneID: 8
     snow_storm: 1
     wind_sound: 1
     backGround: {fileID: 21300000, guid: bfc1540043183a3428a8a39137d23a17, type: 3}
