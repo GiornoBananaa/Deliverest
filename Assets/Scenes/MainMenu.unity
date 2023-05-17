@@ -946,41 +946,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - stone_min_delay: 10
-    stone_max_delay: 13
-    stone_sign_time: 3
-    avalanche_min_delay: 23
-    avalanche_max_delay: 27
-    avalanche_sign_time: 5
+  - stone_min_delay: 8
+    stone_max_delay: 12
+    stone_sign_time: 2
+    avalanche_min_delay: 11
+    avalanche_max_delay: 15
+    avalanche_sign_time: 3
     target_height: 50
-    time_for_level: 120
-    stormMinDelay: 50
-    stormMaxDelay: 50
-    stormMinDuration: 5
-    stormMaxDuration: 8
+    time_for_level: 70
+    stormMinDelay: 25
+    stormMaxDelay: 40
+    stormMinDuration: 3
+    stormMaxDuration: 5
     appearSpeed: 0.023
     stormSpeed: 8
-    signTime: 3
+    signTime: 6
     levelWinSceneID: 7
     snow_storm: 0
     wind_sound: 0
     backGround: {fileID: 21300000, guid: 6b26d36ec3afeb6479de0483b1dc5efe, type: 3}
     music_on_level: {fileID: 8300000, guid: 33e03855d2a5fa544b401855a9a0acdb, type: 3}
-  - stone_min_delay: 9
-    stone_max_delay: 12
-    stone_sign_time: 1
-    avalanche_min_delay: 21
-    avalanche_max_delay: 24
-    avalanche_sign_time: 5
+  - stone_min_delay: 10
+    stone_max_delay: 13
+    stone_sign_time: 3
+    avalanche_min_delay: 20
+    avalanche_max_delay: 27
+    avalanche_sign_time: 6
     target_height: 100
-    time_for_level: 140
-    stormMinDelay: 18
-    stormMaxDelay: 21
-    stormMinDuration: 5
-    stormMaxDuration: 8
+    time_for_level: 80
+    stormMinDelay: 30
+    stormMaxDelay: 40
+    stormMinDuration: 3
+    stormMaxDuration: 5
     appearSpeed: 0.023
     stormSpeed: 8
-    signTime: 3
+    signTime: 6
     levelWinSceneID: 8
     snow_storm: 1
     wind_sound: 1

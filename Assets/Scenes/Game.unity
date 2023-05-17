@@ -1936,10 +1936,18 @@ PrefabInstance:
       propertyPath: _stormManager
       value: 
       objectReference: {fileID: 598741065}
+    - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxStaminaTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _stormManager
       value: 
       objectReference: {fileID: 598741065}
+    - target: {fileID: 8104092854306544065, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: _maxStaminaTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
 --- !u!1 &1447214903
