@@ -47,6 +47,7 @@ public class MainMenu : MonoBehaviour
     }
     public void ShowNext()
     {
+        _clickSource.Play();
         if (++slideID < instrusionSlides.Length)
             ShowSlide(slideID);
         else
@@ -54,6 +55,7 @@ public class MainMenu : MonoBehaviour
     }
     public void ShowPrevious()
     {
+        _clickSource.Play();
         if (--slideID >= 0)
             ShowSlide(slideID);
         else
