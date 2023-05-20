@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MusicReplacer : MonoBehaviour
 {
@@ -8,7 +9,10 @@ public class MusicReplacer : MonoBehaviour
 
     void Start()
     {
-        _musicSource.clip = GameManager.instance.currentLevel.music_on_level;
-        _musicSource.Play();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            _musicSource.clip = GameManager.instance.currentLevel.music_on_level;
+            _musicSource.Play();
+        }
     }
 }

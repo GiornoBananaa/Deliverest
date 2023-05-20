@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+    public static AudioManager audoManager = null;
     public Level[] levels; 
     public Level currentLevel
     {
@@ -40,6 +41,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         LoadValues();
+        if (audoManager is null)
+        {
+            audoManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+            DontDestroyOnLoad(audoManager.gameObject);
+        }
     }
 
     public void StartNewGame()
