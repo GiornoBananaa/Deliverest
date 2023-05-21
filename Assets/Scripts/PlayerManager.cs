@@ -61,7 +61,6 @@ public class PlayerManager : MonoBehaviour
         _restartButton.SetActive(true);
         _isFallingForLoss = true;
         _audioSource.Play();
-
         float fallingTime = 0;
         while (fallingTime< _fallingForLossTime)
         {
@@ -69,11 +68,6 @@ public class PlayerManager : MonoBehaviour
             _audioSource.volume = Mathf.Lerp(_audioSource.volume, 0, 0.005f);
             yield return new WaitForEndOfFrame();
         }
-        /*
-        while (_audioSource.isPlaying)
-        {
-            yield return new WaitForFixedUpdate();
-        }*/
         _restartButton.SetActive(false);
         GameManager.instance.LoseGame(false);
     }

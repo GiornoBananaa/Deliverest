@@ -599,9 +599,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee75b4a149be3844958a6b375d96578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprites:
-  - {fileID: 21300000, guid: 73fc96b700207154f9054075233cb1de, type: 3}
-  - {fileID: 21300000, guid: 4cd31e39f73642e47a9729228d0c8d6d, type: 3}
+  _spritesLanguage:
+  - Russian: {fileID: 0}
+    English: {fileID: 21300000, guid: 73fc96b700207154f9054075233cb1de, type: 3}
+  - Russian: {fileID: 0}
+    English: {fileID: 21300000, guid: 4cd31e39f73642e47a9729228d0c8d6d, type: 3}
   _image: {fileID: 64940586}
   _nextScene: 1
   _nextLevel: 0

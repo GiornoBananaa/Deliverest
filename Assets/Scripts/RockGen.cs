@@ -203,6 +203,7 @@ public class RockGen : MonoBehaviour
     private IEnumerator SoundLerp(GameObject obj)
     {
         AudioSource audio = obj.GetComponent<AudioSource>();
+        audio.volume = GameManager.audoManager.SoundVolume * audio.volume;
         float deafultVolume = audio.volume;
         audio.volume = 0;
         while (audio.volume < deafultVolume-0.05f)

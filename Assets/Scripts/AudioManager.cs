@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _musicPrefab;
 
     private static AudioSource _music;
+    public static Action OnSoundVolumeChange;
 
     private void Awake()
     {
@@ -27,14 +29,6 @@ public class AudioManager : MonoBehaviour
         _music.volume = MusicVolume;
 
         DontDestroyOnLoad(_music.gameObject);
-        /*
-        _musicSlider.value = MusicVolume;
-        _soundSlider.value = SoundVolume;
-        _audioToogle.isOn = Mute;
-
-        _musicSlider.onValueChanged.AddListener(MusicVolumeChange);
-        _soundSlider.onValueChanged.AddListener(SoundVolumeChange);
-        _audioToogle.onValueChanged.AddListener(MuteAudio);*/
     }
 
     private void OnLevelWasLoaded(int level)
@@ -80,6 +74,7 @@ public class AudioManager : MonoBehaviour
     public void SoundVolumeChange(float value)
     {
         SoundVolume = value;
+        OnSoundVolumeChange.Invoke();
     }
 
 
@@ -100,7 +95,7 @@ public class AudioManager : MonoBehaviour
     {
         get
         {
-            return PlayerPrefs.GetFloat("Sound", 0.6f);
+            return PlayerPrefs.GetFloat("Sound", 1f);
         }
         set
         {

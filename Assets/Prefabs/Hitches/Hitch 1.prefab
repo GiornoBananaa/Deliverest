@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3898225851131952444}
   - component: {fileID: 8389875635598424435}
   - component: {fileID: 921895294489397812}
+  - component: {fileID: -356527585199456396}
   m_Layer: 7
   m_Name: Hitch 1
   m_TagString: Untagged
@@ -208,3 +209,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-356527585199456396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293492473114441163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7abebfde51dc9dd4fad365c25649bdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

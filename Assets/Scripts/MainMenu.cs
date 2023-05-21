@@ -8,17 +8,25 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AudioSource _clickSource;
     [SerializeField] private GameObject[] instrusionSlides;
     [SerializeField] private GameObject instructionCanvas;
+    [SerializeField] private GameObject settingsCanvas;
 
     private int slideID = 0;
     private void Start()
     {
         HideAllSlides();
         instructionCanvas.SetActive(false);
+        settingsCanvas.SetActive(false);
     }
     public void StartNewGame()
     {
         _clickSource.Play();
         StartCoroutine(StartDelay());
+    }
+
+    public void OpenSettings()
+    {
+        _clickSource.Play();
+        settingsCanvas.SetActive(true);
     }
 
     public void OpenInstruction()
@@ -28,6 +36,7 @@ public class MainMenu : MonoBehaviour
         instructionCanvas.SetActive(true);
         ShowSlide(0);
     }
+
     public void CloseInstruction()
     {
         instructionCanvas.SetActive(false);
@@ -45,6 +54,7 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         GameManager.instance.StartNewGame();
     }
+
     public void ShowNext()
     {
         _clickSource.Play();
@@ -53,6 +63,7 @@ public class MainMenu : MonoBehaviour
         else
             CloseInstruction();
     }
+
     public void ShowPrevious()
     {
         _clickSource.Play();
@@ -61,11 +72,13 @@ public class MainMenu : MonoBehaviour
         else
             CloseInstruction();
     }
+
     private void ShowSlide(int ID)
     {
         HideAllSlides();
         instrusionSlides[ID].SetActive(true);
     }
+
     private void HideAllSlides()
     {
         foreach(GameObject slide in instrusionSlides)

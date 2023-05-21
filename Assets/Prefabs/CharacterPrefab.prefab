@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 1041484227149672575}
   - component: {fileID: 1587060895}
   - component: {fileID: 1587060896}
+  - component: {fileID: 1469097400186312717}
   m_Layer: 0
   m_Name: CharacterPrefab
   m_TagString: Untagged
@@ -356,6 +357,19 @@ MonoBehaviour:
   _leftArmController: {fileID: 7013552053904924020}
   _rightArmController: {fileID: 8104092854306544065}
   _body: {fileID: 1763467669557993872}
+  _restartButton: {fileID: 0}
+--- !u!114 &1469097400186312717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177096600549341660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7abebfde51dc9dd4fad365c25649bdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6358831652624287188
 GameObject:
   m_ObjectHideFlags: 0
