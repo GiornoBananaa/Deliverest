@@ -3,37 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class LanguageManager : MonoBehaviour
 {
-    private enum Language
+    public enum Language
     {
         English,
         Russian
     }
 
-    [Serializable]
-    private struct ImageLanguages
+    private abstract class AMultiLanguage
     {
-        public Language language;
-        [SerializeField] private Image image;
-        [SerializeField] private Sprite[] languageSprites;
-        private static Language gameLanguage;
+        protected Language language;
 
-        public static Language AllLanguage
+        public virtual Language Language { get; set; }
+
+        public void ChangeLanguage()
         {
-            get
-            {
-                return gameLanguage;
-            }
-            set
-            {
-                gameLanguage = value;
-                languageChange.Invoke();
-            }
+            Language = GameLanguage;
         }
+    }
 
-        public Language Language 
+    [Serializable]
+    private class ImageLanguages : AMultiLanguage
+    {
+        [SerializeField] private Image image;
+        [SerializeField] private Sprite Russian;
+        [SerializeField] private Sprite English;
+
+        public override Language Language 
         {
             get
             {
@@ -41,35 +40,94 @@ public class LanguageManager : MonoBehaviour
             }
             set
             {
-                if ((int)value >= Enum.GetNames(typeof(Language)).Length || (int)value >= languageSprites.Length)
-                    return;
                 language = value;
-                image.sprite = languageSprites[(int)value];
+                switch (language)
+                {
+                    case Language.Russian:
+                        image.sprite = Russian;
+                        break;
+                    case Language.English:
+                        image.sprite = English;
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-        
-        public void ChangeLanguage()
-        {
-            Language = gameLanguage;
         }
     }
 
+    [Serializable]
+    private class TextLanguages : AMultiLanguage
+    {
+        [SerializeField] private TMP_Text text;
+        [SerializeField] private string Russian;
+        [SerializeField] private string English;
+
+        public override Language Language
+        {
+            get
+            {
+                return language;
+            }
+            set
+            {
+                language = value;
+                switch (language)
+                {
+                    case Language.Russian:
+                        text.text = Russian;
+                        break;
+                    case Language.English:
+                        text.text = English;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 
     [SerializeField] private ImageLanguages[] _imageLanguages;
+    [SerializeField] private TextLanguages[] _textLanguages;
+
     private static Action languageChange;
+    private static Language gameLanguage;
+
+    private static Language GameLanguage
+    {
+        get
+        {
+            return gameLanguage;
+        }
+        set
+        {
+            gameLanguage = value;
+            languageChange.Invoke();
+        }
+    }
 
     private void Start()
     {
-        for (int i = 0; i < _imageLanguages.Length; i++)
+        if (_imageLanguages is not null) 
         {
-            languageChange += _imageLanguages[i].ChangeLanguage;
+            for (int i = 0; i < _imageLanguages.Length; i++)
+            {
+                languageChange += _imageLanguages[i].ChangeLanguage;
+            }
         }
-        ImageLanguages.AllLanguage = (Language)PlayerPrefs.GetInt("Language", 0);
+        if (_textLanguages is not null)
+        {
+            for (int i = 0; i < _textLanguages.Length; i++)
+            {
+                languageChange += _textLanguages[i].ChangeLanguage;
+            }
+        }
+        GameLanguage = (Language)PlayerPrefs.GetInt("Language", 0);
     }
 
     public void LanguageChange(int language)
     {
         PlayerPrefs.SetInt("Language", language);
-        ImageLanguages.AllLanguage = (Language)language;
+        GameLanguage = (Language)language;
     }
 }

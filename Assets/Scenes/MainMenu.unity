@@ -4802,6 +4802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageLanguages: []
+  _textLanguages: []
 --- !u!4 &2101630744
 Transform:
   m_ObjectHideFlags: 0
