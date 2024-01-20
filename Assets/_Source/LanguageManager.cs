@@ -102,7 +102,7 @@ public class LanguageManager : MonoBehaviour
         set
         {
             gameLanguage = value;
-            languageChange.Invoke();
+            languageChange?.Invoke();
         }
     }
 

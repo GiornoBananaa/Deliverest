@@ -6,30 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/_Presentation/Scenes/MainMenu.unity
     guid: 0672441f6803da946ab22dbf16032277
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/_Presentation/Scenes/Game.unity
     guid: e5cb7ef2b77211c41b1aec419acc920e
   - enabled: 1
-    path: Assets/Scenes/LoseScene.unity
+    path: Assets/_Presentation/Scenes/LoseScene.unity
     guid: d3daf0765a754be41a55e487a5d025f4
   - enabled: 1
-    path: Assets/Scenes/WinScene.unity
+    path: Assets/_Presentation/Scenes/WinScene.unity
     guid: 55a9d39b35f28104a8c9d06e7305db91
   - enabled: 1
-    path: Assets/Scenes/LoseTimerScene.unity
+    path: Assets/_Presentation/Scenes/LoseTimerScene.unity
     guid: 67c5ff3c33e00f14f987447f1562ed05
   - enabled: 1
-    path: Assets/Scenes/Autors.unity
+    path: Assets/_Presentation/Scenes/Autors.unity
     guid: 62b253321cf9d944481d51c754f54cf5
   - enabled: 1
-    path: Assets/Scenes/FirstCutScene.unity
+    path: Assets/_Presentation/Scenes/FirstCutScene.unity
     guid: 3363b24474c82cc4aa708a7419376bee
   - enabled: 1
-    path: Assets/Scenes/SecondCutScene.unity
+    path: Assets/_Presentation/Scenes/SecondCutScene.unity
     guid: ea98b94a76e7387419b89ecaab560ea1
   - enabled: 1
-    path: Assets/Scenes/ThirdCutScene.unity
+    path: Assets/_Presentation/Scenes/ThirdCutScene.unity
     guid: 635533c6c1a5aed479349f8993da1454
   m_configObjects: {}
