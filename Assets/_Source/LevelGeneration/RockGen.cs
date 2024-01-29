@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Character;
 using UnityEngine;
 
 public class RockGen : MonoBehaviour
@@ -16,12 +17,12 @@ public class RockGen : MonoBehaviour
     private bool avalancheIsWaitingStormEnd;
     private float timeForNextStone, timeForNextAvalanche;
     private Level level;
-    private PlayerManager playerManager;
+    private CharacterMovement _characterMovement;
 
     void Start()
     {
         isStorm = false;
-        playerManager = player.GetComponent<PlayerManager>();
+        _characterMovement = player.GetComponent<CharacterMovement>();
         level = GameManager.instance.currentLevel;
         timeForNextStone = level.stone_max_delay;
         timeForNextAvalanche = level.avalanche_max_delay;
@@ -83,7 +84,7 @@ public class RockGen : MonoBehaviour
                 avalancheIsWaitingStormEnd = true;
         }
 
-        if (playerBody.position.y > transform.position.y && playerManager.IsOnTwoHands)
+        if (playerBody.position.y > transform.position.y && _characterMovement.IsOnTwoHands)
         {
             StartCoroutine(SmoothScroll());
         }
@@ -105,7 +106,6 @@ public class RockGen : MonoBehaviour
     {
         timeForNextStone = Random.Range(level.stone_min_delay, level.avalanche_max_delay);
         GameObject stone = Instantiate(stone_prefab, pos, Quaternion.identity);
-        StartCoroutine(SoundLerp(stone));
     }
 
     private IEnumerator AvalancheEvent()
@@ -123,7 +123,6 @@ public class RockGen : MonoBehaviour
     private void DropAvalanche(Vector3 pos)
     {
         GameObject avalanche = Instantiate(avalanche_prefab, pos, Quaternion.identity);
-        StartCoroutine(SoundLerp(avalanche));
     }
     private void FastScroll()
     {
@@ -198,18 +197,5 @@ public class RockGen : MonoBehaviour
                 (rows_number - 2) * tile_height);
         }
         rows.Add(rowOfTiles);
-    }
-
-    private IEnumerator SoundLerp(GameObject obj)
-    {
-        AudioSource audio = obj.GetComponent<AudioSource>();
-        audio.volume = GameManager.audoManager.SoundVolume * audio.volume;
-        float deafultVolume = audio.volume;
-        audio.volume = 0;
-        while (audio.volume < deafultVolume-0.05f)
-        {
-            audio.volume = Mathf.Lerp(audio.volume, deafultVolume, 0.025f);
-            yield return new WaitForFixedUpdate();
-        }
     }
 }

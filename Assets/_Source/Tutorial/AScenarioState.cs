@@ -7,6 +7,10 @@ namespace Tutorial
     [Serializable]
     public abstract class AScenarioState: AState
     {
-        [SerializeField] protected bool _pauseGame;
+        protected TutorialStateMachine Owner;
+        [SerializeField] 
+        protected bool _pauseGame;
+        
+        public void SetOwner(TutorialStateMachine owner) => Owner = owner;
     }
 }

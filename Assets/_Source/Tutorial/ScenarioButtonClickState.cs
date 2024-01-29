@@ -11,17 +11,19 @@ namespace Tutorial
 
         public override void Enter()
         {
-            
+            _button.onClick.AddListener(SendExitRequest);
         }
-
-        public override void Update()
-        {
-            
-        }
-
+        
+        public override void Update(){}
+        
         public override void Exit()
         {
-            
+            _button.onClick.RemoveListener(SendExitRequest);
+        }
+
+        private void SendExitRequest()
+        {
+            Owner.StateExitRequest?.Invoke();
         }
     }
 }

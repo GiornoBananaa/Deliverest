@@ -2,10 +2,10 @@
 
 namespace Core
 {
-    public interface IStateMachine
+    public interface IStateMachine<T> where T : AState
     {
-        AState CurrentState { get; }
-        void ChangeState(AState state);
+        T CurrentState { get; }
+        void ChangeState(T state);
         void Update();
     }
 }
