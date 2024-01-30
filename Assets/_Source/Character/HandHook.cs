@@ -7,13 +7,14 @@ namespace Character
     {
         public bool IsMoving { get; private set; }
         public bool IsHooked { get; private set; }
+
         public Vector2 JointAcnhor { get; private set; }
 
     
         [SerializeField] private GameObject _target;
         [SerializeField] private LayerMask _hitchLayerMask;
         [FormerlySerializedAs("_avalanceLayerMask")] [SerializeField] private LayerMask _obstacleLayerMask;
-        [SerializeField] private Transform _deafultPosition;
+        [FormerlySerializedAs("_deafultPosition")] [SerializeField] private Transform _defaultPosition;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private GameObject _limbSolver;
         [SerializeField] private GameObject _otherLimbSolver;
@@ -24,7 +25,7 @@ namespace Character
         [SerializeField] private float _stormForce;
         [SerializeField] private float _maxStaminaTime;
         [SerializeField] private float _maxStaminaTimeWhileStorm;
-        [SerializeField] private float _grappingRadius;
+        [FormerlySerializedAs("_grappingRadius")] [SerializeField] private float _hookRadius;
 
         public static bool _isOnOneHand;
         private DistanceJoint2D _joint;
@@ -46,23 +47,24 @@ namespace Character
         {
             if (GameManager.instance.isPaused)
                 return;
+
+            _isOnOneHand = IsHooked != _otherHandHook.IsHooked;
             
             transform.position = _target.transform.position;
-
+            
             if (IsMoving) Move();
 
             OneHandTiming();
             
-            if (IsHooked && !_otherHandHook.IsHooked) _isOnOneHand = true;
-            if (IsHooked && _otherHandHook.IsHooked) _isOnOneHand = false;
-
-            if (Physics2D.OverlapCircleAll(_deafultPosition.position, _grappingRadius, _obstacleLayerMask).Length > 0)
+            
+            //TODO: put obstacle check in another place
+            if (Physics2D.OverlapCircleAll(_defaultPosition.position, _hookRadius, _obstacleLayerMask).Length > 0)
                 Unhook();
 
             SnowStormBehavior();
         }
         
-        //TODO: Move to new timer scipt
+        //TODO: Move to new timer script
         private void OneHandTiming()
         {
             if (_isOnOneHand && !IsHooked)
@@ -99,7 +101,7 @@ namespace Character
                 _maxTime = _maxStaminaTime;
             }
         }
-
+        
         private void Move()
         {
             _target.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -108,54 +110,41 @@ namespace Character
         //TODO: Move to characterMovement
         public void Fall(bool isMovable)
         {
-            _otherJoint.enabled = false;
-            _otherLimbSolver.SetActive(false);
-            _staminaTimer.gameObject.SetActive(false);
-            _joint.enabled = false;
-            _limbSolver.SetActive(false);
-            _otherHandHook.IsHooked = false;
-            IsMoving = false;
-            IsHooked = !isMovable;
-            _isOnOneHand = !isMovable;
-            _joint.autoConfigureConnectedAnchor = true;
-            _otherJoint.autoConfigureConnectedAnchor = true;
+            _otherHandHook.Unhook();
+            Unhook();
+            _isOnOneHand = false;
         }
-
-        private void DefaultJointsAnchor()
-        {
-            _joint.connectedAnchor = JointAcnhor;
-            _otherJoint.connectedAnchor = _otherHandHook.JointAcnhor;
-        }
-
-        private void Unhook()
+        
+        public void Unhook() // in progress
         {
             _joint.enabled = false;
             _limbSolver.SetActive(false);
             _staminaTimer.gameObject.SetActive(false);
             IsMoving = false;
             IsHooked = false;
-            if (_otherHandHook.IsHooked == false)
-            {
-                _joint.autoConfigureConnectedAnchor = true;
-                _otherJoint.autoConfigureConnectedAnchor = true;
-                _isOnOneHand = false;
-            }
-            else _isOnOneHand = true;
+            _joint.autoConfigureConnectedAnchor = true;
         }
-
-        public void TryCling()
+        
+        private void DefaultJointsAnchor()
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(_deafultPosition.position, _grappingRadius, _hitchLayerMask);
+            _joint.connectedAnchor = JointAcnhor;
+            //_otherJoint.connectedAnchor = _otherHandHook.JointAnchor;
+        }
+        
+        public void TryHook()
+        {
+            if(IsHooked) return;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(_defaultPosition.position, _hookRadius, _hitchLayerMask);
 
             if (colliders.Length > 0)
             {
                 if (_joint.autoConfigureConnectedAnchor) 
                 {
-                    _otherJoint.autoConfigureConnectedAnchor = false;
+                    //_otherJoint.autoConfigureConnectedAnchor = false;
                     _joint.autoConfigureConnectedAnchor = false;
                     DefaultJointsAnchor();
                 }
-                _target.transform.position = _deafultPosition.position;
+                _target.transform.position = _defaultPosition.position;
                 IsHooked = true;
                 AudioSource audioSource = colliders[0].GetComponent<AudioSource>();
                 if (audioSource.clip is not null) audioSource.Play();
@@ -171,13 +160,10 @@ namespace Character
 
         public void StartMove()
         {
-            if (_otherHandHook.IsHooked || (!IsHooked && !_otherHandHook.IsHooked))
-            {
-                IsHooked = false;
-                IsMoving = true;
-                if (_joint.enabled == false) _joint.enabled = true;
-                if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
-            }
+            IsHooked = false;
+            IsMoving = true;
+            if (_joint.enabled == false) _joint.enabled = true;
+            if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
         }
     }
 }

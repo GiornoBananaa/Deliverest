@@ -25,8 +25,8 @@ namespace Character
         private float _timeForNextJump;
 
         public float NormalizedJumpReloadTime { get => _timeForNextJump / _jumpReloadTime; }
-        public bool IsOnOneHand { get => (_leftHandHook.IsHooked && !_rightHandHook.IsHooked) || (!_leftHandHook.IsHooked && _rightHandHook.IsHooked); }
-        public bool IsOnTwoHands { get => (_leftHandHook.IsHooked && _rightHandHook.IsHooked); }
+        public bool IsOnOneHand { get => _leftHandHook.IsHooked != _rightHandHook.IsHooked; }
+        public bool IsOnTwoHands { get => _leftHandHook.IsHooked && _rightHandHook.IsHooked; }
         
         void Start()
         {
@@ -38,7 +38,6 @@ namespace Character
         
         
         //TODO: Put timer in new script
-        
         void Update()
         {
             _timeForNextJump += Time.deltaTime;
@@ -49,22 +48,24 @@ namespace Character
 
         public void StartLeftArmMove()
         {
-            _leftHand.StartMove();
+            if (!(IsOnOneHand && _leftHand.IsHooked)) 
+                _leftHand.StartMove();
         }
         
         public void StartRightArmMove()
         {
-            _rightHand.StartMove();
+            if (!(IsOnOneHand && _rightHand.IsHooked))
+                _rightHand.StartMove();
         }
         
         public void EndLeftArmMove()
         {
-            _leftHand.TryCling();
+            _leftHand.TryHook();
         }
         
         public void EndRightArmMove()
         {
-            _rightHand.TryCling();
+            _rightHand.TryHook();
         }
         
         public void Jump()
@@ -72,7 +73,7 @@ namespace Character
             if(!_leftHandHook.IsHooked || !_rightHandHook.IsHooked || _timeForNextJump < _jumpReloadTime)
                 return;
 
-            _leftHandHook.Fall(true);
+            Fall();
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - (Vector2)_body.transform.position).normalized;
 
@@ -81,6 +82,12 @@ namespace Character
             _timeForNextJump = 0;
         }
 
+        public void Fall()
+        {
+            _rightHand.Unhook();
+            _leftHand.Unhook();
+        }
+        
         private IEnumerator FallLoss()
         {
             _restartButton.SetActive(true);

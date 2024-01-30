@@ -72,7 +72,7 @@ public class SnowStormManager : MonoBehaviour
             }
         }
     }
-
+    //TODO: put all needed components in snowstorm srcipt
     private IEnumerator Storm()
     {
         GameManager.instance.isSnowStorm = true;
