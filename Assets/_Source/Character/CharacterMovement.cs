@@ -1,91 +1,182 @@
 using System.Collections;
+using Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Character
 {
     public class CharacterMovement : MonoBehaviour
     {
-        //TODO: put character movement info in scriptable object
-        [SerializeField] private float _lossHeight;
-        [SerializeField] private float _lossY;
-        [SerializeField] private float _jumpForce;
-        [SerializeField] private float _jumpReloadTime;
-        [SerializeField] private float _fallingForLossTime;
-        [FormerlySerializedAs("_leftArmController")] [SerializeField] private HandHook _leftHandHook;
-        [FormerlySerializedAs("_rightArmController")] [SerializeField] private HandHook _rightHandHook;
+        [SerializeField] private HandHook _leftHandHook;
+        [SerializeField] private HandHook _rightHandHook;
+        [SerializeField] private StaminaTimerView _staminaTimerView;
+        [SerializeField] private RectTransform _staminaTimerRectTransform;
+        [SerializeField] private Transform _leftStaminaTimerPoint;
+        [SerializeField] private Transform _rightStaminaTimerPoint;
         [SerializeField] private GameObject _body;
         [SerializeField] private GameObject _restartButton;
-        [SerializeField] private HandHook _leftHand;
-        [SerializeField] private HandHook _rightHand;
+        [SerializeField] private Rigidbody2D _rigidbody;
+        //TODO: refactor Audio system
+        [SerializeField] private AudioSource _audioSource;
         
-        private Rigidbody2D _rigidbody2D;
-        private AudioSource _audioSource;
+        private CharacterMovementData _movementData;
+        private SnowStormManager _stormManager;
+        private UpdateTimer _oneHandTimer;
+        private UpdateTimer _jumpTimer;
         private bool _isFallingForLoss;
-        private float _timeForNextJump;
-
-        public float NormalizedJumpReloadTime { get => _timeForNextJump / _jumpReloadTime; }
-        public bool IsOnOneHand { get => _leftHandHook.IsHooked != _rightHandHook.IsHooked; }
-        public bool IsOnTwoHands { get => _leftHandHook.IsHooked && _rightHandHook.IsHooked; }
         
-        void Start()
+        public bool IsOnOneHand => _leftHandHook.IsHooked != _rightHandHook.IsHooked;
+        public bool IsOnTwoHands => _leftHandHook.IsHooked && _rightHandHook.IsHooked;
+        public bool IsOnNothing => !_leftHandHook.IsHooked && !_rightHandHook.IsHooked;
+
+        private void Awake()
         {
-            _timeForNextJump = _jumpReloadTime;
             _isFallingForLoss = false;
-            _rigidbody2D = _body.GetComponent<Rigidbody2D>();
-            _audioSource = GetComponent<AudioSource>();
+            _jumpTimer = new UpdateTimer(_movementData.JumpReloadTime);
+            _oneHandTimer = new UpdateTimer(_movementData.JumpReloadTime);
+            DisableTimer();
+            _leftHandHook.Construct(_movementData.HookRadius);
+            _rightHandHook.Construct(_movementData.HookRadius);
         }
-        
-        
-        //TODO: Put timer in new script
-        void Update()
+
+        public void Construct(SnowStormManager stormManager, CharacterMovementData movementData)
         {
-            _timeForNextJump += Time.deltaTime;
-
-            if ((_body.transform.position.y <= _lossHeight || _body.transform.localPosition.x <= -_lossY || _body.transform.localPosition.x >= _lossY) && !_isFallingForLoss)
-                StartCoroutine(FallLoss());
+            _stormManager = stormManager;
+            _movementData = movementData;
         }
-
+        
+        private void OnEnable()
+        {
+            _oneHandTimer.OnTimerEnd += Fall;
+            _oneHandTimer.OnTimeChanged += ChangeStaminaView;
+            _leftHandHook.OnObstacleHit += HitArmByObstacle;
+            _rightHandHook.OnObstacleHit += HitArmByObstacle;
+            GameManager.instance.OnSnowStormStart += SnowStormStart;
+            GameManager.instance.OnSnowStormEnd += SnowStormEnd;
+        }
+        
+        private void Update()
+        {
+            _jumpTimer.Update();
+            _oneHandTimer.Update();
+            SnowStormBehavior();
+            CheckLossHeight();
+        }
+        
+        private void OnDisable()
+        {
+            _oneHandTimer.OnTimerEnd -= Fall;
+            _oneHandTimer.OnTimeChanged -= ChangeStaminaView;
+            _leftHandHook.OnObstacleHit -= HitArmByObstacle;
+            _rightHandHook.OnObstacleHit -= HitArmByObstacle;
+            GameManager.instance.OnSnowStormStart -= SnowStormStart;
+            GameManager.instance.OnSnowStormEnd -= SnowStormEnd;;
+        }
+        
         public void StartLeftArmMove()
         {
-            if (!(IsOnOneHand && _leftHand.IsHooked)) 
-                _leftHand.StartMove();
+            if (IsOnOneHand && _leftHandHook.IsHooked) return;
+            if(!IsOnNothing)
+                EnableTimer(_rightStaminaTimerPoint);
+            _leftHandHook.StartMove();
         }
         
         public void StartRightArmMove()
         {
-            if (!(IsOnOneHand && _rightHand.IsHooked))
-                _rightHand.StartMove();
+            if (IsOnOneHand && _rightHandHook.IsHooked) return;
+            if(!IsOnNothing)
+                EnableTimer(_leftStaminaTimerPoint);
+            _rightHandHook.StartMove();
         }
         
         public void EndLeftArmMove()
         {
-            _leftHand.TryHook();
+            if (_leftHandHook.TryHook())
+            {
+                DisableTimer();
+            }
         }
         
         public void EndRightArmMove()
         {
-            _rightHand.TryHook();
+            
+            if (_rightHandHook.TryHook())
+            {
+                DisableTimer();
+            }
         }
         
-        public void Jump()
+        public void Jump(Vector2 mousePosition)
         {
-            if(!_leftHandHook.IsHooked || !_rightHandHook.IsHooked || _timeForNextJump < _jumpReloadTime)
+            if(!_leftHandHook.IsHooked || !_rightHandHook.IsHooked || !_jumpTimer.IsTimerEnd)
                 return;
-
+            
+            _jumpTimer.Restart();
             Fall();
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
             Vector2 direction = (mousePosition - (Vector2)_body.transform.position).normalized;
 
-            _rigidbody2D.AddForce(direction * _jumpForce, ForceMode2D.Impulse);
-
-            _timeForNextJump = 0;
+            _rigidbody.AddForce(direction * _movementData.JumpForce, ForceMode2D.Impulse);
         }
 
-        public void Fall()
+        private void Fall()
         {
-            _rightHand.Unhook();
-            _leftHand.Unhook();
+            DisableTimer();
+            _rightHandHook.Unhook();
+            _leftHandHook.Unhook();
+        }
+
+        private void CheckLossHeight()
+        {
+            if ((_body.transform.position.y <= _movementData.LossHeight || _body.transform.localPosition.x <= -_movementData.LossY || _body.transform.localPosition.x >= _movementData.LossY) && !_isFallingForLoss)
+                StartCoroutine(FallLoss());
+        }
+
+        private void EnableTimer(Transform parent)
+        {
+            var timerTransform = _staminaTimerRectTransform;
+            timerTransform.parent = parent;
+            timerTransform.localPosition = Vector3.zero;
+            _staminaTimerView.gameObject.SetActive(true);
+            _oneHandTimer.Restart();
+        }
+        
+        private void DisableTimer()
+        {
+            _staminaTimerView.gameObject.SetActive(false);
+            _oneHandTimer.Stop();
+        }
+        
+        private void ChangeStaminaView(float elapsedTime)
+        {
+            _staminaTimerView.fillAmount = (_oneHandTimer.MaxTime-elapsedTime) / _oneHandTimer.MaxTime;
+        }
+        
+        private void HitArmByObstacle()
+        {
+            if (IsOnNothing)
+            {
+                Fall();
+            }
+        }
+            
+        private void SnowStormStart()
+        {
+            _oneHandTimer.SetMaxTime(_movementData.MaxStaminaTimeWhileStorm);
+        }
+        
+        private void SnowStormEnd()
+        {
+            _oneHandTimer.SetMaxTime(_movementData.MaxStaminaTime);
+        }
+        
+        private void SnowStormBehavior()
+        {
+            if (_stormManager.IsStorm && IsOnOneHand || IsOnNothing)
+            {
+                _rigidbody.AddForce(
+                    new Vector2(_stormManager.Velocity.x > 0 ? 1 : -1, 0) * _movementData.StormForce,
+                    ForceMode2D.Force);
+            }
         }
         
         private IEnumerator FallLoss()
@@ -94,7 +185,7 @@ namespace Character
             _isFallingForLoss = true;
             _audioSource.Play();
             float fallingTime = 0;
-            while (fallingTime< _fallingForLossTime)
+            while (fallingTime< _movementData.FallingForLossTime)
             {
                 fallingTime += Time.deltaTime;
                 _audioSource.volume = Mathf.Lerp(_audioSource.volume, 0, 0.005f);

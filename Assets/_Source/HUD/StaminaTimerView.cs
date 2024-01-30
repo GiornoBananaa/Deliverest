@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class StaminaTimer : MonoBehaviour
+public class StaminaTimerView : MonoBehaviour
 {
     [SerializeField] private Color fullColor, halfColor, quarterColor;
     [SerializeField] private Image fill;

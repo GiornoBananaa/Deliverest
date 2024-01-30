@@ -38,7 +38,7 @@ namespace InputSystem
         private void ReadJump()
         {
             if (Input.GetKeyDown(KeyCode.Space))
-                _characterMovement.Jump();
+                _characterMovement.Jump(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 }
