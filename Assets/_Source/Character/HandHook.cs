@@ -18,7 +18,7 @@ namespace Character
         
         private float _hookRadius;
 
-        public Action OnObstacleHit;
+        public Action<HandHook> OnObstacleHit;
 
         void Awake()
         {
@@ -50,13 +50,14 @@ namespace Character
             _target.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         
-        public void Unhook()
+        public void Unhook(bool isArmMovable)
         {
             _target.enabled = false;
             _limbSolver.SetActive(false);
             IsMoving = false;
             IsHooked = false;
-            _target.autoConfigureConnectedAnchor = true;
+            if(!isArmMovable)
+                _target.autoConfigureConnectedAnchor = true;
         }
         
         public bool TryHook()
@@ -66,11 +67,8 @@ namespace Character
 
             if (colliders.Length > 0)
             {
-                if (_target.autoConfigureConnectedAnchor) 
-                {
-                    _target.autoConfigureConnectedAnchor = false;
-                    DefaultJointsAnchor();
-                }
+                _target.autoConfigureConnectedAnchor = false;
+                DefaultJointsAnchor();
                 _target.transform.position = _defaultPosition.position;
                 IsHooked = true;
                 AudioSource audioSource = colliders[0].GetComponent<AudioSource>();
@@ -87,20 +85,26 @@ namespace Character
             return colliders.Length > 0;
         }
 
-        public void StartMove()
+        public void StartMove(bool affectBody)
         {
             IsHooked = false;
             IsMoving = true;
-            if (_target.enabled == false) _target.enabled = true;
-            if (!_limbSolver.activeSelf) _limbSolver.SetActive(true);
+            if (affectBody) 
+                _target.enabled = true;
+            if (!_limbSolver.activeSelf) 
+                _limbSolver.SetActive(true);
+        }
+        
+        public void FallJointsAnchor()
+        {
+            _target.autoConfigureConnectedAnchor = false;
         }
         
         private void CheckForObstacles()
         {
             if (Physics2D.OverlapCircleAll(_defaultPosition.position, _hookRadius, _obstacleLayerMask).Length > 0)
             {
-                Unhook();
-                OnObstacleHit?.Invoke();
+                OnObstacleHit?.Invoke(this);
             }
         }
         

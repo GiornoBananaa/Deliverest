@@ -322,6 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterMovement: {fileID: 1309182807}
   _inputListener: {fileID: 1472784240}
+  _stormManager: {fileID: 598741065}
 --- !u!4 &180404874
 Transform:
   m_ObjectHideFlags: 0
@@ -1092,8 +1093,6 @@ MonoBehaviour:
     music_on_level: {fileID: 8300000, guid: 06147c5792a582841b2261c474105579, type: 3}
   best_height: 0
   isPaused: 0
-  isSnowStorm: 0
-  isInSafePlace: 0
 --- !u!4 &942763194
 Transform:
   m_ObjectHideFlags: 0
