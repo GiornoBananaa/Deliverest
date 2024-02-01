@@ -10,7 +10,7 @@ namespace Audio
         
         private void OnEnable()
         {
-            _audioPlayer.Play(_soundName);
+            //_audioPlayer.Play(_soundName);
         }
     }
 }

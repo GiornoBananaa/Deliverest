@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Core;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace Character
         private UpdateTimer _oneHandTimer;
         private UpdateTimer _jumpTimer;
         private bool _isFallingForLoss;
+        
+        public Action OnHandHooked;
         
         public bool IsOnOneHand => _leftHandHook.IsHooked != _rightHandHook.IsHooked;
         public bool IsOnTwoHands => _leftHandHook.IsHooked && _rightHandHook.IsHooked;
@@ -95,6 +98,7 @@ namespace Character
             if (_leftHandHook.TryHook())
             {
                 DisableTimer();
+                OnHandHooked?.Invoke();
             }
         }
         
@@ -103,6 +107,7 @@ namespace Character
             if (_rightHandHook.TryHook())
             {
                 DisableTimer();
+                OnHandHooked?.Invoke();
             }
         }
         
