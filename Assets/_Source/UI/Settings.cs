@@ -14,11 +14,11 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
-        _musicSlider.value = GameManager.audoManager.MusicVolume;
-        _soundSlider.value = GameManager.audoManager.SoundVolume;
+        _musicSlider.value = GameManager.AudoPlayer.MusicVolume;
+        _soundSlider.value = GameManager.AudoPlayer.SoundVolume;
 
-        _musicSlider.onValueChanged.AddListener(GameManager.audoManager.MusicVolumeChange);
-        _soundSlider.onValueChanged.AddListener(GameManager.audoManager.SoundVolumeChange);
+        _musicSlider.onValueChanged.AddListener(GameManager.AudoPlayer.MusicVolumeChange);
+        _soundSlider.onValueChanged.AddListener(GameManager.AudoPlayer.SoundVolumeChange);
         _languageDropDown.onValueChanged.AddListener(_languageManager.LanguageChange);
 
         _languageDropDown.value = PlayerPrefs.GetInt("Language", 0);

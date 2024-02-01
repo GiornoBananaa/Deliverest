@@ -86,7 +86,7 @@ public class SnowStormManager : MonoBehaviour
         _stormRender.color = new Color(1, 1, 1, 0);
         _stormRender.GetComponent<SnowStorm>().Velocity = Velocity;
         _stormSound = _stormRender.GetComponent<AudioSource>();
-        _stormSound.volume = GameManager.audoManager.SoundVolume * _stormSound.volume;
+        _stormSound.volume = GameManager.AudoPlayer.SoundVolume * _stormSound.volume;
         _stormVolume = _stormSound.volume;
         _stormSound.volume = 0;
 

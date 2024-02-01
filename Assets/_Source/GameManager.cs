@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public static AudioManager audoManager = null;
+    public static AudioPlayer AudoPlayer = null;
     public Level[] levels; 
     public Level currentLevel
     {
@@ -59,10 +60,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         LoadValues();
-        if (audoManager is null)
+        if (AudoPlayer is null)
         {
-            audoManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-            DontDestroyOnLoad(audoManager.gameObject);
+            AudoPlayer = GameObject.Find("AudioManager").GetComponent<AudioPlayer>();
+            DontDestroyOnLoad(AudoPlayer.gameObject);
         }
     }
 

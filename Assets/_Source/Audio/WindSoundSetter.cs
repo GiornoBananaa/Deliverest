@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WindSoundSetter : MonoBehaviour
+namespace Audio
 {
-    void Start()
+    public class WindSoundSetter : MonoBehaviour
     {
-        if (!GameManager.instance.currentLevel.snow_storm)
+        void Start()
         {
-            gameObject.SetActive(false);
+            if (!GameManager.instance.currentLevel.snow_storm)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

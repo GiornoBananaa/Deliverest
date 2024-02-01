@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MusicReplacer : MonoBehaviour
+namespace Audio
 {
-    [SerializeField] private AudioSource _musicSource;
-
-    void Start()
+    public class MusicReplacer : MonoBehaviour
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        [SerializeField] private AudioSource _musicSource;
+        [SerializeField] private string _soundName;
+        
+        private AudioPlayer _audioPlayer;
+        
+        public void Construct(AudioPlayer audioPlayer)
         {
-            _musicSource.clip = GameManager.instance.currentLevel.music_on_level;
-            _musicSource.Play();
+            _audioPlayer = audioPlayer;
+        }
+        
+        void Start()
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                _musicSource.clip = GameManager.instance.currentLevel.music_on_level;
+                _musicSource.Play();
+            }
+            else
+            {
+                _audioPlayer.RegisterSpatial(_soundName,_musicSource);
+                _musicSource.Play();
+            }
         }
     }
 }
