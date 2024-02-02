@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5376390377267641620}
   - component: {fileID: 6438439549463524223}
   - component: {fileID: -6687834353185275798}
+  - component: {fileID: 6592021541237794857}
   m_Layer: 7
   m_Name: Hitch
   m_TagString: Untagged
@@ -211,3 +212,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abebfde51dc9dd4fad365c25649bdd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioPlayer: {fileID: 0}
+  _soundName: 
+  _audioPlayer: {fileID: 0}
+--- !u!114 &6592021541237794857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293492473114441163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0570d673a49be144fb0a3a1a8d0e6f78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _spriteRenderer: {fileID: 3898225851131952444}

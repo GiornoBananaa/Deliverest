@@ -12,6 +12,13 @@ namespace Tutorial
             new ScenarioDialogueState(),
             new ScenarioRockHookState(),
             new ScenarioDialogueState(),
+            new ScenarioRockHookState(),
+            new ScenarioDialogueState(),
+            new ScenarioRockHookState(),
+            new ScenarioRockHookState(),
+            new ScenarioDialogueState(),
+            new ScenarioHeightState(),
+            new ScenarioDialogueState(),
         };
         
         [SerializeField] private TutorialReferencesContainer _tutorialReferencesContainer;
@@ -31,12 +38,6 @@ namespace Tutorial
             NextPart();
         }
         
-        private void OnEnable()
-        {
-            if(_tutorialStateMachine!=null) 
-                _tutorialStateMachine.StateExitRequest += NextPart;
-        }
-        
         private void Update()
         {
             _tutorialStateMachine.CurrentState.Update();
@@ -47,7 +48,8 @@ namespace Tutorial
             _currentPartIndex++;
             if (_currentPartIndex >= _scenarioParts.Length)
                 EndTutorial();
-            _tutorialStateMachine.ChangeState(_scenarioParts[_currentPartIndex]);
+            else
+                _tutorialStateMachine.ChangeState(_scenarioParts[_currentPartIndex]);
         }
         
         public void EndTutorial()
@@ -55,7 +57,7 @@ namespace Tutorial
             _game.StartArcadeGame();
         }
         
-        private void OnDisable()
+        private void OnDestroy()
         {
             _tutorialStateMachine.StateExitRequest -= NextPart;
         }

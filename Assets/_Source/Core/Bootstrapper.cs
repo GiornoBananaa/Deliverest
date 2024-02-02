@@ -26,6 +26,7 @@ namespace Core
         
         private void Awake()
         {
+            
             _game = new Game();
             if(_characterMovement!=null)
             {
@@ -47,6 +48,10 @@ namespace Core
             if(_tutorialScenario!=null)
             {
                 _tutorialScenario.Construct(_game);
+            }
+            else
+            {
+                GameManager.instance.OnTopReached += GameManager.instance.WinGame;
             }
         }
 

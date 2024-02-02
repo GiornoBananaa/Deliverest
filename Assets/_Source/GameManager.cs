@@ -10,10 +10,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public static AudioPlayer AudoPlayer = null;
-    public Level[] levels; 
+    public Level[] levels;
+    [SerializeField] private Level tutorial;
     public Level currentLevel
     {
-        get => levels[currentLevelID];
+        get
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 9) return tutorial;
+            return levels[currentLevelID];
+        }
     }
 
     private int currentLevelID;
@@ -25,7 +30,7 @@ public class GameManager : MonoBehaviour
         {
             _height = value;
             if (_height >= currentLevel.target_height)
-                WinGame();
+                OnTopReached?.Invoke();
         }
     }
     [HideInInspector] public bool isPaused;
@@ -47,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     public Action OnSnowStormStart;
     public Action OnSnowStormEnd;
+    public Action OnTopReached;
     
     private void Awake()
     {
@@ -58,11 +64,12 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
         {
             Destroy(gameObject);
+            return;
         }
         LoadValues();
         if (AudoPlayer is null)
         {
-            AudoPlayer = GameObject.Find("AudioManager").GetComponent<AudioPlayer>();
+            AudoPlayer = GameObject.Find("AudioPlayer").GetComponent<AudioPlayer>();
             DontDestroyOnLoad(AudoPlayer.gameObject);
         }
     }
@@ -72,7 +79,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         isSnowStorm = false;
         ResetProgress();
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(9);
     }
     public void NextLevel()
     {

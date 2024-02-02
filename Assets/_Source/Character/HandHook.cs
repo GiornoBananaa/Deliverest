@@ -18,6 +18,7 @@ namespace Character
         
         private float _hookRadius;
 
+        public Action<GameObject> OnHandHooked;
         public Action<HandHook> OnObstacleHit;
 
         void Awake()
@@ -73,6 +74,7 @@ namespace Character
                 IsHooked = true;
                 AudioSource audioSource = colliders[0].GetComponent<AudioSource>();
                 if (audioSource.clip is not null) audioSource.Play();
+                OnHandHooked?.Invoke(colliders[0].gameObject);
             }
             else
             {

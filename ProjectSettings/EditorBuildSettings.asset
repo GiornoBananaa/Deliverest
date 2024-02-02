@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Presentation/Scenes/ThirdCutScene.unity
     guid: 635533c6c1a5aed479349f8993da1454
+  - enabled: 1
+    path: Assets/_Presentation/Scenes/Tutorial.unity
+    guid: 8281ac8a4db8a2640be358460e05ad61
   m_configObjects: {}

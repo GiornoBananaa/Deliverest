@@ -1,15 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Character;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class RockGen : MonoBehaviour
 {
+    [Serializable]
+    public class LevelRow
+    {
+        public GameObject[] row;
+    }
+    
     [SerializeField] private int tile_width, tile_height, tiles_in_row, rows_number, min_ledges, max_ledges;
     [SerializeField] private GameObject[] tilesWithLedges, tilesWithOutLedges;
     [SerializeField] private GameObject edgeTile, avalanche_prefab, avalanche_sighn_prefab, stone_prefab, stone_sighn_prefab;
     [SerializeField] private Transform player, playerBody;
-
+    [SerializeField] private List<LevelRow> _startRows;
+    
     private List<GameObject[]> rows = new List<GameObject[]>();
     private bool _isMoving;
     private bool isStorm;
@@ -19,17 +29,30 @@ public class RockGen : MonoBehaviour
     private Level level;
     private CharacterMovement _characterMovement;
 
+    public Action OnObstacle;
+    
     void Start()
     {
+        foreach (var row in _startRows)
+        {
+            rows.Add(row.row);
+        }
         isStorm = false;
         _characterMovement = player.GetComponent<CharacterMovement>();
         level = GameManager.instance.currentLevel;
         timeForNextStone = level.stone_max_delay;
         timeForNextAvalanche = level.avalanche_max_delay;
-        for (int i = 0; i < rows_number; i++)
+        if(_startRows.Count==0)
         {
-            FastScroll();
-            GenRow();
+            for (int i = 0; i < rows_number; i++)
+            {
+                FastScroll();
+                GenRow();
+            }
+        }
+        else
+        {
+            GenRow(); 
         }
     }
 
@@ -92,6 +115,7 @@ public class RockGen : MonoBehaviour
 
     private IEnumerator StoneEvent()
     {
+        OnObstacle?.Invoke();
         timeForNextStone = Random.Range(level.stone_min_delay, level.avalanche_max_delay) + level.stone_sign_time;
         Vector3 pos = new Vector3(playerBody.position.x + Random.Range(-tile_width, tile_width), tile_height);
         GameObject sign = Instantiate(stone_sighn_prefab, pos, Quaternion.identity);
@@ -110,6 +134,7 @@ public class RockGen : MonoBehaviour
 
     private IEnumerator AvalancheEvent()
     {
+        OnObstacle?.Invoke();
         timeForNextAvalanche = Random.Range(level.avalanche_min_delay, level.avalanche_max_delay) + level.avalanche_sign_time;
         Vector3 pos = new Vector3(transform.position.x + tile_width * 2f * Random.Range(-1, 2), tile_height);
         GameObject sign = Instantiate(avalanche_sighn_prefab, pos, Quaternion.identity);

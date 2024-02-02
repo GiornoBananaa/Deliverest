@@ -19,10 +19,7 @@ namespace Audio
         public void Construct(Dictionary<string,Sound> sounds)
         {
             _sounds = sounds;
-        }
-        
-        private void Awake()
-        {
+            
             _soundSources = new Dictionary<string, AudioSource>();
             _spatialSources = new Dictionary<string, AudioSource>();
             

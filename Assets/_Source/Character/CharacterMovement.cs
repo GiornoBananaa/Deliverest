@@ -24,19 +24,20 @@ namespace Character
         private UpdateTimer _oneHandTimer;
         private UpdateTimer _jumpTimer;
         private bool _isFallingForLoss;
+        private bool _looseStamina;
         
-        public Action OnHandHooked;
+        public Action<GameObject> OnHandHooked;
         
         public bool IsOnOneHand => _leftHandHook.IsHooked != _rightHandHook.IsHooked;
         public bool IsOnTwoHands => _leftHandHook.IsHooked && _rightHandHook.IsHooked;
         public bool IsOnNothing => !_leftHandHook.IsHooked && !_rightHandHook.IsHooked;
-
+        
         private void Awake()
         {
             _isFallingForLoss = false;
             _jumpTimer = new UpdateTimer(_movementData.JumpReloadTime);
             _oneHandTimer = new UpdateTimer(_movementData.JumpReloadTime);
-            DisableTimer();
+            DisableStaminaTimer();
             _leftHandHook.Construct(_movementData.HookRadius);
             _rightHandHook.Construct(_movementData.HookRadius);
         }
@@ -55,6 +56,8 @@ namespace Character
             _rightHandHook.OnObstacleHit += HitArmByObstacle;
             GameManager.instance.OnSnowStormStart += SnowStormStart;
             GameManager.instance.OnSnowStormEnd += SnowStormEnd;
+            _leftHandHook.OnHandHooked+=InvokeOnHandHook;
+            _rightHandHook.OnHandHooked+=InvokeOnHandHook;
         }
         
         private void Update()
@@ -71,8 +74,10 @@ namespace Character
             _oneHandTimer.OnTimeChanged -= ChangeStaminaView;
             _leftHandHook.OnObstacleHit -= HitArmByObstacle;
             _rightHandHook.OnObstacleHit -= HitArmByObstacle;
+            _leftHandHook.OnHandHooked-=InvokeOnHandHook;
+            _rightHandHook.OnHandHooked-=InvokeOnHandHook;
             GameManager.instance.OnSnowStormStart -= SnowStormStart;
-            GameManager.instance.OnSnowStormEnd -= SnowStormEnd;;
+            GameManager.instance.OnSnowStormEnd -= SnowStormEnd;
         }
         
         public void StartLeftArmMove()
@@ -80,7 +85,7 @@ namespace Character
             if (IsOnOneHand && _leftHandHook.IsHooked)
                 return;
             if(IsOnTwoHands)
-                EnableTimer(_rightStaminaTimerPoint);
+                EnableStaminaTimer(_rightStaminaTimerPoint);
             _leftHandHook.StartMove(!IsOnNothing);
         }
         
@@ -89,7 +94,7 @@ namespace Character
             if (IsOnOneHand && _rightHandHook.IsHooked) 
                 return;
             if(IsOnTwoHands)
-                EnableTimer(_leftStaminaTimerPoint);
+                EnableStaminaTimer(_leftStaminaTimerPoint);
             _rightHandHook.StartMove(!IsOnNothing);
         }
         
@@ -97,8 +102,7 @@ namespace Character
         {
             if (_leftHandHook.TryHook())
             {
-                DisableTimer();
-                OnHandHooked?.Invoke();
+                DisableStaminaTimer();
             }
         }
         
@@ -106,8 +110,7 @@ namespace Character
         {
             if (_rightHandHook.TryHook())
             {
-                DisableTimer();
-                OnHandHooked?.Invoke();
+                DisableStaminaTimer();
             }
         }
         
@@ -124,9 +127,14 @@ namespace Character
             _rigidbody.AddForce(direction * _movementData.JumpForce, ForceMode2D.Impulse);
         }
 
+        public void EnableStamina(bool enable)
+        {
+            _looseStamina = enable;
+        }
+        
         private void Fall()
         {
-            DisableTimer();
+            DisableStaminaTimer();
             _rightHandHook.FallJointsAnchor();
             _leftHandHook.FallJointsAnchor();
             _rightHandHook.Unhook(false);
@@ -139,8 +147,9 @@ namespace Character
                 StartCoroutine(FallLoss());
         }
 
-        private void EnableTimer(Transform parent)
+        private void EnableStaminaTimer(Transform parent)
         {
+            if(!_looseStamina) return;
             var timerTransform = _staminaTimerRectTransform;
             timerTransform.SetParent(parent, false);
             timerTransform.localPosition = Vector3.zero;
@@ -148,7 +157,7 @@ namespace Character
             _oneHandTimer.Restart();
         }
         
-        private void DisableTimer()
+        private void DisableStaminaTimer()
         {
             _staminaTimerView.gameObject.SetActive(false);
             _oneHandTimer.Stop();
@@ -170,7 +179,7 @@ namespace Character
             {
                 Debug.Log("2");
                 hand.Unhook(IsOnTwoHands);
-                EnableTimer(hand!=_leftHandHook?_leftStaminaTimerPoint:_rightStaminaTimerPoint);
+                EnableStaminaTimer(hand!=_leftHandHook?_leftStaminaTimerPoint:_rightStaminaTimerPoint);
             }
             if (IsOnNothing)
             {
@@ -212,6 +221,11 @@ namespace Character
             }
             _restartButton.SetActive(false);
             GameManager.instance.LoseGame(false);
+        }
+
+        private void InvokeOnHandHook(GameObject hitch)
+        {
+            OnHandHooked?.Invoke(hitch);
         }
     }
 }

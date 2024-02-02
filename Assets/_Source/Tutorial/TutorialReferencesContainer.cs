@@ -13,5 +13,6 @@ namespace Tutorial
         public Button DialogueButton;
         public CharacterMovement CharacterMovement;
         public Game Game;
+        public RockGen LevelGeneration;
     }
 }
