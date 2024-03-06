@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace LevelGeneration
@@ -8,14 +7,14 @@ namespace LevelGeneration
     {
         [SerializeField] private Color _highlightedColor;
         [SerializeField] private SpriteRenderer _spriteRenderer;
-
+        
         private Color _defaultColor;
-
+        
         private void Awake()
         {
             _defaultColor = _spriteRenderer.color;
         }
-
+        
         private void OnMouseEnter()
         {
             _spriteRenderer.color = _highlightedColor;
