@@ -5788,16 +5788,16 @@ PrefabInstance:
       value: Hitch (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3898225851131952444, guid: 283f684a889624f4fbc98f30bb5ecc2f, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898225851131952444, guid: 283f684a889624f4fbc98f30bb5ecc2f, type: 3}
       propertyPath: m_FlipY
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3898225851131952444, guid: 283f684a889624f4fbc98f30bb5ecc2f, type: 3}
       propertyPath: m_SortingOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898225851131952444, guid: 283f684a889624f4fbc98f30bb5ecc2f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 283f684a889624f4fbc98f30bb5ecc2f, type: 3}
