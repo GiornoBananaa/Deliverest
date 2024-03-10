@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Character
 {
@@ -11,7 +12,7 @@ namespace Character
         public Vector2 JointAnchor => _target.connectedAnchor;
     
         [SerializeField] private DistanceJoint2D _target;
-        [SerializeField] private LayerMask _hitchLayerMask;
+        [SerializeField] private LayerMask _gripLayerMask;
         [SerializeField] private LayerMask _obstacleLayerMask;
         [SerializeField] private Transform _defaultPosition;
         [SerializeField] private GameObject _limbSolver;
@@ -20,6 +21,12 @@ namespace Character
 
         public Action<GameObject> OnHandHooked;
         public Action<HandHook> OnObstacleHit;
+        private Camera _camera;
+
+        private void Start()
+        {
+            _camera = Camera.main;
+        }
 
         void Awake()
         {
@@ -48,7 +55,7 @@ namespace Character
         
         private void Move()
         {
-            _target.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            _target.transform.position = (Vector2)_camera.ScreenToWorldPoint(Input.mousePosition);
         }
         
         public void Unhook(bool isArmMovable)
@@ -64,7 +71,7 @@ namespace Character
         public bool TryHook()
         {
             if(IsHooked) return false;
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(_defaultPosition.position, _hookRadius, _hitchLayerMask);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(_defaultPosition.position, _hookRadius, _gripLayerMask);
 
             if (colliders.Length > 0)
             {

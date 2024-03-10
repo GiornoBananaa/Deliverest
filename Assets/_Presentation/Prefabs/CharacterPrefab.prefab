@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 299850827760441401}
-  _hitchLayerMask:
+  _gripLayerMask:
     serializedVersion: 2
     m_Bits: 128
   _obstacleLayerMask:
@@ -360,6 +360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abebfde51dc9dd4fad365c25649bdd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioPlayer: {fileID: 0}
+  _soundName: 
+  _audioPlayer: {fileID: 0}
 --- !u!1 &6358831652624287188
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 6068310077142246156}
-  _hitchLayerMask:
+  _gripLayerMask:
     serializedVersion: 2
     m_Bits: 128
   _obstacleLayerMask:
@@ -729,7 +732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 522728437239792706, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.0041451454
+      value: 0.004144907
       objectReference: {fileID: 0}
     - target: {fileID: 710201458243097310, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_LocalRotation.w
@@ -761,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1192089645792440330, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.006152123
+      value: -0.006152004
       objectReference: {fileID: 0}
     - target: {fileID: 1192089645792440330, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Extent.x
@@ -793,7 +796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196512245491548388, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.003018856
+      value: -0.0030190945
       objectReference: {fileID: 0}
     - target: {fileID: 2545823785515252511, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -857,7 +860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8164559248164257280, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.11431587
+      value: 0.11431599
       objectReference: {fileID: 0}
     - target: {fileID: 8164559248164257280, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Extent.x
@@ -869,7 +872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8612310533544259084, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.0059004426
+      value: 0.0059009194
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7e534094398ce546ba335a24ea33263, type: 3}

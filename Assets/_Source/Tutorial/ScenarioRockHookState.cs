@@ -1,35 +1,36 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Tutorial
 {
     [Serializable]
     public class ScenarioRockHookState: AScenarioState
     {
-        [SerializeField] private GameObject _hitch;
-        [SerializeField] private GameObject _hitchHint;
+        [SerializeField] private GameObject _grip;
+        [SerializeField] private GameObject _gripHint;
         [SerializeField] private bool _looseStamina = true;
         
         public override void Enter()
         {
             Owner.TutorialReferencesContainer.CharacterMovement.EnableStamina(_looseStamina);
-            Owner.TutorialReferencesContainer.CharacterMovement.OnHandHooked += CheckHookedHitch;
-            _hitchHint.gameObject.SetActive(true);
+            Owner.TutorialReferencesContainer.CharacterMovement.OnHandHooked += CheckHookedGrip;
+            _gripHint.gameObject.SetActive(true);
         }
         
         public override void Update() { }
 
         public override void Exit()
         {
-            Owner.TutorialReferencesContainer.CharacterMovement.OnHandHooked -= CheckHookedHitch;
-            _hitchHint.gameObject.SetActive(false);
+            Owner.TutorialReferencesContainer.CharacterMovement.OnHandHooked -= CheckHookedGrip;
+            _gripHint.gameObject.SetActive(false);
         }
         
         public override string ToString() => "WaitRockHook";
 
-        private void CheckHookedHitch(GameObject hitch)
+        private void CheckHookedGrip(GameObject grip)
         {
-            if (hitch == _hitch)
+            if (grip == _grip)
                 SendExitRequest();
         }
     }

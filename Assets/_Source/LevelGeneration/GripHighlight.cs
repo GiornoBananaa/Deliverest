@@ -3,7 +3,7 @@ using UnityEngine;
 namespace LevelGeneration
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class HitchHighlight : MonoBehaviour
+    public class GripHighlight : MonoBehaviour
     {
         [SerializeField] private Color _highlightedColor;
         [SerializeField] private SpriteRenderer _spriteRenderer;

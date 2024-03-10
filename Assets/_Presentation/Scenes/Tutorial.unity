@@ -2724,6 +2724,9 @@ MonoBehaviour:
   _outlineObjectLayer:
     serializedVersion: 2
     m_Bits: 128
+  _rayCastPoints:
+  - {fileID: 1129854701}
+  - {fileID: 1617205481}
 --- !u!1 &942763192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,6 +3490,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109618489}
   m_CullTransparentMesh: 1
+--- !u!4 &1129854701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4298769694160772404, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+  m_PrefabInstance: {fileID: 1309182804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1152930534
 GameObject:
   m_ObjectHideFlags: 0
@@ -3843,32 +3851,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
---- !u!1 &1309182805 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4177096600549341660, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
-  m_PrefabInstance: {fileID: 1309182804}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1309182806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309182805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7abebfde51dc9dd4fad365c25649bdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AudioPlayer: {fileID: 0}
-  _soundName: 
-  _audioPlayer: {fileID: 0}
 --- !u!114 &1309182807 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1587060896, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
   m_PrefabInstance: {fileID: 1309182804}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309182805}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afd8e484410a11145b8e31252481a8c7, type: 3}
@@ -5308,6 +5296,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615277313}
   m_CullTransparentMesh: 1
+--- !u!4 &1617205481 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4298769693275229285, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+  m_PrefabInstance: {fileID: 1309182804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1619888901
 GameObject:
   m_ObjectHideFlags: 0

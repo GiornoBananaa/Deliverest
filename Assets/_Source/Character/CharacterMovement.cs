@@ -16,7 +16,6 @@ namespace Character
         [SerializeField] private GameObject _body;
         [SerializeField] private GameObject _restartButton;
         [SerializeField] private Rigidbody2D _rigidbody;
-        //TODO: refactor Audio system
         [SerializeField] private AudioSource _audioSource;
         
         private CharacterMovementData _movementData;
@@ -177,7 +176,6 @@ namespace Character
             }
             if(IsOnTwoHands)
             {
-                Debug.Log("2");
                 hand.Unhook(IsOnTwoHands);
                 EnableStaminaTimer(hand!=_leftHandHook?_leftStaminaTimerPoint:_rightStaminaTimerPoint);
             }
@@ -223,9 +221,9 @@ namespace Character
             GameManager.instance.LoseGame(false);
         }
 
-        private void InvokeOnHandHook(GameObject hitch)
+        private void InvokeOnHandHook(GameObject grip)
         {
-            OnHandHooked?.Invoke(hitch);
+            OnHandHooked?.Invoke(grip);
         }
     }
 }
