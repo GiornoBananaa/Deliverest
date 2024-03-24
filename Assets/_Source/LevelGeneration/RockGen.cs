@@ -97,7 +97,6 @@ public class RockGen : MonoBehaviour
 
         if (_camera.transform.position.y >= generated_height - tile_height * 2)
         {
-            Debug.Log(generated_height);
             GenRow();
         }
     }
