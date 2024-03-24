@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Serialization;
 
 namespace Character
 {
@@ -7,7 +8,9 @@ namespace Character
     {
         public float LossHeight;
         public float LossY;
-        public float JumpForce;
+        public float MinimumJumpForce;
+        public float MaximumJumpForce;
+        public float JumpPreparationTime;
         public float JumpReloadTime;
         public float HookRadius;
         public float MaxStaminaTime;

@@ -14,10 +14,10 @@ public class RockGen : MonoBehaviour
         public GameObject[] row;
     }
     
-    [SerializeField] private int tile_width, tile_height, tiles_in_row, rows_number, min_ledges, max_ledges;
+    [SerializeField] private int tile_width, tile_height, tiles_in_row, rows_number, min_ledges, max_ledges, generated_height;
     [SerializeField] private GameObject[] tilesWithLedges, tilesWithOutLedges;
     [SerializeField] private GameObject edgeTile, avalanche_prefab, avalanche_sighn_prefab, stone_prefab, stone_sighn_prefab;
-    [SerializeField] private Transform player, playerBody;
+    [SerializeField] private Transform playerBody;
     [SerializeField] private List<LevelRow> _startRows;
     
     private List<GameObject[]> rows = new List<GameObject[]>();
@@ -27,33 +27,25 @@ public class RockGen : MonoBehaviour
     private bool avalancheIsWaitingStormEnd;
     private float timeForNextStone, timeForNextAvalanche;
     private Level level;
-    private CharacterMovement _characterMovement;
+    private Camera _camera;
 
     public Action OnObstacle;
     
     void Start()
     {
+        _camera = Camera.main;
         foreach (var row in _startRows)
         {
             rows.Add(row.row);
         }
         isStorm = false;
-        _characterMovement = player.GetComponent<CharacterMovement>();
         level = GameManager.instance.currentLevel;
         timeForNextStone = level.stone_max_delay;
         timeForNextAvalanche = level.avalanche_max_delay;
-        if(_startRows.Count==0)
-        {
-            for (int i = 0; i < rows_number; i++)
-            {
-                FastScroll();
-                GenRow();
-            }
-        }
-        else
-        {
-            GenRow(); 
-        }
+        
+        GenRow();
+        GenRow();
+        GenRow();
     }
 
 
@@ -107,12 +99,13 @@ public class RockGen : MonoBehaviour
                 avalancheIsWaitingStormEnd = true;
         }
 
-        if (playerBody.position.y > transform.position.y && _characterMovement.IsOnTwoHands)
+        if (_camera.transform.position.y >= generated_height - tile_height * 2)
         {
-            StartCoroutine(SmoothScroll());
+            
         }
     }
 
+    #region Obstacles
     private IEnumerator StoneEvent()
     {
         OnObstacle?.Invoke();
@@ -149,39 +142,9 @@ public class RockGen : MonoBehaviour
     {
         GameObject avalanche = Instantiate(avalanche_prefab, pos, Quaternion.identity);
     }
-    private void FastScroll()
-    {
-        foreach (GameObject[] row in rows)
-        {
-            foreach (GameObject tile in row)
-            {
-                tile.transform.position += Vector3.down * tile_height;
-            }
-        }
-
-    }
-    private IEnumerator SmoothScroll()
-    {
-        if (!_isMoving)
-        {
-            _isMoving = true;
-            Vector3 startPosition = transform.position;
-            for (float i = 0f; i <= 1.0f; i += 0.015f)
-            {
-                transform.position = Vector3.Lerp(startPosition, startPosition + Vector3.down * tile_height, i);
-                yield return new WaitForFixedUpdate();
-
-            }
-            DelLastRaw();
-            transform.position = startPosition;
-            GameManager.instance.height += tile_height;
-            player.position += Vector3.down * tile_height;
-            FastScroll();
-            GenRow();
-            _isMoving = false;
-        }
-
-    }
+    
+    #endregion
+    
     private void DelLastRaw()
     {
         GameObject[] rawToDel = rows[0];
@@ -191,8 +154,10 @@ public class RockGen : MonoBehaviour
         }
         rows.Remove(rawToDel);
     }
+    
     private void GenRow()
     {
+        generated_height += tile_height;
         int ledges_ammount = Random.Range(min_ledges, max_ledges + 1);
         GameObject[] rowOfPrefabs = new GameObject[tiles_in_row];
         for (int i = 0; i < tiles_in_row; i++)
@@ -210,16 +175,16 @@ public class RockGen : MonoBehaviour
         GameObject[] rowOfTiles = new GameObject[tiles_in_row + 2];
         rowOfTiles[0] = Instantiate(edgeTile, transform);
         rowOfTiles[0].transform.position = new Vector3(tile_width / 2 - tile_width * (tiles_in_row + 1) / 2,
-            (rows_number - 2) * tile_height);
+            generated_height);
         rowOfTiles[rowOfTiles.Length - 1] = Instantiate(edgeTile, transform);
         rowOfTiles[rowOfTiles.Length - 1].transform.position = new Vector3(- tile_width / 2 + tile_width * (tiles_in_row + 1) / 2,
-            (rows_number - 2) * tile_height);
+            generated_height);
         rowOfTiles[rowOfTiles.Length - 1].transform.localScale = new Vector3(-1, 1, 1);
         for (int i = 0; i < tiles_in_row; i++)
         {
             rowOfTiles[i + 1] = Instantiate(rowOfPrefabs[i], transform);
             rowOfTiles[i + 1].transform.position = new Vector3(tile_width * i + tile_width / 2 - tile_width * tiles_in_row / 2,
-                (rows_number - 2) * tile_height);
+                generated_height);
         }
         rows.Add(rowOfTiles);
     }

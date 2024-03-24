@@ -15,8 +15,10 @@ MonoBehaviour:
   <MovementData>k__BackingField:
     LossHeight: -7.8
     LossY: 8
-    JumpForce: 15
-    JumpReloadTime: 4
+    MinimumJumpForce: 12
+    MaximumJumpForce: 20
+    JumpPreparationTime: 2
+    JumpReloadTime: 0
     HookRadius: 0.2
     MaxStaminaTime: 3
     MaxStaminaTimeWhileStorm: 0.4

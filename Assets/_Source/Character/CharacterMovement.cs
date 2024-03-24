@@ -10,6 +10,7 @@ namespace Character
         [SerializeField] private HandHook _leftHandHook;
         [SerializeField] private HandHook _rightHandHook;
         [SerializeField] private StaminaTimerView _staminaTimerView;
+        [SerializeField] private JumpBarView _jumpBarView;
         [SerializeField] private RectTransform _staminaTimerRectTransform;
         [SerializeField] private Transform _leftStaminaTimerPoint;
         [SerializeField] private Transform _rightStaminaTimerPoint;
@@ -19,6 +20,7 @@ namespace Character
         [SerializeField] private AudioSource _audioSource;
         
         private CharacterMovementData _movementData;
+        private CharacterJump _characterJump;
         private SnowStormManager _stormManager;
         private UpdateTimer _oneHandTimer;
         private UpdateTimer _jumpTimer;
@@ -31,20 +33,18 @@ namespace Character
         public bool IsOnTwoHands => _leftHandHook.IsHooked && _rightHandHook.IsHooked;
         public bool IsOnNothing => !_leftHandHook.IsHooked && !_rightHandHook.IsHooked;
         
-        private void Awake()
-        {
-            _isFallingForLoss = false;
-            _jumpTimer = new UpdateTimer(_movementData.JumpReloadTime);
-            _oneHandTimer = new UpdateTimer(_movementData.JumpReloadTime);
-            DisableStaminaTimer();
-            _leftHandHook.Construct(_movementData.HookRadius);
-            _rightHandHook.Construct(_movementData.HookRadius);
-        }
-
         public void Construct(SnowStormManager stormManager, CharacterMovementData movementData)
         {
-            _stormManager = stormManager;
             _movementData = movementData;
+            _stormManager = stormManager;
+            _oneHandTimer = new UpdateTimer(_movementData.MaxStaminaTime);
+            _jumpTimer = new UpdateTimer(_movementData.JumpPreparationTime);
+            _characterJump = new CharacterJump(_rigidbody, movementData, _jumpTimer);
+            _jumpBarView.Construct(movementData, _characterJump);
+            _leftHandHook.Construct(_movementData.HookRadius);
+            _rightHandHook.Construct(_movementData.HookRadius);
+            _isFallingForLoss = false;
+            DisableStaminaTimer();
         }
         
         private void OnEnable()
@@ -113,17 +113,30 @@ namespace Character
             }
         }
         
-        public void Jump(Vector2 mousePosition)
+        public void Jump()
+        {
+            if(!IsOnTwoHands)
+                return;
+            if(_characterJump.Jump())
+                Fall();
+        }
+        
+        public void SetJumpDirection(Vector3 mousePosition)
+        {
+            if(!IsOnTwoHands)
+                return;
+
+            Vector2 jumpDirection = mousePosition - _rigidbody.transform.position;
+            
+            _characterJump.SetJumpDirection(jumpDirection);
+        }
+        
+        public void PrepareForJump()
         {
             if(!IsOnTwoHands)
                 return;
             
-            _jumpTimer.Restart();
-            Fall();
-            
-            Vector2 direction = (mousePosition - (Vector2)_body.transform.position).normalized;
-
-            _rigidbody.AddForce(direction * _movementData.JumpForce, ForceMode2D.Impulse);
+            _characterJump.PrepareForJump();
         }
 
         public void EnableStamina(bool enable)
@@ -139,13 +152,13 @@ namespace Character
             _rightHandHook.Unhook(false);
             _leftHandHook.Unhook(false);
         }
-
+        
         private void CheckLossHeight()
         {
             if ((_body.transform.position.y <= _movementData.LossHeight || _body.transform.localPosition.x <= -_movementData.LossY || _body.transform.localPosition.x >= _movementData.LossY) && !_isFallingForLoss)
                 StartCoroutine(FallLoss());
         }
-
+        
         private void EnableStaminaTimer(Transform parent)
         {
             if(!_looseStamina) return;

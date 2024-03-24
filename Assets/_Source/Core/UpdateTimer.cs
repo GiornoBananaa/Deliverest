@@ -39,7 +39,7 @@ namespace Core
         public void Restart()
         {
             ElapsedTime = 0;
-            _isStopped = false;
+            Continue();
         }
         
         private void AddTime()
@@ -51,8 +51,10 @@ namespace Core
                 OnTimerEnd?.Invoke();
                 Stop();
             }
-        
-            OnTimeChanged?.Invoke(ElapsedTime);
+            else
+            {
+                OnTimeChanged?.Invoke(ElapsedTime);
+            }
         }
     }
 }

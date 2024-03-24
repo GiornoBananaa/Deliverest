@@ -1208,11 +1208,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2219662549720207819, guid: c4b402703ab9b384ab8058bd5b6a6521, type: 3}
   m_PrefabInstance: {fileID: 363019900}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &363019902 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2293492473114441163, guid: c4b402703ab9b384ab8058bd5b6a6521, type: 3}
-  m_PrefabInstance: {fileID: 363019900}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &365957809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,6 +3780,10 @@ PrefabInstance:
       propertyPath: _restartButton
       value: 
       objectReference: {fileID: 1300939584}
+    - target: {fileID: 568418851836395805, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1041484227149672575, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3829,9 +3828,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3749658924077553649, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749658924077553649, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749658924077553649, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749658924077553649, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4177096600549341660, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: m_Name
       value: CharacterPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715984264326689771, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715984264326689771, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715984264326689771, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715984264326689771, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7013552053904924020, guid: 1c000e5f5ccc3134f8d12712b07decdd, type: 3}
       propertyPath: _stormManager
@@ -4601,6 +4632,7 @@ MonoBehaviour:
   rows_number: 4
   min_ledges: 4
   max_ledges: 5
+  generated_height: 0
   tilesWithLedges:
   - {fileID: 3307335735891350794, guid: 3c2fc3ba197309740a5c429adefb8ae1, type: 3}
   - {fileID: 3307335735891350794, guid: 5af79a29249ccf74a884ee31204a4945, type: 3}
@@ -4618,7 +4650,6 @@ MonoBehaviour:
   avalanche_sighn_prefab: {fileID: 6591707329160501096, guid: 1812bb6f22adbc144b3dde90b5e8915a, type: 3}
   stone_prefab: {fileID: 2566756003551857671, guid: fd70789213c11ee40bc48a867e17988b, type: 3}
   stone_sighn_prefab: {fileID: 7639293978689803026, guid: 091afe0008e3c2043937535f70b75aa9, type: 3}
-  player: {fileID: 838643414}
   playerBody: {fileID: 1732677309}
   _startRows:
   - row:
@@ -4746,11 +4777,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1509360002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3872287365370536035, guid: a90138d68b59ad54a967f2c929fe6734, type: 3}
-  m_PrefabInstance: {fileID: 1525234545}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1525234545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5566,8 +5592,8 @@ MonoBehaviour:
     - rid: 4239590445260996617
       type: {class: ScenarioRockHookState, ns: Tutorial, asm: Assembly-CSharp}
       data:
-        _hitch: {fileID: 363019902}
-        _hitchHint: {fileID: 965252843}
+        _grip: {fileID: 0}
+        _gripHint: {fileID: 0}
         _looseStamina: 0
     - rid: 4239590445260996618
       type: {class: ScenarioDialogueState, ns: Tutorial, asm: Assembly-CSharp}
@@ -5577,8 +5603,8 @@ MonoBehaviour:
     - rid: 4239590445260996619
       type: {class: ScenarioRockHookState, ns: Tutorial, asm: Assembly-CSharp}
       data:
-        _hitch: {fileID: 1902895661}
-        _hitchHint: {fileID: 50471660}
+        _grip: {fileID: 0}
+        _gripHint: {fileID: 0}
         _looseStamina: 1
     - rid: 4239590445260996620
       type: {class: ScenarioDialogueState, ns: Tutorial, asm: Assembly-CSharp}
@@ -5588,14 +5614,14 @@ MonoBehaviour:
     - rid: 4239590445260996621
       type: {class: ScenarioRockHookState, ns: Tutorial, asm: Assembly-CSharp}
       data:
-        _hitch: {fileID: 1509360002}
-        _hitchHint: {fileID: 1576232323}
+        _grip: {fileID: 0}
+        _gripHint: {fileID: 0}
         _looseStamina: 1
     - rid: 4239590445260996622
       type: {class: ScenarioRockHookState, ns: Tutorial, asm: Assembly-CSharp}
       data:
-        _hitch: {fileID: 1713554730}
-        _hitchHint: {fileID: 365957809}
+        _grip: {fileID: 0}
+        _gripHint: {fileID: 0}
         _looseStamina: 1
     - rid: 4239590445260996623
       type: {class: ScenarioDialogueState, ns: Tutorial, asm: Assembly-CSharp}
@@ -5797,11 +5823,6 @@ PrefabInstance:
 --- !u!4 &1713554729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2219662549720207819, guid: 283f684a889624f4fbc98f30bb5ecc2f, type: 3}
-  m_PrefabInstance: {fileID: 1713554728}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1713554730 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2293492473114441163, guid: 283f684a889624f4fbc98f30bb5ecc2f, type: 3}
   m_PrefabInstance: {fileID: 1713554728}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1723482340
@@ -6213,11 +6234,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1902895661 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2293492473114441163, guid: 0a6aa4bda7456e548bd3e3e481ba6dd0, type: 3}
-  m_PrefabInstance: {fileID: 1766189474}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1910758087
 GameObject:
   m_ObjectHideFlags: 0
