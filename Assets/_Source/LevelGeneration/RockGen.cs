@@ -42,10 +42,6 @@ public class RockGen : MonoBehaviour
         level = GameManager.instance.currentLevel;
         timeForNextStone = level.stone_max_delay;
         timeForNextAvalanche = level.avalanche_max_delay;
-        
-        GenRow();
-        GenRow();
-        GenRow();
     }
 
 
@@ -101,7 +97,8 @@ public class RockGen : MonoBehaviour
 
         if (_camera.transform.position.y >= generated_height - tile_height * 2)
         {
-            
+            Debug.Log(generated_height);
+            GenRow();
         }
     }
 
