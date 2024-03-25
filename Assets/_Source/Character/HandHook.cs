@@ -58,14 +58,14 @@ namespace Character
             _target.transform.position = (Vector2)_camera.ScreenToWorldPoint(Input.mousePosition);
         }
         
-        public void Unhook(bool isArmMovable)
+        public void Unhook(bool isArmMovesPlayer)
         {
             _target.enabled = false;
             _limbSolver.SetActive(false);
             IsMoving = false;
             IsHooked = false;
-            if(!isArmMovable)
-                _target.autoConfigureConnectedAnchor = true;
+            if(!isArmMovesPlayer)
+                _target.autoConfigureConnectedAnchor = false;
         }
         
         public bool TryHook()
@@ -75,8 +75,10 @@ namespace Character
 
             if (colliders.Length > 0)
             {
-                _target.autoConfigureConnectedAnchor = false;
+                _limbSolver.SetActive(true);
                 DefaultJointsAnchor();
+                _target.enabled = true;
+                _target.autoConfigureConnectedAnchor = false;
                 _target.transform.position = _defaultPosition.position;
                 IsHooked = true;
                 AudioSource audioSource = colliders[0].GetComponent<AudioSource>();
@@ -102,11 +104,6 @@ namespace Character
                 _target.enabled = true;
             if (!_limbSolver.activeSelf) 
                 _limbSolver.SetActive(true);
-        }
-        
-        public void FallJointsAnchor()
-        {
-            _target.autoConfigureConnectedAnchor = false;
         }
         
         private void CheckForObstacles()

@@ -147,8 +147,6 @@ namespace Character
         private void Fall()
         {
             DisableStaminaTimer();
-            _rightHandHook.FallJointsAnchor();
-            _leftHandHook.FallJointsAnchor();
             _rightHandHook.Unhook(false);
             _leftHandHook.Unhook(false);
         }
