@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/_Presentation/Scenes/MainMenu.unity
     guid: 0672441f6803da946ab22dbf16032277
   - enabled: 1
-    path: Assets/_Presentation/Scenes/Game.unity
-    guid: e5cb7ef2b77211c41b1aec419acc920e
+    path: Assets/_Presentation/Scenes/Game_Arcade.unity
+    guid: 649cfdf4d4a2b0d42bdc91c973911063
   - enabled: 1
     path: Assets/_Presentation/Scenes/LoseScene.unity
     guid: d3daf0765a754be41a55e487a5d025f4
@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Presentation/Scenes/Tutorial.unity
     guid: 8281ac8a4db8a2640be358460e05ad61
+  - enabled: 1
+    path: Assets/_Presentation/Scenes/Game_TimeLimeted.unity
+    guid: e5cb7ef2b77211c41b1aec419acc920e
   m_configObjects: {}

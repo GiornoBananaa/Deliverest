@@ -1529,7 +1529,7 @@ MonoBehaviour:
     avalanche_min_delay: 11
     avalanche_max_delay: 15
     avalanche_sign_time: 3
-    target_height: 50
+    target_height: 99999
     time_for_level: 70
     stormMinDelay: 25
     stormMaxDelay: 40
@@ -1539,8 +1539,8 @@ MonoBehaviour:
     stormSpeed: 8
     signTime: 6
     levelWinSceneID: 7
-    snow_storm: 0
-    wind_sound: 0
+    snow_storm: 1
+    wind_sound: 1
     backGround: {fileID: 21300000, guid: 6b26d36ec3afeb6479de0483b1dc5efe, type: 3}
     music_on_level: {fileID: 8300000, guid: 33e03855d2a5fa544b401855a9a0acdb, type: 3}
   - stone_min_delay: 10
@@ -1549,7 +1549,7 @@ MonoBehaviour:
     avalanche_min_delay: 20
     avalanche_max_delay: 27
     avalanche_sign_time: 6
-    target_height: 100
+    target_height: 999999
     time_for_level: 80
     stormMinDelay: 30
     stormMaxDelay: 40
@@ -1570,7 +1570,7 @@ MonoBehaviour:
     avalanche_min_delay: 99999
     avalanche_max_delay: 99999
     avalanche_sign_time: 3
-    target_height: 50
+    target_height: 18
     time_for_level: 70
     stormMinDelay: 25
     stormMaxDelay: 40
@@ -3099,7 +3099,7 @@ MonoBehaviour:
   _musicSlider: {fileID: 184935338}
   _soundSlider: {fileID: 1727985642}
   _languageDropDown: {fileID: 647643972}
-  _languageManager: {fileID: 2101630743}
+  _languageManager: {fileID: 0}
 --- !u!1 &1295593425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4881,52 +4881,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094676573}
   m_CullTransparentMesh: 1
---- !u!1 &2101630742
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2101630744}
-  - component: {fileID: 2101630743}
-  m_Layer: 0
-  m_Name: LanguageManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2101630743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101630742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 300e9ad4f7133e64b91801d2fd89d95a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _imageLanguages: []
-  _textLanguages: []
---- !u!4 &2101630744
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101630742}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2601122, y: -1.435961, z: 2.1966665}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2102308444
 GameObject:
   m_ObjectHideFlags: 0

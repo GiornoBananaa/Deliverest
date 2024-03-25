@@ -72,7 +72,7 @@ public class SnowStormManager : MonoBehaviour
             }
         }
     }
-    //TODO: put all needed components in snowstorm srcipt
+    
     private IEnumerator Storm()
     {
         GameManager.instance.isSnowStorm = true;
@@ -83,6 +83,7 @@ public class SnowStormManager : MonoBehaviour
 
         Velocity = new Vector2(Random.value < 0.5f ? -level.stormSpeed : level.stormSpeed, 0);
         _stormRender = Instantiate(_stormPrefab, (Vector2)_spawnPosition.position + (Velocity.x > 0 ? -_spawnOffset : _spawnOffset), Quaternion.identity).GetComponent<SpriteRenderer>();
+        _stormRender.transform.SetParent(_spawnPosition);
         _stormRender.color = new Color(1, 1, 1, 0);
         _stormRender.GetComponent<SnowStorm>().Velocity = Velocity;
         _stormSound = _stormRender.GetComponent<AudioSource>();

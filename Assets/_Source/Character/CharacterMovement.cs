@@ -25,7 +25,7 @@ namespace Character
         private UpdateTimer _oneHandTimer;
         private UpdateTimer _jumpTimer;
         private bool _isFallingForLoss;
-        private bool _looseStamina;
+        private bool _looseStamina = true;
         
         public Action<GameObject> OnHandHooked;
         
