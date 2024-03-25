@@ -1545,6 +1545,7 @@ MonoBehaviour:
     wind_sound: 0
     backGround: {fileID: 21300000, guid: 6b26d36ec3afeb6479de0483b1dc5efe, type: 3}
     music_on_level: {fileID: 8300000, guid: 33e03855d2a5fa544b401855a9a0acdb, type: 3}
+  losePanel: {fileID: 3417050435570488959, guid: fb7a9f4ecbdac24449c8ce925dea135c, type: 3}
   best_height: 0
   isPaused: 0
 --- !u!4 &414920429

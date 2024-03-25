@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static AudioPlayer AudoPlayer = null;
     public Level[] levels;
     [SerializeField] private Level tutorial;
+    [SerializeField] private ArcadePanelController losePanel;
     public Level currentLevel
     {
         get
@@ -99,8 +100,8 @@ public class GameManager : MonoBehaviour
         if (loseTime)
             SceneManager.LoadScene(4);
         else
-            SceneManager.LoadScene(2);
-
+            losePanel.ActivatePanel();
+            //SceneManager.LoadScene(2);
     }
     public void WinGame()
     {
