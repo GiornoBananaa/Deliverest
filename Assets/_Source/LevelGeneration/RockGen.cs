@@ -84,10 +84,10 @@ public class RockGen : MonoBehaviour
                 avalancheIsWaitingStormEnd = true;
         }
 
-        //if (playerBody.position.y > transform.position.y && _characterMovement.IsOnTwoHands)
-        //{
-        //    StartCoroutine(SmoothScroll());
-        //}
+        if (playerBody.position.y > transform.position.y && _characterMovement.IsOnTwoHands)
+        {
+            StartCoroutine(SmoothScroll());
+        }
     }
 
     private IEnumerator StoneEvent()
@@ -135,28 +135,28 @@ public class RockGen : MonoBehaviour
         }
 
     }
+    private IEnumerator SmoothScroll()
+    {
+        if (!_isMoving)
+        {
+            _isMoving = true;
+            Vector3 startPosition = transform.position;
+            for (float i = 0f; i <= 1.0f; i += 0.015f)
+            {
+                transform.position = Vector3.Lerp(startPosition, startPosition + Vector3.down * tile_height, i);
+                yield return new WaitForFixedUpdate();
 
-    //private IEnumerator SmoothScroll()
-    //{
-    //    if (!_isMoving)
-    //    {
-    //        _isMoving = true;
-    //        Vector3 startPosition = transform.position;
-    //        for (float i = 0f; i <= 1.0f; i += 0.015f)
-    //        {
-    //            transform.position = Vector3.Lerp(startPosition, startPosition + Vector3.down * tile_height, i);
-    //            yield return new WaitForFixedUpdate();
-    //        }
-    //        DelLastRaw();
-    //        transform.position = startPosition;
-    //        GameManager.instance.height += tile_height;
-    //        player.position += Vector3.down * tile_height;
-    //        FastScroll();
-    //        GenRow();
-    //        _isMoving = false;
-    //    }
-    //}
+            }
+            DelLastRaw();
+            transform.position = startPosition;
+            GameManager.instance.height += tile_height;
+            player.position += Vector3.down * tile_height;
+            FastScroll();
+            GenRow();
+            _isMoving = false;
+        }
 
+    }
     private void DelLastRaw()
     {
         GameObject[] rawToDel = rows[0];
@@ -166,7 +166,6 @@ public class RockGen : MonoBehaviour
         }
         rows.Remove(rawToDel);
     }
-
     private void GenRow()
     {
         int ledges_ammount = Random.Range(min_ledges, max_ledges + 1);
