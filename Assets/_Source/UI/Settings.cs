@@ -10,7 +10,6 @@ public class Settings : MonoBehaviour
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _soundSlider;
     [SerializeField] private TMP_Dropdown _languageDropDown;
-    [SerializeField] private LanguageManager _languageManager;
 
     void Start()
     {
@@ -19,8 +18,5 @@ public class Settings : MonoBehaviour
 
         _musicSlider.onValueChanged.AddListener(GameManager.AudoPlayer.MusicVolumeChange);
         _soundSlider.onValueChanged.AddListener(GameManager.AudoPlayer.SoundVolumeChange);
-        _languageDropDown.onValueChanged.AddListener(_languageManager.LanguageChange);
-
-        _languageDropDown.value = PlayerPrefs.GetInt("Language", 0);
     }
 }
