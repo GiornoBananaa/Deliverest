@@ -75,12 +75,13 @@ public class SnowStormManager : MonoBehaviour
     
     private IEnumerator Storm()
     {
-        GameManager.instance.isSnowStorm = true;
         _isStormCoroutine = true;
         _dangersSign.SetActive(true);
 
         yield return new WaitForSeconds(level.signTime);
-
+        
+        GameManager.instance.isSnowStorm = true;
+        
         Velocity = new Vector2(Random.value < 0.5f ? -level.stormSpeed : level.stormSpeed, 0);
         _stormRender = Instantiate(_stormPrefab, (Vector2)_spawnPosition.position + (Velocity.x > 0 ? -_spawnOffset : _spawnOffset), Quaternion.identity).GetComponent<SpriteRenderer>();
         _stormRender.transform.SetParent(_spawnPosition);
