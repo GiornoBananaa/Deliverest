@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,9 +28,25 @@ public class GameManager : MonoBehaviour
         }
     }
     [HideInInspector] public bool isPaused;
-    [HideInInspector] public bool isSnowStorm;
-    [HideInInspector] public bool isInSafePlace;
+    private bool _isSnowStorm;
+    public bool isSnowStorm
+    {
+        get => _isSnowStorm;
+        set
+        {
+            if(!_isSnowStorm && value)
+                OnSnowStormStart?.Invoke();
+            if(_isSnowStorm && !value)
+                OnSnowStormEnd?.Invoke();
+            _isSnowStorm = value;
+        }
+    }
+    
     private float _height;
+
+    public Action OnSnowStormStart;
+    public Action OnSnowStormEnd;
+    
     private void Awake()
     {
         if (instance == null)
