@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         isSnowStorm = false;
         ResetProgress();
-        SceneManager.LoadScene(9);
+        SceneManager.LoadScene(1);
     }
     public void NextLevel()
     {

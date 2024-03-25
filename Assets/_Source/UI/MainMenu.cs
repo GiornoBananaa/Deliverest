@@ -17,12 +17,18 @@ public class MainMenu : MonoBehaviour
         instructionCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
     }
+    
     public void StartNewGame()
     {
         _clickSource.Play();
         StartCoroutine(StartDelay());
     }
-
+    
+    public void OpenTutorial()
+    {
+        SceneManager.LoadScene(9);
+    }
+    
     public void OpenSettings()
     {
         _clickSource.Play();

@@ -434,6 +434,7 @@ MonoBehaviour:
   _restartButton: {fileID: 0}
   _rigidbody: {fileID: 1763467669557993887}
   _audioSource: {fileID: 1587060895}
+  _lossPositionOffset: {x: 8, y: 8}
 --- !u!114 &1469097400186312717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,7 +925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 522728437239792706, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.004144907
+      value: 0.0041451454
       objectReference: {fileID: 0}
     - target: {fileID: 710201458243097310, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_LocalRotation.w
@@ -956,7 +957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1192089645792440330, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.006152004
+      value: -0.006152123
       objectReference: {fileID: 0}
     - target: {fileID: 1192089645792440330, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Extent.x
@@ -988,7 +989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196512245491548388, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.0030190945
+      value: -0.003018856
       objectReference: {fileID: 0}
     - target: {fileID: 2545823785515252511, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -1052,7 +1053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8164559248164257280, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.11431599
+      value: 0.11431587
       objectReference: {fileID: 0}
     - target: {fileID: 8164559248164257280, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Extent.x
@@ -1064,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8612310533544259084, guid: d7e534094398ce546ba335a24ea33263, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.0059009194
+      value: 0.0059004426
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7e534094398ce546ba335a24ea33263, type: 3}

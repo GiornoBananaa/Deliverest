@@ -18,6 +18,7 @@ namespace Character
         [SerializeField] private GameObject _restartButton;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private Vector2 _lossPositionOffset;
         
         private CharacterMovementData _movementData;
         private CharacterJump _characterJump;
@@ -26,13 +27,19 @@ namespace Character
         private UpdateTimer _jumpTimer;
         private bool _isFallingForLoss;
         private bool _looseStamina = true;
+        private Camera _camera;
         
         public Action<GameObject> OnHandHooked;
-        
+
         public bool IsOnOneHand => _leftHandHook.IsHooked != _rightHandHook.IsHooked;
         public bool IsOnTwoHands => _leftHandHook.IsHooked && _rightHandHook.IsHooked;
         public bool IsOnNothing => !_leftHandHook.IsHooked && !_rightHandHook.IsHooked;
-        
+
+        private void Awake()
+        {
+            _camera = Camera.main;
+        }
+
         public void Construct(SnowStormManager stormManager, CharacterMovementData movementData)
         {
             _movementData = movementData;
@@ -153,7 +160,7 @@ namespace Character
         
         private void CheckLossHeight()
         {
-            if ((_body.transform.position.y <= _movementData.LossHeight || _body.transform.localPosition.x <= -_movementData.LossY || _body.transform.localPosition.x >= _movementData.LossY) && !_isFallingForLoss)
+            if ((_body.transform.position.y + _lossPositionOffset.y <= _camera.transform.position.y || _camera.transform.position.x + _lossPositionOffset.x <= -_camera.transform.position.x || _camera.transform.position.x - _lossPositionOffset.x >= _movementData.LossY) && !_isFallingForLoss)
                 StartCoroutine(FallLoss());
         }
         
